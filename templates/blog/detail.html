@@ -5,13 +5,15 @@
         <header class="entry-header">
             <h1 class="entry-title">{{ post.title }}</h1>
             <div class="entry-meta">
-                <span class="post-category"><a href="#">{{ post.category.name }} </a></span>
+                <span class="post-category">
+                    <a href="{{ post.category.get_absolute_url }}">{{ post.category.name }} </a>
+                </span>
                 <span class="post-date">
                     <a href="#">
-                    <time class="entry-date" datetime="{{ post.created_time }}">{{ post.created_time }}</time>
+                    <time class="entry-date" datetime="{{ post.created_time }}">{{ post.created_time|date }}</time>
                     </a>
                 </span>
-                <span class="post-author"><a href="#">{{ post.author }} </a></span>
+                <span class="post-author"><a href="#">{{ post.author.first_name }} </a></span>
                 <span class="comments-link"><a href="#">4 Comments</a></span>
             </div>
         </header>
@@ -19,4 +21,11 @@
             {{ post.body|safe }}
         </div>
     </article>
+
+    <section class="comments-area">
+        <!-- UY BEGIN -->
+        <div id="uyan_frame"></div>
+        <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
+        <!-- UY END -->
+    </section>
 {% endblock main %}

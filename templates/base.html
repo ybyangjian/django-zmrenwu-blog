@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-md-4 col-sm-5 col-xs-8">
                 <div class="logo">
-                    <h1><a href="index.html"><b>Black</b> &amp; White</a></h1>
+                    <h1><a href="{% url 'blog:index' %}"><b>Black</b> &amp; White</a></h1>
                 </div>
             </div><!-- col-md-4 -->
             <div class="col-md-8 col-sm-7 col-xs-4">
@@ -40,10 +40,12 @@
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="cl-effect-11"><a href="index.html" data-hover="Home">Home</a></li>
+                            {% comment %}
+                            <li class="cl-effect-11"><a href="{% url 'blog:index' %}" data-hover="Home">Home</a></li>
                             <li class="cl-effect-11"><a href="full-width.html" data-hover="Blog">Blog</a></li>
                             <li class="cl-effect-11"><a href="about.html" data-hover="About">About</a></li>
                             <li class="cl-effect-11"><a href="contact.html" data-hover="Contact">Contact</a></li>
+                            {% endcomment %}
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </nav>
@@ -51,7 +53,7 @@
                     <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>
                     <div id="search-form" class="search-form">
                         <form role="search" method="get" id="searchform" action="#">
-                            <input type="search" placeholder="Search" required>
+                            <input type="search" placeholder="开发中..." required>
                             <button type="submit"><span class="ion-ios-search-strong"></span></button>
                         </form>
                     </div>
@@ -115,9 +117,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p class="copyright">&copy; 2014 ThemeWagon.com -More Templates <a href="http://www.cssmoban.com/"
-                                                                                   target="_blank" title="模板之家">模板之家</a>
-                    - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+                <p class="copyright">&copy; 2017·追梦人物的博客·GitHub·知乎
+                </p>
             </div>
         </div>
     </div>
@@ -128,15 +129,17 @@
     <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
     <nav>
         <ul>
-            <li><a href="index.html">Home</a></li>
+            {% comment %}
+            <li><a href="{% url 'blog:index' %}">Home</a></li>
             <li><a href="full-width.html">Blog</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
+            {% endcomment %}
         </ul>
     </nav>
 </div>
 
-<script src="js/script.js"></script>
+<script src="{% static 'blog/js/script.js' %}"></script>
 
 </body>
 </html>
