@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.utils.six import python_2_unicode_compatible
 from django.urls import reverse
 
@@ -32,7 +32,7 @@ class Post(models.Model):
     excerpt = models.CharField(max_length=200, blank=True)
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tag, blank=True)
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     class Meta:
         ordering = ['-created_time']
