@@ -3,7 +3,7 @@
 {% block title %}追梦人物的博客 - {{ post.title }}{% endblock title %}
 
 {% block main %}
-    <article class="post post-1">
+    <article class="post post-{{ post.pk }}">
         <header class="entry-header">
             <h1 class="entry-title">{{ post.title }}</h1>
             <div class="entry-meta">
@@ -16,10 +16,14 @@
                     </a>
                 </span>
                 <span class="post-author"><a href="#">{{ post.author.name }} </a></span>
-                <span class="comments-link"><a href="#">4 Comments</a></span>
+                <span class="comments-link">
+                    <!-- UYAN COUNT BEGIN -->
+                <a href="{{ post.get_absolute_url }}" id="uyan_count_unit" du="zmrenwu.com">0条评论</a>
+                    <!-- UYAN COUNT END -->
+                </span>
             </div>
         </header>
-        <div class="entry-content clearfix">
+        <div class="entry-content clearfix typo">
             {{ post.body|safe }}
         </div>
     </article>
