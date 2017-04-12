@@ -33,7 +33,19 @@ def detail(request, pk):
                                       'markdown.extensions.codehilite',
                                       'markdown.extensions.toc',
                                   ])
-    return render(request, 'blog/detail.html', context={'post': post})
+    try:
+        previous_post = post.get_previous_by_created_time()
+    except Post.DoesNotExist:
+        previous_post = None
+
+    try:
+        next_post = post.get_next_by_created_time()
+    except Post.DoesNotExist:
+        next_post = None
+
+    return render(request, 'blog/detail.html', context={'post': post,
+                                                        'previous_post': previous_post,
+                                                        'next_post': next_post})
 
 
 def archives(request, year, month):
