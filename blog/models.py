@@ -33,7 +33,7 @@ class Post(models.Model):
     created_time = models.DateTimeField()
     modified_time = models.DateTimeField()
     excerpt = models.CharField(max_length=200, blank=True)
-    category = models.ForeignKey(Category)
+    category = models.ForeignKey(Category, null=True, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
 
