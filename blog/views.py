@@ -56,4 +56,5 @@ def archives(request, year, month):
 def category(request, pk):
     cate = get_object_or_404(Category, pk=pk)
     post_list = Post.objects.filter(category=cate)
-    return render(request, 'blog/index.html', context={'post_list': post_list})
+    return render(request, 'blog/category.html', context={'post_list': post_list,
+                                                          'category': cate})

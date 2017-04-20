@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}追梦人物的博客 - {{ post.title }}{% endblock title %}
+{% block title %}{{ post.title }}{% endblock title %}
 
 {% block main %}
     <article class="post post-{{ post.pk }}">
@@ -28,8 +28,10 @@
         </div>
         <hr>
         <aside>
-            <p>上一篇： {% if previous_post %}<a href="{{ previous_post.get_absolute_url }}">{{ previous_post.title }}</a>{% else %}没有了{% endif %}</p>
-            <p>下一篇： {% if next_post %}<a href="{{ next_post.get_absolute_url }}">{{ next_post.title }}</a>{% else %}没有了{% endif %}</p>
+            <p>上一篇： {% if previous_post %}
+                <a href="{{ previous_post.get_absolute_url }}">{{ previous_post.title }}</a>{% else %}没有了{% endif %}</p>
+            <p>下一篇： {% if next_post %}<a href="{{ next_post.get_absolute_url }}">{{ next_post.title }}</a>{% else %}
+                没有了{% endif %}</p>
         </aside>
         <hr>
     </article>

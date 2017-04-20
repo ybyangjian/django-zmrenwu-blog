@@ -6,7 +6,10 @@ from django.urls import reverse
 
 @python_2_unicode_compatible
 class Category(models.Model):
+    title = models.CharField(max_length=255, null=True, help_text="浏览器的 title 标签内容，用于搜索引擎优化。")
     name = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
+    slug = models.SlugField(null=True)
 
     def __str__(self):
         return self.name
