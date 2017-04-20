@@ -1,3 +1,6 @@
 {% extends 'blog/index.html' %}
 
 {% block title %}{{ category.title }}{% endblock title %}
+{% block description %}
+    <meta name="description" content="{{ category.description }}">
+{% endblock description %}
