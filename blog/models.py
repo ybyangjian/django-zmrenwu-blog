@@ -15,7 +15,7 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('blog:category', kwargs={'pk': self.pk})
+        return reverse('blog:category_slug', kwargs={'slug': self.slug})
 
 
 @python_2_unicode_compatible

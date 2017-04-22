@@ -1,6 +1,6 @@
 import markdown
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import Post, Category
 
@@ -55,6 +55,11 @@ def archives(request, year, month):
 
 def category(request, pk):
     cate = get_object_or_404(Category, pk=pk)
+    return redirect(cate, permanent=True)
+
+
+def category_slug(request, slug):
+    cate = get_object_or_404(Category, slug=slug)
     post_list = Post.objects.filter(category=cate)
     return render(request, 'blog/category.html', context={'post_list': post_list,
                                                           'category': cate})
