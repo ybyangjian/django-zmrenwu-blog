@@ -6,7 +6,7 @@ register = template.Library()
 
 
 @register.simple_tag
-def get_recent_posts(num=5):
+def get_recent_posts(num=10):
     return Post.objects.all()[:num]
 
 

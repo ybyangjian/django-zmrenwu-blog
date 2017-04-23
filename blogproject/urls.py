@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 
 from blog.sitemaps import sitemaps
+from blog.feeds import AllPostsRssFeed
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -26,4 +27,5 @@ urlpatterns = [
     url(r'^sitemap\.xml$', sitemap,
         {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
+    url(r'^all/rss/$', AllPostsRssFeed()),
 ]

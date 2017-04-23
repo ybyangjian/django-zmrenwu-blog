@@ -92,6 +92,9 @@
             </main>
             {% load blog_tags %}
             <aside class="col-md-4">
+                <div class="widget">
+                    <h4><a href="/all/rss/">使用 RSS 订阅本博客</a></h4>
+                </div>
                 <div class="widget widget-recent-posts">
                     <h3 class="widget-title">最新文章</h3>
                     {% get_recent_posts as recent_post_list %}
