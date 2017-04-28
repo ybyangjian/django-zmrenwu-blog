@@ -3,3 +3,4 @@ Markdown==2.6.8
 Pygments==2.2.0
 pytz==2016.10
 Pillow==4.1.0
+python-slugify==1.2.4
