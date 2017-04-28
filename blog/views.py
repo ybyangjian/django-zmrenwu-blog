@@ -1,8 +1,15 @@
 import markdown
 
+from slugify import slugify
 from django.shortcuts import render, get_object_or_404, redirect
+from markdown.extensions.toc import TocExtension
 
 from .models import Post, Category
+
+
+def header_slugify(value, separator='-'):
+    return slugify(value, separator=separator)
+
 
 """
 使用下方的模板引擎方式。
@@ -28,12 +35,12 @@ def index(request):
 def detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.increase_views()
-    post.body = markdown.markdown(post.body,
-                                  extensions=[
-                                      'markdown.extensions.extra',
-                                      'markdown.extensions.codehilite',
-                                      'markdown.extensions.toc',
-                                  ])
+    md = markdown.Markdown(extensions=[
+        'markdown.extensions.extra',
+        'markdown.extensions.codehilite',
+        TocExtension(slugify=header_slugify)
+    ])
+    post.body = md.convert(post.body)
     try:
         previous_post = post.get_previous_by_created_time()
     except Post.DoesNotExist:
@@ -45,6 +52,7 @@ def detail(request, pk):
         next_post = None
 
     return render(request, 'blog/detail.html', context={'post': post,
+                                                        'toc': md.toc,
                                                         'previous_post': previous_post,
                                                         'next_post': next_post})
 

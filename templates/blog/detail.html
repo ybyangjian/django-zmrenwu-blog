@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ post.title }} - {% if post.category %}{{ post.category.name }} - {% endif %}追梦人物的博客{% endblock title %}
-{#{% block menu_btn %}#}
-{#    <div class="unit-0 show-on-mobile nav-bar-item" id="menu-btn">#}
-{#        <i class="fa fa-bars" aria-hidden="true"></i>#}
-{#    </div>#}
-{#{% endblock menu_btn %}#}
+{% block title %}{{ post.title }} -
+    {% if post.category %}{{ post.category.name }} - {% endif %}追梦人物的博客{% endblock title %}
+{% block menu_btn %}
+    <div class="unit-0 show-on-mobile nav-bar-item" id="menu-btn">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+{% endblock menu_btn %}
 {% block flex_wrap %}{% endblock flex_wrap %}
 {% block main %}
     <main class="unit-3-4 unit-1-on-mobile">
@@ -97,113 +98,56 @@
 {% endblock main %}
 
 
-{#{% block aside %}#}
-{#    <div class="musk"></div>#}
-{#    <aside class="unit-1-4 hide-on-mobile" id="sidebar">#}
-{#        <section class="">#}
-{#            <h3>文章目录</h3>#}
-{#            开发中...#}
-{#            {% comment %}#}
-{#            <ul class="text-small table-of-content">#}
-{#                <li>#}
-{#                    <a href="">搭建开发环境</a>#}
-{#                </li>#}
-{#                <li>#}
-{#                    <a href="">修改语言版本</a>#}
-{#                    <ul>#}
-{#                        <li>#}
-{#                            <a href="">搭建开发环境</a>#}
-{#                        </li>#}
-{#                        <li><a href="">开启服务器</a></li>#}
-{#                        <li><a href="">修改语言版本</a></li>#}
-{#                    </ul>#}
-{#                </li>#}
-{#                <li><a href="">创建第一个 app，并且在本地迁移数据库</a></li>#}
-{#                <li><a href="">Hello world</a></li>#}
-{#                <li>#}
-{#                    <a href="">修改语言版本</a>#}
-{#                    <ul>#}
-{#                        <li>#}
-{#                            <a href="">搭建开发环境</a>#}
-{#                        </li>#}
-{#                        <li><a href="">开启服务器</a></li>#}
-{#                        <li><a href="">修改语言版本</a></li>#}
-{#                    </ul>#}
-{#                </li>#}
-{#                <li>#}
-{#                    <a href="">修改语言版本</a>#}
-{#                    <ul>#}
-{#                        <li>#}
-{#                            <a href="">搭建开发环境</a>#}
-{#                        </li>#}
-{#                        <li><a href="">开启服务器</a></li>#}
-{#                        <li><a href="">修改语言版本</a></li>#}
-{#                    </ul>#}
-{#                </li>#}
-{#                <li>#}
-{#                    <a href="">修改语言版本</a>#}
-{#                    <ul>#}
-{#                        <li>#}
-{#                            <a href="">搭建开发环境</a>#}
-{#                        </li>#}
-{#                        <li><a href="">开启服务器</a></li>#}
-{#                        <li><a href="">修改语言版本</a></li>#}
-{#                    </ul>#}
-{#                </li>#}
-{#                <li>#}
-{#                    <a href="">修改语言版本</a>#}
-{#                    <ul>#}
-{#                        <li>#}
-{#                            <a href="">搭建开发环境</a>#}
-{#                        </li>#}
-{#                        <li><a href="">开启服务器</a></li>#}
-{#                        <li><a href="">修改语言版本</a></li>#}
-{#                    </ul>#}
-{#                </li>#}
-{#            </ul>#}
-{#            {% endcomment %}#}
-{#        </section>#}
-{##}
-{#        <section class="recommendation-posts" style="display: none">#}
-{#            <h3>推荐阅读</h3>#}
-{#            <ul>#}
-{#                <li><a href="">Android悬浮球及全局返回功能的实现</a></li>#}
-{#                <li><a href="">2017 Facebook 开发者大会要点总结</a></li>#}
-{#                <li><a href="">一个可拖拽，移动，自由组合子控件的视图控件，让开发更简单</a></li>#}
-{#                <li><a href="">Android自定义色盘</a></li>#}
-{#                <li><a href="">Android自定义色盘</a></li>#}
-{#                <li><a href="">Android自定义色盘</a></li>#}
-{#                <li><a href="">Android自定义色盘</a></li>#}
-{#                <li><a href="">Android自定义色盘</a></li>#}
-{#            </ul>#}
-{#        </section>#}
-{#    </aside>#}
-{#{% endblock aside %}#}
-{#{% block script %}#}
-{#    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>#}
-{#    <script>#}
-{#        $(document).ready(function () {#}
-{#            function showSidebar() {#}
-{#                var $sidebar = $('#sidebar');#}
-{#                $('.musk').fadeIn();#}
-{#                $sidebar#}
-{#                    .removeClass()#}
-{#                    .css({#}
-{#                        'left': -$sidebar.outerWidth(),#}
-{#                        'position': 'fixed'#}
-{#                    })#}
-{#                    .addClass('sidebar-on-mobile scroll-view')#}
-{#                    .animate({'left': 0}, 300);#}
-{#            }#}
-{##}
-{#            function hideSidebar() {#}
-{#                var $sidebar = $('#sidebar');#}
-{#                $('.musk').fadeOut();#}
-{#                $sidebar.animate({'left': -$sidebar.outerWidth()}, 300);#}
-{#            }#}
-{##}
-{#            $('#menu-btn').on('click', showSidebar);#}
-{#            $('.musk').on('click', hideSidebar)#}
-{#        })#}
-{#    </script>#}
-{#{% endblock script %}#}
+{% block aside %}
+    <div class="musk"></div>
+    <aside class="unit-1-4 hide-on-mobile" id="sidebar">
+        <section class="">
+            <h3>文章目录</h3>
+            <div class="text-small table-of-content">
+                {{ toc|safe }}
+            </div>
+        </section>
+
+        <section class="recommendation-posts" style="display: none">
+            <h3>推荐阅读</h3>
+            <ul>
+                <li><a href="">Android悬浮球及全局返回功能的实现</a></li>
+                <li><a href="">2017 Facebook 开发者大会要点总结</a></li>
+                <li><a href="">一个可拖拽，移动，自由组合子控件的视图控件，让开发更简单</a></li>
+                <li><a href="">Android自定义色盘</a></li>
+                <li><a href="">Android自定义色盘</a></li>
+                <li><a href="">Android自定义色盘</a></li>
+                <li><a href="">Android自定义色盘</a></li>
+                <li><a href="">Android自定义色盘</a></li>
+            </ul>
+        </section>
+    </aside>
+{% endblock aside %}
+{% block script %}
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function showSidebar() {
+                var $sidebar = $('#sidebar');
+                $('.musk').fadeIn();
+                $sidebar
+                    .removeClass()
+                    .css({
+                        'left': -$sidebar.outerWidth(),
+                        'position': 'fixed'
+                    })
+                    .addClass('sidebar-on-mobile scroll-view')
+                    .animate({'left': 0}, 300);
+            }
+
+            function hideSidebar() {
+                var $sidebar = $('#sidebar');
+                $('.musk').fadeOut();
+                $sidebar.animate({'left': -$sidebar.outerWidth()}, 300);
+            }
+
+            $('#menu-btn').on('click', showSidebar);
+            $('.musk').on('click', hideSidebar)
+        })
+    </script>
+{% endblock script %}
