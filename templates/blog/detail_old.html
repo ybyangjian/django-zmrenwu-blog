@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }}{% endblock title %}
+
+{% block main %}
+    <article class="post post-{{ post.pk }}">
+        <header class="entry-header">
+            <h1 class="entry-title">{{ post.title }}</h1>
+            <div class="entry-meta">
+                <span class="post-category">
+                    <a href="{{ post.category.get_absolute_url }}">{{ post.category.name }} </a>
+                </span>
+                <span class="post-date">
+                    <a href="#">
+                    <time class="entry-date" datetime="{{ post.created_time }}">{{ post.created_time|date }}</time>
+                    </a>
+                </span>
+                <span class="post-author"><a href="#">{{ post.author.name }} </a></span>
+                <span class="comments-link">
+                    <!-- UYAN COUNT BEGIN -->
+                    <a href="{{ post.get_absolute_url }}" id="uyan_count_unit" du="zmrenwu.com"></a>
+                    <!-- UYAN COUNT END -->
+                </span>
+            </div>
+        </header>
+        <div class="entry-content clearfix typo">
+            {{ post.body|safe }}
+        </div>
+        <hr>
+        <div class="jiathis_style">
+            <span class="jiathis_txt">分享到：</span>
+            <a class="jiathis_button_qzone">QQ空间</a>
+            <a class="jiathis_button_tsina">新浪微博</a>
+            <a class="jiathis_button_tqq">腾讯微博</a>
+            <a class="jiathis_button_weixin">微信</a>
+            <a href="http://www.jiathis.com/share?uid=2128865"
+               class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+            <a class="jiathis_counter_style"></a>
+        </div>
+        <script type="text/javascript">
+            var jiathis_config = {data_track_clickback: 'true'};
+        </script>
+        <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2128865" charset="utf-8"></script>
+        <!-- JiaThis Button END -->
+        <br/>
+        <br/>
+        <aside>
+            <p>上一篇： {% if previous_post %}
+                <a href="{{ previous_post.get_absolute_url }}">{{ previous_post.title }}</a>{% else %}没有了{% endif %}</p>
+            <p>下一篇： {% if next_post %}<a href="{{ next_post.get_absolute_url }}">{{ next_post.title }}</a>{% else %}
+                没有了{% endif %}</p>
+        </aside>
+        <hr>
+    </article>
+
+    <section class="comments-area">
+        <!-- UY BEGIN -->
+        <script type="text/javascript">
+            var uyan_config = {
+                'du': 'zmrenwu.com'
+            }
+        </script>
+        <div id="uyan_frame"></div>
+        <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2128865"></script>
+        <!-- UY END -->
+    </section>
+{% endblock main %}

@@ -1,0 +1,504 @@
+/**
+ * 目录
+ *
+ * 1.0 - 导航栏
+ *
+ * 2.0 -
+
+ */
+
+/**
+ *  助手类
+ */
+.site-60 {
+    margin-top: 5rem;
+}
+
+.list-unstyle, .list-unstyle-inline {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.list-unstyle-inline > li {
+    display: inline-block;
+}
+
+/**
+ * 1.0 - 导航栏
+ */
+
+#blog-header {
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.nav-bar {
+    height: 5rem;
+    border-bottom: solid 1px #eee;
+}
+
+.nav-bar .nav-bar-item {
+    line-height: 5rem;
+}
+
+/**
+ * 1.1 - Logo 和 mobile 首页按钮
+ */
+
+#logo {
+    color: #ea6f5a;
+    font-size: 2.5rem;
+}
+
+#logo:hover {
+    text-decoration: none;
+}
+
+#home-btn {
+    margin-right: 15px;
+}
+
+/**
+ * 1.2 - 搜索框
+ */
+
+.nav-bar .search-area {
+    margin-right: 15px;
+}
+
+.nav-bar .search-area {
+    height: 5rem;
+}
+
+#search-form {
+    width: 50%;
+    position: relative;
+}
+
+#search-form .search-btn {
+    font-size: 2rem;
+    position: absolute;
+    top: 4px;
+    right: 1rem;
+    cursor: pointer;
+}
+
+#search-form input[type='search'] {
+    margin: 0;
+    padding: 0.7rem 2.8rem 0.7rem 1.6rem;
+    border-radius: 45px;
+}
+
+@media screen and (max-width: 568px) {
+    #search-form {
+        width: 100%;
+    }
+}
+
+/**
+ * 1.3 - 通知
+ */
+
+#notification {
+    font-size: 1.8rem;
+    color: #333;
+}
+
+#notification:hover {
+    text-decoration: none;
+}
+
+#notification .counter {
+    color: #fff;
+    font-size: 1.4rem;
+    text-align: center;
+    height: 1.6rem;
+    width: 1.6rem;
+    line-height: 1.6rem;
+    display: inline-block;
+    background-color: #ea6f5a;
+    border-radius: 45px;
+    position: relative;
+    top: -0.8rem;
+}
+
+/**
+ * 2.0 - 推荐教程
+ */
+
+.category-widget {
+    border-bottom: 1px solid #eee;
+}
+
+.category-list li {
+    margin-right: 15px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.category-list li a.category-label {
+    color: #333;
+    display: inline-block;
+    padding: 5px 10px;
+    border: solid 1px rgb(220, 220, 220);
+    border-radius: 4px;
+}
+
+.category-list li a.category-label:hover {
+    text-decoration: none;
+}
+
+/**
+ * 3.0 - 文章列表
+ */
+
+.post-list article {
+    border-bottom: 1px solid #eee;
+    padding: 1.5rem 0;
+}
+
+.post-header-meta .author {
+    color: #2f2f2f;
+    margin-right: 0.5rem;
+}
+
+.post-main-info .title {
+    font-size: 1.8rem;
+    color: #2f2f2f;
+    font-weight: bold;
+}
+
+.post-main-info,
+.post-main-info .excerpt,
+.post-footer-meta {
+    margin-top: 7px;
+}
+
+.post-footer-meta span {
+    margin-right: 7px;
+}
+
+.post-footer-meta span a {
+    text-decoration: none;
+}
+
+.post-footer-meta .category {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid #ec6149;
+}
+
+.post-footer-meta .category a {
+    color: #ec6149;
+}
+
+.post-footer-meta .category a:hover {
+    text-decoration: none;
+}
+
+.post-cover-image {
+    width: 100%;
+    border-radius: 4px;
+}
+
+/**
+ * 3.0 - 侧边栏
+ */
+
+.recent-posts ul,
+.recommendation-posts ul {
+    margin-top: 7px;
+}
+
+.recent-posts ul li,
+.recommendation-posts ul li {
+    margin-bottom: 7px;
+}
+
+.recent-posts ul li a,
+.recommendation-posts ul li a {
+    color: #333;
+}
+
+.recommendation-tutorials a {
+    color: #ec6149;
+}
+
+.favorite-tip {
+    margin-top: 7px;
+}
+
+.favorite-shotcuts {
+    color: #ea6f5a;
+}
+
+.feeds a {
+    color: #ea6f5a;
+}
+
+/**
+ * 4.0 - 分页
+ */
+.pagination-bar li {
+    width: 1.6rem;
+    height: 1.6rem;
+    line-height: 1.6rem;
+    padding: 5px;
+}
+
+.pagination-bar li a {
+    color: #777;
+}
+
+.pagination-bar li.current a {
+    color: #ea6f5a;
+}
+
+/**
+ * 5.0 - 站脚
+ */
+
+#blog-footer {
+    color: #777;
+    font-size: 1.4rem;
+    height: 5rem;
+    margin-top: 1rem;
+}
+
+/**
+ * 6.0 - 文章详情页
+ */
+.post .post-meta span {
+    margin-right: 3px;
+}
+
+.table-of-content li {
+    margin-bottom: 7px
+}
+
+.table-of-content > li ul {
+    margin-top: 7px;
+}
+
+.table-of-content li a {
+    color: #333;
+}
+
+.tutorial-reminder .tutorial {
+    color: #ea6f5a;
+}
+
+.tutorial-reminder a {
+    color: #333;
+    border-bottom: 1px solid #333;
+}
+
+.tutorial-reminder a:hover {
+    text-decoration: none;
+}
+
+.tags .tag-label {
+    margin-right: 7px;
+}
+
+.tags .tag-item {
+    margin-right: 10px;
+}
+
+.tags .tag-item a {
+    color: #333;
+}
+
+.share .share-icon {
+    margin-left: 7px;
+}
+
+.pre-next a {
+    color: #333;
+}
+
+.musk {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 2;
+}
+
+.sidebar-on-mobile {
+    max-width: 70%;
+    top: 0;
+    background-color: RGB(255, 255, 255);
+    padding: 0 15px;
+    height: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 3;
+}
+
+#menu-btn {
+    margin-right: 15px;
+}
+
+#home-btn a {
+    color: #333;
+}
+
+/**
+ * 7.0 - 评论
+ */
+
+.avatar {
+    margin-top: 0;
+    margin-right: 8px;
+}
+
+.avatar-img {
+    border-radius: 5px;
+    width: 38px;
+}
+
+.child-comments .avatar-img {
+    width: 30px;
+}
+
+.comment-list > div {
+    margin-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #eee;
+}
+
+.child-comments {
+    margin-top: 15px;
+    margin-left: -19px;
+}
+
+.child-comments > div {
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+}
+
+/**
+ * 8.0 - 教程介绍
+ */
+
+.tutorial-cover {
+    margin-top: 0;
+    position: relative;
+}
+
+.tutorial-heading-on-mobile {
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 4px;
+    margin-right: 30px;
+    width: 100%;
+}
+
+div.tutorial-heading {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.tutorial-cover-img {
+    width: 100%;
+    border-radius: 4px;
+}
+
+.tutorial-headings {
+    list-style: none;
+    border-left: 2px solid #eee;
+    padding-left: 0;
+    margin-left: 5px;
+}
+
+.tutorial-headings li {
+    margin: 20px 0;
+    position: relative;
+    padding-left: 20px;
+}
+
+.tutorial-headings li:before {
+    line-height: 24px;
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #ccc;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -5px;
+    border-radius: 45px;
+    margin-left: -6px;
+}
+
+.tutorial-headings li a {
+    color: #333;
+}
+
+.tutotial-meta ul li {
+    margin-bottom: 7px;
+}
+
+span.done {
+    color: red;
+}
+
+/**
+ * 8.0 - 通知
+ */
+
+.notification-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.notification-list li {
+    padding: 15px 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.notification-content {
+    margin-top: 5px;
+}
+
+.delete-noti-btn {
+    margin-left: 10px;
+    margin-top: 0;
+}
+
+.unread {
+    background-color: rgb(255, 249, 234);
+}
+
+/*
+.unread header {
+    position: relative;
+}
+
+.unread header:before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 45px;
+    display: inline-block;
+    background-color: red;
+    position: absolute;
+    top: 50%;
+    margin-top: -4px;
+}
+*/
+

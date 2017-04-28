@@ -61,5 +61,10 @@ def category(request, pk):
 def category_slug(request, slug):
     cate = get_object_or_404(Category, slug=slug)
     post_list = Post.objects.filter(category=cate)
+
+    if cate.get_genre_display() == 'tutorial':
+        post_list = post_list.order_by('created_time')
+        return render(request, 'blog/tutorial.html', context={'post_list': post_list,
+                                                              'category': cate})
     return render(request, 'blog/category.html', context={'post_list': post_list,
                                                           'category': cate})
