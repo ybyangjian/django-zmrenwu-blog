@@ -3,6 +3,8 @@ from django.conf import settings
 from django.utils.six import python_2_unicode_compatible
 from django.urls import reverse
 
+import os
+
 
 @python_2_unicode_compatible
 class Tag(models.Model):
@@ -41,14 +43,27 @@ class Category(models.Model):
         return reverse('blog:category_slug', kwargs={'slug': self.slug})
 
 
+def post_cover_path(instance, filename):
+    return os.path.join('posts', instance.pk, filename)
+
+
 @python_2_unicode_compatible
 class Post(models.Model):
-    title = models.CharField(max_length=70)
+    STATUS_CHOICES = (
+        (1, 'ongoing'),
+        (2, 'finished'),
+    )
+
+    status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, blank=True, null=True)
+    title = models.CharField(max_length=255)
     body = models.TextField()
+    excerpt = models.CharField(max_length=200, blank=True)
+    views = models.PositiveIntegerField(default=0, editable=False)
+    pub_date = models.DateTimeField(blank=True, null=True)
     created_time = models.DateTimeField()
     modified_time = models.DateTimeField()
-    excerpt = models.CharField(max_length=200, blank=True)
-    category = models.ForeignKey(Category, blank=True, null=True)
+    cover = models.ImageField(upload_to=post_cover_path, blank=True)
+    category = models.ForeignKey(Category, null=True, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
 
