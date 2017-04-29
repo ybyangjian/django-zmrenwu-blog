@@ -2,6 +2,7 @@ import markdown
 
 from slugify import slugify
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView
 from markdown.extensions.toc import TocExtension
 
 from .models import Post, Category
@@ -27,9 +28,82 @@ def index(request):
 """
 
 
-def index(request):
-    post_list = Post.objects.all()
-    return render(request, 'blog/index.html', context={'post_list': post_list})
+class PaginationMixin(object):
+    def page_left_right(self, paginator, page, is_paginated):
+        left = []
+        right = []
+        left_has_more = False
+        right_has_more = False
+        first = False
+        last = False
+
+        context = {
+            'left': left,
+            'right': right,
+            'left_has_more': left_has_more,
+            'right_has_more': right_has_more,
+            'first': first,
+            'last': last,
+        }
+
+        if not is_paginated:
+            return context
+
+        page_number = page.number
+        total_pages = paginator.num_pages
+        page_range = paginator.page_range
+
+        if page_number == 1:
+            right = page_range[page_number:page_number + 2]
+            if right[-1] < total_pages - 1:
+                right_has_more = True
+
+            if right[-1] < total_pages:
+                last = True
+        elif page_number == total_pages:
+            left = page_range[(page_number - 3) if (page_number - 3) > 0 else 0:page_number - 1]
+            if left[0] > 2:
+                left_has_more = True
+
+            if left[0] > 1:
+                first = True
+        else:
+            left = page_range[(page_number - 3) if (page_number - 3) > 0 else 0:page_number - 1]
+            right = page_range[page_number:page_number + 2]
+            if right[-1] < total_pages - 1:
+                right_has_more = True
+            if right[-1] < total_pages:
+                last = True
+
+            if left[0] > 2:
+                left_has_more = True
+            if left[0] > 1:
+                first = True
+
+        context = {
+            'left': left,
+            'right': right,
+            'left_has_more': left_has_more,
+            'right_has_more': right_has_more,
+            'first': first,
+            'last': last,
+        }
+
+        return context
+
+
+class IndexView(ListView, PaginationMixin):
+    model = Post
+    paginate_by = 1
+    template_name = 'blog/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        paginator = context.get('paginator')
+        page = context.get('page_obj')
+        is_paginated = context.get('is_paginated')
+        context.update(self.page_left_right(paginator, page, is_paginated))
+        return context
 
 
 def detail(request, pk):

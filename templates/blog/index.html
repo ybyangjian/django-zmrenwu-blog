@@ -61,18 +61,36 @@
                 <div class="no-post">暂时还没有发布的文章！</div>
             {% endfor %}
         </section>
-        {% comment %}
-    <aside class="pagination flex-center">
-        <ul class="pagination-bar list-unstyle-inline">
-            <li class="current"><a href="">1</a></li>
-            <li><a href="">2</a></li>
-            <li><a href="">3</a></li>
-            <li><a href="">4</a></li>
-            <li><a href="">5</a></li>
-            <li><span>...</span></li>
-            <li><a href="">128</a></li>
-        </ul>
-    </aside>
-    {% endcomment %}
+        {% if is_paginated %}
+            <aside class="pagination flex-center">
+                <ul class="pagination-bar list-unstyle-inline">
+                    {% if first %}
+                        <li><a href="{{ post.get_absolute_url }}?page=1">1</a></li>
+                    {% endif %}
+                    {% if left %}
+                        {% if left_has_more %}
+                            <li><span>...</span></li>
+                        {% endif %}
+                        {% for i in left %}
+                            <li><a href="{{ post.get_absolute_url }}?page={{ i }}">{{ i }}</a></li>
+                        {% endfor %}
+                    {% endif %}
+                    <li class="current"><a href="{{ post.get_absolute_url }}?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>
+                    {% if right %}
+                        {% for i in right %}
+                            <li><a href="{{ post.get_absolute_url }}?page={{ i }}">{{ i }}</a></li>
+                        {% endfor %}
+                        {% if right_has_more %}
+                            <li><span>...</span></li>
+                        {% endif %}
+                    {% endif %}
+                    {% if last %}
+                        <li>
+                            <a href="{{ post.get_absolute_url }}?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </aside>
+        {% endif %}
     </main>
 {% endblock main %}
