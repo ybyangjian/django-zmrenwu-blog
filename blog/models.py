@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum, Max
 from django.conf import settings
 from django.utils.six import python_2_unicode_compatible
 from django.urls import reverse
@@ -41,6 +42,12 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse('blog:category_slug', kwargs={'slug': self.slug})
+
+    def total_views(self):
+        return self.post_set.aggregate(category_views=Sum('views'))
+
+    def last_modified(self):
+        return self.post_set.aggregate(last_modified=Max('modified_time'))
 
 
 def post_cover_path(instance, filename):

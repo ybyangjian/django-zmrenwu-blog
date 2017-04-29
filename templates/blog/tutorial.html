@@ -15,11 +15,10 @@
             <div class="tutotial-meta unit-1-3 unit-1-on-mobile">
                 <div class="tutorial-heading hide-on-mobile">{{ category.name }}</div>
                 <ul class="list-unstyle text-small">
-                    {% comment %}
-                    <li>状态：<span class="done">{{ category.get_status_display }}</span></li>
-                    <li>最后更新时间：5 天前</li>
-                    <li>总阅读量：150005</li>
-                    {% endcomment %}
+                    <li>状态：<span class="done">{% if category.get_status_display == 'finished' %}已完结{% else %}
+                        进行中{% endif %}</span></li>
+                    <li>最后更新时间：{{ category.last_modified.last_modified|timesince }}前</li>
+                    <li>总阅读量：{{ category.total_views.category_views }}</li>
                     {% if category.resource %}
                         <li><a href="{{ category.resource }}" class="btn text-small" target="_blank">查看 GitHub 仓库</a>
                         </li>
