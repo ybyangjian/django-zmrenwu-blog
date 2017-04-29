@@ -57,8 +57,9 @@ def post_cover_path(instance, filename):
 @python_2_unicode_compatible
 class Post(models.Model):
     STATUS_CHOICES = (
-        (1, 'ongoing'),
-        (2, 'finished'),
+        (1, 'published'),
+        (2, 'draft'),
+        (3, 'hidden'),
     )
 
     status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, blank=True, null=True)
