@@ -141,6 +141,32 @@ def category(request, pk):
     return redirect(cate, permanent=True)
 
 
+class CategoryView(ListView, PaginationMixin):
+    paginate_by = 1
+    template_name = 'blog/category.html'
+
+    def get_queryset(self):
+        cate = get_object_or_404(Category, slug=self.kwargs.get('slug'))
+        post_list = cate.post_set.all()
+
+        if cate.get_genre_display() == 'tutorial':
+            post_list = post_list.order_by('created_time')
+            self.template_name = 'blog/tutorial.html'
+            self.paginate_by = None
+
+        return post_list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cate = get_object_or_404(Category, slug=self.kwargs.get('slug'))
+        paginator = context.get('paginator')
+        page = context.get('page_obj')
+        is_paginated = context.get('is_paginated')
+        context.update(self.page_left_right(paginator, page, is_paginated))
+        context['category'] = cate
+        return context
+
+
 def category_slug(request, slug):
     cate = get_object_or_404(Category, slug=slug)
     post_list = Post.objects.filter(category=cate)
