@@ -118,4 +118,6 @@ class Post(models.Model):
         return len(strip_tags(md.convert(self.body)))
 
     def is_tutorial(self):
+        if not self.category:
+            return False
         return self.category.get_genre_display() == 'tutorial'
