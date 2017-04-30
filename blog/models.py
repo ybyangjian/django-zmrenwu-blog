@@ -1,10 +1,10 @@
+import os
+
+from django.conf import settings
 from django.db import models
 from django.db.models import Sum, Max
-from django.conf import settings
-from django.utils.six import python_2_unicode_compatible
 from django.urls import reverse
-
-import os
+from django.utils.six import python_2_unicode_compatible
 
 
 @python_2_unicode_compatible
@@ -30,10 +30,11 @@ class Category(models.Model):
     title = models.CharField(max_length=255, blank=True)
     slug = models.SlugField(unique=True)
     description = models.TextField(blank=True)
-    created = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
     genre = models.PositiveSmallIntegerField(choices=GENRE_CHOICES)
     status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, blank=True, null=True)
     cover = models.ImageField(upload_to='covers/categories/%Y/%m/%d/', blank=True)
+    cover_caption = models.CharField(max_length=255, blank=True)
     resource = models.URLField(blank=True)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL)
 
@@ -51,7 +52,7 @@ class Category(models.Model):
 
 
 def post_cover_path(instance, filename):
-    return os.path.join('posts', instance.pk, filename)
+    return os.path.join('posts', str(instance.pk), filename)
 
 
 @python_2_unicode_compatible
@@ -62,14 +63,14 @@ class Post(models.Model):
         (3, 'hidden'),
     )
 
-    status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, blank=True, null=True)
+    status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES)
     title = models.CharField(max_length=255)
     body = models.TextField()
-    excerpt = models.CharField(max_length=200, blank=True)
+    excerpt = models.CharField(max_length=255, blank=True)
     views = models.PositiveIntegerField(default=0, editable=False)
     pub_date = models.DateTimeField(blank=True, null=True)
-    created_time = models.DateTimeField()
-    modified_time = models.DateTimeField()
+    created_time = models.DateTimeField(auto_now_add=True)
+    modified_time = models.DateTimeField(auto_now=True)
     cover = models.ImageField(upload_to=post_cover_path, blank=True)
     category = models.ForeignKey(Category, null=True, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
