@@ -94,7 +94,7 @@ class PaginationMixin(object):
 
 class IndexView(ListView, PaginationMixin):
     model = Post
-    paginate_by = 1
+    paginate_by = 10
     template_name = 'blog/index.html'
 
     def get_context_data(self, **kwargs):
@@ -142,7 +142,7 @@ def category(request, pk):
 
 
 class CategoryView(ListView, PaginationMixin):
-    paginate_by = 1
+    paginate_by = 10
     template_name = 'blog/category.html'
 
     def get_queryset(self):
