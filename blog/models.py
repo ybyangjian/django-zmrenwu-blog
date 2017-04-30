@@ -41,6 +41,12 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        if not self.title:
+            self.title = self.name
+
+        super().save(*args, **kwargs)
+
     def get_absolute_url(self):
         return reverse('blog:category_slug', kwargs={'slug': self.slug})
 
