@@ -27,7 +27,7 @@
                             <div class="post-main-info">
                                 <a class="title" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
                                 <div class="text-small excerpt">
-                                    {{ post.body|truncatechars:130 }}
+                                    {{ post.excerpt }}...
                                 </div>
                             </div>
                             <footer class="text-small post-footer-meta">

@@ -1,9 +1,11 @@
 import os
+import markdown
 
-from django.conf import settings
 from django.db import models
 from django.db.models import Sum, Max
+from django.conf import settings
 from django.urls import reverse
+from django.utils.html import strip_tags
 from django.utils.six import python_2_unicode_compatible
 
 
@@ -88,9 +90,32 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+        if not self.excerpt:
+            md = markdown.Markdown(extensions=[
+                'markdown.extensions.extra',
+                'markdown.extensions.codehilite',
+            ])
+            self.excerpt = strip_tags(md.convert(self.body))[:74]
+
+        if not self.pub_date and self.get_status_display() == 'published':
+            self.pub_date = self.created_time
+
+        super().save(*args, **kwargs)
+
     def get_absolute_url(self):
         return reverse('blog:detail', kwargs={'pk': self.pk})
 
     def increase_views(self):
         self.views += 1
         self.save(update_fields=['views'])
+
+    def word_count(self):
+        md = markdown.Markdown(extensions=[
+            'markdown.extensions.extra',
+            'markdown.extensions.codehilite',
+        ])
+        return len(strip_tags(md.convert(self.body)))
+
+    def is_tutorial(self):
+        return self.category.get_genre_display() == 'tutorial'

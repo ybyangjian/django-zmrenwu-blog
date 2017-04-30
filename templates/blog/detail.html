@@ -15,9 +15,7 @@
                 <h1>{{ post.title }}</h1>
                 <div class="post-meta text-muted text-small top-gap">
                     <span>{{ post.created_time|timesince }}前</span>
-                    {% comment %}
-                    <span>字数 4614</span>
-                    {% endcomment %}
+                    <span>字数 {{ post.word_count }}</span>
                     <span>阅读 {{ post.views }}</span>
                     {% comment %}
                     <span>评论 45</span>
@@ -58,7 +56,7 @@
                 </footer>
             </article>
             <aside>
-                {% if post.category.get_genre_display == 'tutorial' %}
+                {% if post.is_tutorial %}
                     <section class="tutorial-reminder text-small top-gap-big">
                         本文属于 <span class="tutorial">{{ post.category.name }}</span>，<a
                             href="{{ post.category.get_absolute_url }}">查看该教程全部文章</a>
@@ -106,20 +104,6 @@
             <div class="text-small table-of-content">
                 {{ toc|safe }}
             </div>
-        </section>
-
-        <section class="recommendation-posts" style="display: none">
-            <h3>推荐阅读</h3>
-            <ul>
-                <li><a href="">Android悬浮球及全局返回功能的实现</a></li>
-                <li><a href="">2017 Facebook 开发者大会要点总结</a></li>
-                <li><a href="">一个可拖拽，移动，自由组合子控件的视图控件，让开发更简单</a></li>
-                <li><a href="">Android自定义色盘</a></li>
-                <li><a href="">Android自定义色盘</a></li>
-                <li><a href="">Android自定义色盘</a></li>
-                <li><a href="">Android自定义色盘</a></li>
-                <li><a href="">Android自定义色盘</a></li>
-            </ul>
         </section>
     </aside>
 {% endblock aside %}
