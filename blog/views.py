@@ -1,31 +1,11 @@
 import markdown
-
-from slugify import slugify
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView
 from markdown.extensions.toc import TocExtension
 
+from django.shortcuts import render, get_object_or_404, redirect
+from django.utils.text import slugify
+from django.views.generic import ListView
+
 from .models import Post, Category
-
-
-def header_slugify(value, separator='-'):
-    return slugify(value, separator=separator)
-
-
-"""
-使用下方的模板引擎方式。
-def index(request):
-    return HttpResponse("欢迎访问我的博客首页！")
-"""
-
-"""
-使用下方真正的首页视图函数
-def index(request):
-    return render(request, 'blog/index.html', context={
-        'title': '我的博客首页',
-        'welcome': '欢迎访问我的博客首页'
-    })
-"""
 
 
 class PaginationMixin(object):
@@ -112,7 +92,7 @@ def detail(request, pk):
     md = markdown.Markdown(extensions=[
         'markdown.extensions.extra',
         'markdown.extensions.codehilite',
-        TocExtension(slugify=header_slugify)
+        TocExtension(slugify=slugify)
     ])
     post.body = md.convert(post.body)
     try:
