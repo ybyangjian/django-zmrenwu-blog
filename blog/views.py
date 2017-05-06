@@ -10,25 +10,15 @@ from .models import Post, Category
 
 class PaginationMixin(object):
     def page_left_right(self, paginator, page, is_paginated):
+        if not is_paginated:
+            return {}
+
         left = []
         right = []
         left_has_more = False
         right_has_more = False
         first = False
         last = False
-
-        context = {
-            'left': left,
-            'right': right,
-            'left_has_more': left_has_more,
-            'right_has_more': right_has_more,
-            'first': first,
-            'last': last,
-        }
-
-        if not is_paginated:
-            return context
-
         page_number = page.number
         total_pages = paginator.num_pages
         page_range = paginator.page_range
