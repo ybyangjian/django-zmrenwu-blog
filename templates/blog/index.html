@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}首页 - 追梦人物的博客{% endblock title %}
-{% load blog_tags %}
+{% load blog_tags comments %}
 {% block main %}
     <main class="unit-3-4 unit-1-on-mobile">
         <section class="category-widget hide-on-mobile">
@@ -40,11 +40,10 @@
                                 <a class="text-muted" href="{{ post.get_absolute_url }}">
                                     <i class="fa fa-eye" aria-hidden="true"></i> {{ post.views }}</a>
                             </span>
-                                {% comment %}
+                                {% get_comment_count for post as comment_count %}
                                 <span class="comments"><a class="text-muted" href="detail.html"><i
                                         class="fa fa-comments-o"
-                                        aria-hidden="true"></i> 68</a></span>
-                                        {% endcomment %}
+                                        aria-hidden="true"></i> {{ comment_count }}</a></span>
                             </footer>
                         </div>
                         {% if post.cover %}

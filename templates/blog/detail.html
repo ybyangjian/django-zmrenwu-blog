@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load comments %}
 {% block title %}{{ post.title }} -
     {% if post.category %}{{ post.category.name }} - {% endif %}追梦人物的博客{% endblock title %}
 {% block menu_btn %}
@@ -17,9 +17,8 @@
                     <span>{{ post.created_time|timesince }}前</span>
                     <span>字数 {{ post.word_count }}</span>
                     <span>阅读 {{ post.views }}</span>
-                    {% comment %}
-                    <span>评论 45</span>
-                     {% endcomment %}
+                    {% get_comment_count for post as comment_count %}
+                    <span>评论 {{ comment_count }}</span>
                 </div>
                 <div class="post-body top-gap-big">
                     {{ post.body|safe }}
@@ -82,8 +81,6 @@
         </section>
         <hr>
         <section class="comment-area top-gap-big" id="comment-area">
-            {% load comments %}
-            {% get_comment_count for post as comment_count %}
             <h5>{{ comment_count }} 条评论</h5>
             {% if user.is_authenticated %}
                 <div class="commet-form-panel top-gap">
