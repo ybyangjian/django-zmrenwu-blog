@@ -11,11 +11,15 @@ class SocialAccountAdapter(DefaultSocialAccountAdapter):
                       data):
         user = super().populate_user(request, sociallogin, data)
         name = data.get('name')
-        try:
-            User.objects.get(name=name)
-            name = '%s_%s' % (name, sociallogin.account.provider)
-            user_field(user, 'name', name)
-        except User.DoesNotExist:
-            user_field(user, 'name', name)
 
+        if name:
+            try:
+                User.objects.get(name=name)
+                name = '%s_%s' % (name, sociallogin.account.provider)
+                user_field(user, 'name', name)
+            except User.DoesNotExist:
+                user_field(user, 'name', name)
+        else:
+            name = user.username
+            user_field(user, 'name', name)
         return user
