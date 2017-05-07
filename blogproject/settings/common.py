@@ -36,10 +36,14 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.weibo',
+    'allauth.socialaccount.providers.github',
+    'django_comments',
     'blog',
     'users',
+    'comments',
 ]
 
+COMMENTS_APP = 'comments'
 SITE_ID = 1
 
 MIDDLEWARE = [
@@ -129,3 +133,5 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
+
+SOCIALACCOUNT_ADAPTER = 'users.adapter.SocialAccountAdapter'

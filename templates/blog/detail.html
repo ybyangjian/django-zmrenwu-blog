@@ -82,15 +82,104 @@
         </section>
         <hr>
         <section class="comment-area top-gap-big" id="comment-area">
-            <!-- UY BEGIN -->
-            <script type="text/javascript">
-                var uyan_config = {
-                    'du': 'zmrenwu.com'
-                }
-            </script>
-            <div id="uyan_frame"></div>
-            <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2128865"></script>
-            <!-- UY END -->
+            {% load comments %}
+            {% get_comment_count for post as comment_count %}
+            <h5>{{ comment_count }} 条评论</h5>
+            {% if user.is_authenticated %}
+                <div class="commet-form-panel top-gap">
+                    {% render_comment_form for post %}
+                </div>
+            {% else %}
+                {% load socialaccount %}
+                <div class="login-panel flex-center top-gap">
+                    <div>
+                        <div class="login-title text-muted text-center"><span>登录后评论</span></div>
+                        <div class="social-icon flex-center text-center">
+                        <span class="weibo"><a
+                                href="{% provider_login_url 'weibo' %}?next={{ request.path }}#comment-area"><i
+                                class="fa fa-weibo"
+                                aria-hidden="true"></i></a></span>
+                            {% comment %}
+                        <span class="weixin"><a href=""><i class="fa fa-weixin"
+                                                           aria-hidden="true"></i></a></span>
+                        <span class="qq"><a href=""><i class="fa fa-qq" aria-hidden="true"></i></a></span>
+                        {% endcomment %}
+                            <span class="github"><a
+                                    href="{% provider_login_url 'github' %}?next={{ request.path }}#comment-area">
+                            <i class="fa fa-github" aria-hidden="true"></i></a></span>
+
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <hr class="top-gap-big">
+            <div class="comment-list">
+                {% for comment in post.root_comments %}
+                    <div class="flex-left" id="c{{ comment.pk }}">
+                        <div class="unit-0">
+                            <figure class="avatar">
+                                <img src="{{ comment.user.social_avatar }}" class="avatar-img"/>
+                            </figure>
+                        </div>
+                        <div class="unit">
+                            <header class="comment-header-meta">
+                                    <span class="nickname text-small text-muted">{{ comment.user.name }}
+                                        {% if comment.user.name == "追梦人物" %}
+                                            <span class="master">[博主]</span>
+                                        {% endif %}
+                                    </span>
+                            </header>
+                            <div class="comment-body">
+                                {{ comment.comment }}
+                            </div>
+                            <footer class="comment-footer">
+                                <time class="text-small text-muted">{{ comment.submit_date|timesince }}前</time>
+                                <a href="{% url 'comments:reply' comment.pk %}" class="reply-btn text-small text-muted">回复</a>
+                                {% comment %}
+                                <a href="" class="comment-btn text-small text-muted">5 条评论 <i
+                                        class="fa fa-angle-down"
+                                        aria-hidden="true"></i></a>
+                                        {% endcomment %}
+                            </footer>
+                            <div class="child-comments" data-comment-count="">
+                                {% for child_comment in comment.get_descendants_reversely %}
+                                    <div class="flex-left" id="c{{ child_comment.pk }}">
+                                        <div class="unit-0">
+                                            <figure class="avatar">
+                                                <img src="{{ child_comment.user.social_avatar }}" class="avatar-img"/>
+                                            </figure>
+                                        </div>
+                                        <div class="unit">
+                                            <header class="comment-header-meta">
+                                        <span class="nickname text-small text-muted">{{ child_comment.user.name }}
+                                            {% if child_comment.user.name == "追梦人物" %}
+                                                <span class="master">[博主]</span>
+                                            {% endif %}
+                                        </span>
+                                                <span class="reply-label text-small text-muted"><i class="fa fa-share"
+                                                                                                   aria-hidden="true"></i></span>
+                                                <span class="nickname text-small text-muted">{{ child_comment.parent.user.name }}
+                                                    {% if child_comment.parent.user.name == "追梦人物" %}
+                                                        <span class="master">[博主]</span>
+                                                    {% endif %}
+                                                </span>
+                                            </header>
+                                            <div class="comment-body">
+                                                {{ child_comment.comment }}
+                                            </div>
+                                            <footer class="comment-footer">
+                                                <time class="reply-date text-small text-muted">{{ child_comment.submit_date|timesince }}前</time>
+                                                <a href="{% url 'comments:reply' child_comment.pk %}"
+                                                   class="reply-btn text-small text-muted">回复</a>
+                                            </footer>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </section>
     </main>
 {% endblock main %}
@@ -132,7 +221,9 @@
             }
 
             $('#menu-btn').on('click', showSidebar);
-            $('.musk').on('click', hideSidebar)
+            $('.musk').on('click', hideSidebar);
+
+            $('.comment-form textarea').removeAttr('cols').removeAttr('rows')
         })
     </script>
 {% endblock script %}

@@ -1,0 +1,24 @@
+{% load comments %}
+<form class="form comment-form" action="{% comment_form_target %}"
+      method="post">{% csrf_token %}
+    {% if next %}
+        <input type="hidden" name="next" value="{{ next }}"/>
+    {% endif %}
+    {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+    {% endfor %}
+    <input type="hidden" name="next" value="{% url 'comments:comment_success' %}">
+    {{ form.comment.errors }}
+    {{ form.comment }}
+    {{ form.honeypot }}
+    <div class="flex-right">
+        <button class="preview-btn btn btn-success text-small" type="button"><i
+                class="fa fa-eye"
+                aria-hidden="true"></i> 预览
+        </button>
+        <button class="send-btn btn btn-success text-small" type="submit"><i
+                class="fa fa-paper-plane"
+                aria-hidden="true"></i> 发布
+        </button>
+    </div>
+</form>

@@ -354,35 +354,139 @@
 /**
  * 7.0 - 评论
  */
+.comment-area .login-panel {
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 15px 0;
+    border-radius: 4px;
+}
+
+.comment-area .social-icon {
+    margin-top: 10px;
+}
+
+.social-icon span:not(:last-child) {
+    margin-right: 10px;
+}
+
+.social-icon span {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    line-height: 26px;
+    border-radius: 50%;
+}
+
+.social-icon .weixin {
+    border: 1px solid #7bc549;
+}
+
+.social-icon .weixin a {
+    color: #7bc549;
+}
+
+.social-icon .weibo {
+    border: 1px solid #ff763b;
+}
+
+.social-icon .weibo a {
+    color: #ff763b;
+}
+
+.social-icon .qq {
+    border: 1px solid #333;
+}
+
+.social-icon .qq a {
+    color: #333;
+}
+
+.social-icon .github {
+    border: 1px solid #2680d9;
+}
+
+.social-icon .github a {
+    color: #2680d9;
+}
 
 .avatar {
-    margin-top: 0;
-    margin-right: 8px;
+    margin-top: 5px;
+    padding-right: 7px;
 }
 
 .avatar-img {
-    border-radius: 5px;
-    width: 38px;
+    border-radius: 4px;
+    width: 48px;
+}
+
+.comment-header-meta .master {
+    color: #ec6149;
+}
+
+.comment-footer a {
+    text-decoration: none;
+}
+
+.comment-footer a:before {
+    color: #333;
+    content: '· ';
 }
 
 .child-comments .avatar-img {
-    width: 30px;
+    width: 36px;
 }
 
 .comment-list > div {
-    margin-top: 30px;
-    padding-bottom: 30px;
+    padding: 15px 0;
     border-bottom: 1px solid #eee;
 }
 
 .child-comments {
-    margin-top: 15px;
-    margin-left: -19px;
+    margin-top: 7px;
 }
 
 .child-comments > div {
     padding: 15px 0;
     border-top: 1px solid #eee;
+}
+
+.child-comments > div:last-child {
+    padding-bottom: 0;
+}
+
+.commet-form-panel .comment-form textarea {
+    padding: 10px;
+    height: 120px;
+}
+
+.preview-btn {
+    margin-right: 15px;
+}
+
+.login-panel .login-title {
+    position: relative;
+}
+
+.login-panel .login-title span {
+    background-color: #fff;
+    padding: 7px;
+}
+
+.login-panel .login-title:before {
+    content: '';
+    display: inline-block;
+    width: 100%;
+    height: 2px;
+    border: 1px solid #ccc;
+    position: absolute;
+    top: 50%;
+    margin-top: -1px;
+    z-index: -1;
+    margin-left: -19%;
+}
+
+.comment-form input[name=honeypot] {
+    display: none !important;
 }
 
 /**

@@ -7,6 +7,9 @@ from django.conf import settings
 from django.urls import reverse
 from django.utils.html import strip_tags
 from django.utils.six import python_2_unicode_compatible
+from django.contrib.contenttypes.fields import GenericRelation
+
+from comments.models import BlogComment
 
 
 @python_2_unicode_compatible
@@ -83,6 +86,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category, null=True, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
+    comments = GenericRelation(BlogComment, object_id_field='object_pk', content_type_field='content_type')
 
     class Meta:
         ordering = ['-created_time']
@@ -121,3 +125,6 @@ class Post(models.Model):
         if not self.category:
             return False
         return self.category.get_genre_display() == 'tutorial'
+
+    def root_comments(self):
+        return self.comments.filter(parent__isnull=True)
