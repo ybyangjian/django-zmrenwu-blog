@@ -24,6 +24,7 @@ from blog.feeds import AllPostsRssFeed
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/', include('allauth.urls')),
     url(r'', include('blog.urls')),
     url(r'^sitemap\.xml$', sitemap,
         {'sitemaps': sitemaps},
