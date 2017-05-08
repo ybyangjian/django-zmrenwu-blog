@@ -92,12 +92,11 @@
                     <div>
                         <div class="login-title text-muted text-center"><span>登录后评论</span></div>
                         <div class="social-icon flex-center text-center">
-                            {% comment %}
                         <span class="weibo"><a
                                 href="{% provider_login_url 'weibo' %}?next={{ request.path }}#comment-area"><i
                                 class="fa fa-weibo"
                                 aria-hidden="true"></i></a></span>
-
+                            {% comment %}
                         <span class="weixin"><a href=""><i class="fa fa-weixin"
                                                            aria-hidden="true"></i></a></span>
                         <span class="qq"><a href=""><i class="fa fa-qq" aria-hidden="true"></i></a></span>
