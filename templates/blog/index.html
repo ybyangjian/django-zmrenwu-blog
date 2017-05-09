@@ -41,7 +41,8 @@
                                     <i class="fa fa-eye" aria-hidden="true"></i> {{ post.views }}</a>
                             </span>
                                 {% get_comment_count for post as comment_count %}
-                                <span class="comments"><a class="text-muted" href="detail.html"><i
+                                <span class="comments"><a class="text-muted"
+                                                          href="{{ post.get_absolute_url }}#comment-area"><i
                                         class="fa fa-comments-o"
                                         aria-hidden="true"></i> {{ comment_count }}</a></span>
                             </footer>

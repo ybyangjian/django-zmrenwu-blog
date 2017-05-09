@@ -127,4 +127,4 @@ class Post(models.Model):
         return self.category.get_genre_display() == 'tutorial'
 
     def root_comments(self):
-        return self.comments.filter(parent__isnull=True)
+        return self.comments.filter(parent__isnull=True, is_public=True, is_removed=False)
