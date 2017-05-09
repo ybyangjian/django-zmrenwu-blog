@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load notifications_tags blog_tags %}
+
+{% block title %}通知 - 追梦人物的博客{% endblock title %}
+
+{% block main %}
+    <main class="unit-3-4 unit-1-on-mobile">
+        {% notifications_unread as unread_count %}
+        <h3>全部通知</h3>
+        <hr>
+        <ul class="notification-list">
+            {% for notification in notifications %}
+                <li {% if notification.unread %}class="unread{% endif %}">
+                    {{ notification | describe }}
+                    <footer class="flex-right top-gap">
+                        <span class=" text-small text-muted">{{ notification.timestamp|timesince }}前</span>
+                        {% if notification.unread %}
+                            <a class="text-small delete-noti-btn"
+                               href="{% url 'notifications:mark_as_read' notification.slug %}">标为已读</a>
+                        {% endif %}
+                        {% comment %}
+                        <a class="text-small delete-noti-btn" href="{% url 'notifications:delete' notification.slug %}">删除</a>
+                        {% endcomment %}
+                    </footer>
+                </li>
+            {% empty %}
+                <li>暂无通知</li>
+            {% endfor %}
+        </ul>
+    </main>
+{% endblock main %}

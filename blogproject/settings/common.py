@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.weibo',
     'allauth.socialaccount.providers.github',
     'django_comments',
+    'notifications',
     'blog',
     'users',
     'comments',
@@ -135,3 +136,9 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SOCIALACCOUNT_ADAPTER = 'users.adapter.SocialAccountAdapter'
+
+# Notification
+NOTIFICATION_TEMPLATES = {
+    'comment': 'notifications/comment.html',
+    'reply': 'notifications/reply.html',
+}

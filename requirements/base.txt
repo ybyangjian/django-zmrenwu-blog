@@ -6,3 +6,4 @@ Pillow==4.1.0
 django-allauth==0.32.0
 django-contrib-comments==1.8.0
 django-mptt==0.8.7
+django-notifications-hq==1.2

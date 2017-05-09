@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^comments/', include('comments.urls')),
+    url(r'^notifications/', include('notifications.urls')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'', include('blog.urls')),
     url(r'^sitemap\.xml$', sitemap,

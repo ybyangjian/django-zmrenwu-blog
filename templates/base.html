@@ -49,16 +49,17 @@
                         <span class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></span>
                     </form>
                 </div>
-                {% comment %}
-                开发中...
                 <div class="unit-0">
-                    <a class="nav-bar-item" href="" id="notification">
+                    {% load notifications_tags %}
+                    {% notifications_unread as unread_count %}
+                    <a class="nav-bar-item" href="{% url 'notifications:all' %}" id="notification">
                         <i class="fa fa-bell-o" aria-hidden="true"></i>
                         <span class="hide-on-mobile">通知</span>
-                        <span class="counter">3</span>
+                        {% if unread_count %}
+                            <span class="counter">{{ unread_count }}</span>
+                        {% endif %}
                     </a>
                 </div>
-                {% endcomment %}
             </div>
         </div>
     </nav>
