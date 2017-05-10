@@ -12,20 +12,11 @@ class BlogModerator(Moderator):
 
 class BlogCommentModerator(CommentModerator):
     def reply(self, comment, content_object, request):
-        # 通知文章作者,如果是文章作者自己评论，则不通知
         post_author = content_object.author
-        if post_author != comment.user:
-            comment_data = {
-                'recipient': post_author,
-                'verb': 'comment',
-                'target': comment,
-            }
-            notify.send(sender=comment.user, **comment_data)
 
-        # 通知被评论的人
         if comment.parent:
             parent_user = comment.parent.user
-            # 自己回复自己无需通知
+            # 通知被评论的人，自己回复自己无需通知
             if parent_user != comment.user:
                 reply_data = {
                     'recipient': parent_user,
@@ -33,5 +24,24 @@ class BlogCommentModerator(CommentModerator):
                     'target': comment,
                 }
                 notify.send(sender=comment.user, **reply_data)
+
+            if parent_user != content_object.author and post_author != comment.user:
+                # 如果被回复的人不是文章作者，且不是文章作者自己的回复，文章作者应该收到通知
+                comment_data = {
+                    'recipient': post_author,
+                    'verb': 'comment',
+                    'target': comment,
+                }
+                notify.send(sender=comment.user, **comment_data)
+        else:
+            # 如果是直接评论，且不是文章作者自己评论，则通知文章作者
+            if post_author != comment.user:
+                comment_data = {
+                    'recipient': post_author,
+                    'verb': 'comment',
+                    'target': comment,
+                }
+                notify.send(sender=comment.user, **comment_data)
+
 
 moderator = BlogModerator()
