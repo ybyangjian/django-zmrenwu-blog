@@ -81,7 +81,16 @@
         </section>
         <hr>
         <section class="comment-area top-gap-big" id="comment-area">
-            <h5>{{ comment_count }} 条评论</h5>
+            <div class="flex-left">
+                <div class="unit"><h5 class="top-gap-0">{{ comment_count }} 条评论</h5></div>
+                {% if user.is_authenticated %}
+                    <div class="unit-0"><a href="{% url 'account_logout' %}?next={{ request.path }}"
+                                           class="text-small text-muted" style="text-decoration: none"><i
+                            class="fa fa-sign-out"
+                            aria-hidden="true"></i> 登出</a></div>
+                {% endif %}
+            </div>
+
             {% if user.is_authenticated %}
                 <div class="commet-form-panel top-gap">
                     {% render_comment_form for post %}

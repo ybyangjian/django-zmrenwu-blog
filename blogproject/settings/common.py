@@ -136,6 +136,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SOCIALACCOUNT_ADAPTER = 'users.adapter.SocialAccountAdapter'
+ACCOUNT_LOGOUT_ON_GET = True
 
 # Notification
 NOTIFICATION_TEMPLATES = {
