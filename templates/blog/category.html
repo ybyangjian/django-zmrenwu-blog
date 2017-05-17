@@ -2,7 +2,9 @@
 
 {% block title %}{{ category.title }} - 追梦人物的博客{% endblock title %}
 {% block description %}
-    <meta name="description" content="{{ category.description }}">
+    {% if category.description %}
+        <meta name="description" content="{{ category.description }}">
+    {% endif %}
 {% endblock description %}
 
 {% block pagination %}

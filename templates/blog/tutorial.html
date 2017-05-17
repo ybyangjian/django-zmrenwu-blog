@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block title %}{{ category.title }} - 追梦人物的博客{% endblock title %}
-
+{% block description %}
+    <meta name="description" content="{{ category.description }}">
+{% endblock description %}
 {% load blog_tags %}
 {% block main %}
     <main class="unit-3-4 unit-1-on-mobile">
