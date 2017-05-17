@@ -9,7 +9,7 @@ register = template.Library()
 
 @register.simple_tag
 def get_recent_posts(num=10):
-    return Post.objects.all()[:num]
+    return Post.objects.exclude(category__genre=2).order_by('-views')[:num]
 
 
 @register.simple_tag
@@ -19,7 +19,7 @@ def archives():
 
 @register.simple_tag
 def get_categories():
-    return Category.objects.all()
+    return Category.objects.filter(genre=2)
 
 
 @register.filter

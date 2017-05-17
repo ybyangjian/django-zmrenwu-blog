@@ -67,6 +67,9 @@ class IndexView(ListView, PaginationMixin):
     paginate_by = 10
     template_name = 'blog/index.html'
 
+    def get_queryset(self):
+        return super().get_queryset().exclude(category__genre=2)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         paginator = context.get('paginator')
