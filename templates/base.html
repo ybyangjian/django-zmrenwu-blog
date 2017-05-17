@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}"/>
 
     <title>{% block title %}追梦人物的博客{% endblock title %}</title>
-
+    <!-- 百度统计代码 -->
     <script>
         var _hmt = _hmt || [];
         (function () {
@@ -28,6 +28,21 @@
             hm.src = "https://hm.baidu.com/hm.js?fb59b2a6022bccc02671a750f61c356b";
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <!-- 百度自动推送链接 -->
+    <script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
         })();
     </script>
 </head>
