@@ -15,7 +15,7 @@
                         </span>
                     </header>
                     <div class="comment-body">
-                        {{ blogcomment.comment }}
+                        {{ blogcomment.comment|linebreaksbr }}
                     </div>
                     <footer class="comment-footer">
                         <time class="reply-date text-small text-muted">{{ blogcomment.submit_date|timesince }}前</time>

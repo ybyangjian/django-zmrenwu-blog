@@ -14,6 +14,7 @@
 
     {% block description %}{% endblock description %}
 
+
     <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css"/>
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'blog/css/friendly.css' %}">
@@ -59,9 +60,9 @@
                     <a href="{% url 'blog:index' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
                 </div>
                 <div class="unit flex-right flex-middle search-area">
-                    <form class="form" action="#" id="search-form">
-                        <input type="search" placeholder="开发中"/>
-                        <span class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></span>
+                    <form class="form" action="{% url 'haystack_search' %}" id="search-form">
+                        <input type="search" name="q" placeholder="搜索"/>
+                        <button class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                 </div>
                 <div class="unit-0">
@@ -144,6 +145,8 @@
         <div>蜀ICP备 16036143号-1</div>
     </div>
 </footer>
+<script>
+</script>
 {% block script %}
 {% endblock script %}
 </body>

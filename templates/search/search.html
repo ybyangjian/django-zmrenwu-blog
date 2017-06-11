@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load highlight %}
+{% load comments %}
+
+{% block main %}
+    <main class="unit-3-4 unit-1-on-mobile">
+        <section class="post-list">
+            {% if query %}
+                {% for result in page.object_list %}
+                    <article>
+                        <div class="flex-left units-gap">
+                            <div class="unit-0">
+                                <header class="text-small post-header-meta">
+                                    <span class="author">{{ result.object.author.name }}</span>
+                                    <span class="pub-date text-muted"><time
+                                            title="{{ result.object.created_time }}">{{ result.object.created_time|timesince }}</time>前</span>
+                                </header>
+                                <div class="post-main-info">
+                                    <a class="title"
+                                       href="{{ result.object.get_absolute_url }}">{% highlight result.object.title with query %}</a>
+                                    <div class="text-small excerpt">
+                                        {% highlight result.object.body with query %}
+                                    </div>
+                                </div>
+                                <footer class="text-small post-footer-meta">
+                                    {% if result.object.category %}
+                                        <span class="category">
+                                <a href="{{ result.object.category.get_absolute_url }}">{{ result.object.category.name }}</a>
+                            </span>
+                                    {% endif %}
+                                    <span class="views">
+                                <a class="text-muted" href="{{ result.object.get_absolute_url }}">
+                                    <i class="fa fa-eye" aria-hidden="true"></i> {{ result.object.views }}</a>
+                            </span>
+                                    {% get_comment_count for result.object as comment_count %}
+                                    <span class="comments"><a class="text-muted"
+                                                              href="{{ result.object.get_absolute_url }}#comment-area"><i
+                                            class="fa fa-comments-o"
+                                            aria-hidden="true"></i> {{ comment_count }}</a></span>
+                                </footer>
+                            </div>
+                            {% if post.cover %}
+                                <div class="unit-1-4 hide-on-mobile flex-right flex-middle">
+                                    <figure class="post-cover">
+                                        <a href="detail.html"><img class="post-cover-image" src="images/500_400.jpg"
+                                                                   alt=""></a>
+                                    </figure>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </article>
+                {% empty %}
+                    <div class="no-post">没有搜索到你想要的结果！</div>
+                {% endfor %}
+                {% if page.has_previous or page.has_next %}
+                    <div>
+                        {% if page.has_previous %}
+                            <a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo;
+                        Previous
+                        {% if page.has_previous %}</a>{% endif %}
+                        |
+                        {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}
+                        Next
+                        &raquo;{% if page.has_next %}</a>{% endif %}
+                    </div>
+                {% endif %}
+            {% else %}
+                请输入搜索关键词，例如 django
+            {% endif %}
+        </section>
+    </main>
+{% endblock main %}

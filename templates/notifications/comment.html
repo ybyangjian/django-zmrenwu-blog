@@ -4,5 +4,5 @@
     <a href="{{ target.content_object.get_absolute_url }}#c{{ target.pk }}">{{ target.content_object.title }}</a>
 </header>
 <div class="notification-content">
-    {{ target.comment }}
+    {{ target.comment|linebreaksbr }}
 </div>

@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^comments/', include('comments.urls')),
     url(r'^notifications/', include('notifications.urls')),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^search/', include('haystack.urls')),
     url(r'', include('blog.urls')),
     url(r'^sitemap\.xml$', sitemap,
         {'sitemaps': sitemaps},

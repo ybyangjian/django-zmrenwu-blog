@@ -82,9 +82,11 @@
 #search-form .search-btn {
     font-size: 2rem;
     position: absolute;
-    top: 4px;
-    right: 1rem;
+    top: 2px;
+    right: 0.6rem;
     cursor: pointer;
+    background-color: #fff;
+    border: none;
 }
 
 #search-form input[type='search'] {
@@ -612,5 +614,10 @@ span.done {
 
 .zhcn {
     color: #ffd343 !important;
+}
+
+/* 搜索结果关键词高亮*/
+span.highlighted {
+    color: red;
 }
 

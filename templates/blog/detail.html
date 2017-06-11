@@ -136,7 +136,7 @@
                                     </span>
                             </header>
                             <div class="comment-body">
-                                {{ comment.comment }}
+                                {{ comment.comment|linebreaksbr }}
                             </div>
                             <footer class="comment-footer">
                                 <time class="text-small text-muted">{{ comment.submit_date|timesince }}前</time>
@@ -171,7 +171,7 @@
                                                 </span>
                                             </header>
                                             <div class="comment-body">
-                                                {{ child_comment.comment }}
+                                                {{ child_comment.comment|linebreaksbr }}
                                             </div>
                                             <footer class="comment-footer">
                                                 <time class="reply-date text-small text-muted">{{ child_comment.submit_date|timesince }}前</time>
