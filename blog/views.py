@@ -5,6 +5,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.text import slugify
 from django.views.generic import ListView
 
+from notifications.views import AllNotificationsList, UnreadNotificationsList
+
 from .models import Post, Category
 
 
@@ -61,15 +63,6 @@ class PaginationMixin(object):
 
         return context
 
-
-class IndexView(ListView, PaginationMixin):
-    model = Post
-    paginate_by = 10
-    template_name = 'blog/index.html'
-
-    def get_queryset(self):
-        return super().get_queryset()
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         paginator = context.get('paginator')
@@ -77,6 +70,15 @@ class IndexView(ListView, PaginationMixin):
         is_paginated = context.get('is_paginated')
         context.update(self.page_left_right(paginator, page, is_paginated))
         return context
+
+
+class IndexView(PaginationMixin, ListView):
+    model = Post
+    paginate_by = 10
+    template_name = 'blog/index.html'
+
+    def get_queryset(self):
+        return super().get_queryset()
 
 
 def detail(request, pk):
@@ -150,3 +152,11 @@ def category_slug(request, slug):
                                                               'category': cate})
     return render(request, 'blog/category.html', context={'post_list': post_list,
                                                           'category': cate})
+
+
+class AllNotificationsListView(PaginationMixin, AllNotificationsList):
+    paginate_by = 20
+
+
+class UnreadNotificationsListView(PaginationMixin, UnreadNotificationsList):
+    paginate_by = 20

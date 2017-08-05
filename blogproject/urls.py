@@ -24,12 +24,12 @@ from blog.feeds import AllPostsRssFeed
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'', include('blog.urls')),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^comments/', include('comments.urls')),
     url(r'^notifications/', include('notifications.urls')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^search/', include('haystack.urls')),
-    url(r'', include('blog.urls')),
     url(r'^sitemap\.xml$', sitemap,
         {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
