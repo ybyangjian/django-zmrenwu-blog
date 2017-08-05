@@ -7,7 +7,7 @@
         <h2 class="text-center">使用第三方账户账户登录</h2>
         <div class="social-icon flex-center text-center top-gap-big">
                         <span class="weibo"><a
-                                href="{% provider_login_url 'weibo' %}?next={{ request.path }}#comment-area"><i
+                                href="{% provider_login_url 'weibo' %}"><i
                                 class="fa fa-weibo"
                                 aria-hidden="true"></i></a></span>
             {% comment %}
@@ -16,7 +16,7 @@
                         <span class="qq"><a href=""><i class="fa fa-qq" aria-hidden="true"></i></a></span>
                         {% endcomment %}
             <span class="github"><a
-                    href="{% provider_login_url 'github' %}?next={{ request.path }}#comment-area">
+                    href="{% provider_login_url 'github' %}">
                             <i class="fa fa-github" aria-hidden="true"></i></a></span>
 
         </div>

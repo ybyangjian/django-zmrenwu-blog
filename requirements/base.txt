@@ -8,5 +8,6 @@ django-contrib-comments==1.8.0
 django-mptt==0.8.7
 django-notifications-hq==1.2
 django-haystack==2.6.1
+django-ckeditor==5.3.0
 jieba==0.38
 Whoosh==2.7.4

@@ -360,6 +360,14 @@
 /**
  * 7.0 - 评论
  */
+.comment-form div.django-ckeditor-widget {
+    max-width: 100%;
+}
+
+#cke_id_comment {
+    max-width: 100%;
+}
+
 .comment-area .login-panel {
     width: 100%;
     border: 1px solid #ddd;

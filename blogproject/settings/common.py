@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     'django_comments',
     'notifications',
+    'ckeditor',
     'blog',
     'users',
     'comments',
@@ -155,3 +156,15 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 20
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 HAYSTACK_CUSTOM_HIGHLIGHTER = 'blog.utils.Highlighter'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat', 'Source']
+        ]
+    }
+}

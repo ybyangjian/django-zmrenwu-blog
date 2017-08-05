@@ -1,6 +1,7 @@
 {% load comments %}
 <form class="form comment-form" action="{% comment_form_target %}"
       method="post">{% csrf_token %}
+    {{ form.media }}
     {% if next %}
         <input type="hidden" name="next" value="{{ next }}"/>
     {% endif %}
