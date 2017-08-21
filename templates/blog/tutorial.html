@@ -10,7 +10,9 @@
         <div class="flex-left flex-wrap units-gap top-gap-big">
             <div class="unit-2-3 unit-1-on-mobile ">
                 <figure class="tutorial-cover">
-                    <img class="tutorial-cover-img" src="{{ category.cover.url }}" alt="">
+                    {% if category.cover %}
+                        <img class="tutorial-cover-img" src="{{ category.cover.url }}" alt="">
+                    {% endif %}
                     <div class="tutorial-heading-on-mobile">{{ category.name }}</div>
                 </figure>
             </div>

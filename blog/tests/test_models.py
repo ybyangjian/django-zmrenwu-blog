@@ -99,4 +99,5 @@ class PostTestCase(TestCase):
         self.assertFalse(self.post.is_tutorial())
 
     def test_root_comments(self):
+        # TODO
         pass

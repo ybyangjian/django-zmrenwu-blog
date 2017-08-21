@@ -77,9 +77,6 @@ class IndexView(PaginationMixin, ListView):
     paginate_by = 10
     template_name = 'blog/index.html'
 
-    def get_queryset(self):
-        return super().get_queryset()
-
 
 def detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -106,9 +103,13 @@ def detail(request, pk):
                                                         'next_post': next_post})
 
 
+"""
+not in using
+
 def archives(request, year, month):
     post_list = Post.objects.filter(created_time__year=year, created_time__month=month)
     return render(request, 'blog/index.html', context={'post_list': post_list})
+"""
 
 
 def category(request, pk):
@@ -142,6 +143,9 @@ class CategoryView(ListView, PaginationMixin):
         return context
 
 
+"""
+not in using
+
 def category_slug(request, slug):
     cate = get_object_or_404(Category, slug=slug)
     post_list = Post.objects.filter(category=cate)
@@ -152,6 +156,7 @@ def category_slug(request, slug):
                                                               'category': cate})
     return render(request, 'blog/category.html', context={'post_list': post_list,
                                                           'category': cate})
+"""
 
 
 class AllNotificationsListView(PaginationMixin, AllNotificationsList):
