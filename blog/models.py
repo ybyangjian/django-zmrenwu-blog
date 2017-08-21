@@ -5,43 +5,46 @@ from django.db import models
 from django.db.models import Sum, Max
 from django.conf import settings
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
 from django.utils.html import strip_tags
 from django.utils.six import python_2_unicode_compatible
 from django.contrib.contenttypes.fields import GenericRelation
 
+from model_utils import Choices
+
 from comments.models import BlogComment
 
 
-@python_2_unicode_compatible
 class Tag(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(_('name'), max_length=100)
 
     def __str__(self):
         return self.name
 
 
 class Category(models.Model):
-    GENRE_CHOICES = (
-        (1, 'collection'),
-        (2, 'tutorial'),
+    GENRE_CHOICES = Choices(
+        (1, 'collection', _('collection')),
+        (2, 'tutorial', _('tutorial')),
     )
 
-    STATUS_CHOICES = (
-        (1, 'ongoing'),
-        (2, 'finished'),
+    STATUS_CHOICES = Choices(
+        (1, 'ongoing', _('ongoing')),
+        (2, 'finished', _('finished')),
     )
 
-    name = models.CharField(max_length=100)
-    title = models.CharField(max_length=255, blank=True)
-    slug = models.SlugField(unique=True)
-    description = models.TextField(blank=True)
-    created = models.DateTimeField(auto_now_add=True)
-    genre = models.PositiveSmallIntegerField(choices=GENRE_CHOICES)
-    status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, blank=True, null=True)
-    cover = models.ImageField(upload_to='covers/categories/%Y/%m/%d/', blank=True)
-    cover_caption = models.CharField(max_length=255, blank=True)
-    resource = models.URLField(blank=True)
-    creator = models.ForeignKey(settings.AUTH_USER_MODEL)
+    name = models.CharField(_('name'), max_length=100)
+    title = models.CharField(_('title'), max_length=255, blank=True)
+    slug = models.SlugField(_('slug'), unique=True)
+    description = models.TextField(_('description'), blank=True)
+    created = models.DateTimeField(_('creation time'), auto_now_add=True)
+    genre = models.PositiveSmallIntegerField(_('genre'), choices=GENRE_CHOICES,
+                                             default=GENRE_CHOICES.collection)
+    status = models.PositiveSmallIntegerField(_('status'), choices=STATUS_CHOICES, blank=True, null=True)
+    cover = models.ImageField(_('cover'), upload_to='covers/categories/%Y/%m/%d/', blank=True)
+    cover_caption = models.CharField(_('cover caption'), max_length=255, blank=True)
+    resource = models.URLField(_('resource'), blank=True)
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('creator'))
 
     def __str__(self):
         return self.name
@@ -68,24 +71,24 @@ def post_cover_path(instance, filename):
 
 @python_2_unicode_compatible
 class Post(models.Model):
-    STATUS_CHOICES = (
-        (1, 'published'),
-        (2, 'draft'),
-        (3, 'hidden'),
+    STATUS_CHOICES = Choices(
+        (1, 'published', 'published'),
+        (2, 'draft', 'draft'),
+        (3, 'hidden', 'hidden'),
     )
 
-    status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES)
-    title = models.CharField(max_length=255)
-    body = models.TextField()
-    excerpt = models.CharField(max_length=255, blank=True)
-    views = models.PositiveIntegerField(default=0, editable=False)
-    pub_date = models.DateTimeField(blank=True, null=True)
-    created_time = models.DateTimeField(auto_now_add=True)
-    modified_time = models.DateTimeField(auto_now=True)
-    cover = models.ImageField(upload_to=post_cover_path, blank=True)
-    category = models.ForeignKey(Category, null=True, blank=True)
-    tags = models.ManyToManyField(Tag, blank=True)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL)
+    status = models.PositiveSmallIntegerField(_('status'), choices=STATUS_CHOICES, default=STATUS_CHOICES.draft)
+    title = models.CharField(_('title'), max_length=255)
+    body = models.TextField(_('body'), )
+    excerpt = models.CharField(_('excerpt'), max_length=255, blank=True)
+    views = models.PositiveIntegerField(_('views'), default=0, editable=False)
+    pub_date = models.DateTimeField(_('publication time'), blank=True, null=True)
+    created_time = models.DateTimeField(_('creation time'), auto_now_add=True)
+    modified_time = models.DateTimeField(_('modification time'), auto_now=True)
+    cover = models.ImageField(_('cover'), upload_to=post_cover_path, blank=True)
+    category = models.ForeignKey(Category, verbose_name=_('category'), null=True, blank=True)
+    tags = models.ManyToManyField(Tag, verbose_name=_('tags'), blank=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('author'))
     comments = GenericRelation(BlogComment, object_id_field='object_pk', content_type_field='content_type')
 
     class Meta:
