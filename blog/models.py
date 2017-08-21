@@ -11,6 +11,7 @@ from django.utils.six import python_2_unicode_compatible
 from django.contrib.contenttypes.fields import GenericRelation
 
 from model_utils import Choices
+from model_utils.fields import AutoCreatedField, AutoLastModifiedField
 
 from comments.models import BlogComment
 
@@ -59,6 +60,9 @@ class Category(models.Model):
         return reverse('blog:category_slug', kwargs={'slug': self.slug})
 
     def total_views(self):
+        if not self.post_set.exists():
+            return {'category_views': 0}
+
         return self.post_set.aggregate(category_views=Sum('views'))
 
     def last_modified(self):
@@ -79,12 +83,14 @@ class Post(models.Model):
 
     status = models.PositiveSmallIntegerField(_('status'), choices=STATUS_CHOICES, default=STATUS_CHOICES.draft)
     title = models.CharField(_('title'), max_length=255)
-    body = models.TextField(_('body'), )
+    body = models.TextField(_('body'))
     excerpt = models.CharField(_('excerpt'), max_length=255, blank=True)
     views = models.PositiveIntegerField(_('views'), default=0, editable=False)
     pub_date = models.DateTimeField(_('publication time'), blank=True, null=True)
-    created_time = models.DateTimeField(_('creation time'), auto_now_add=True)
-    modified_time = models.DateTimeField(_('modification time'), auto_now=True)
+
+    # Do not user auto_add=True or auto_now_add=True since value is None before instance be saved
+    created_time = AutoCreatedField(_('creation time'))
+    modified_time = AutoLastModifiedField(_('modification time'))
     cover = models.ImageField(_('cover'), upload_to=post_cover_path, blank=True)
     category = models.ForeignKey(Category, verbose_name=_('category'), null=True, blank=True)
     tags = models.ManyToManyField(Tag, verbose_name=_('tags'), blank=True)
@@ -103,9 +109,10 @@ class Post(models.Model):
                 'markdown.extensions.extra',
                 'markdown.extensions.codehilite',
             ])
+            # TODO: refactor and test
             self.excerpt = strip_tags(md.convert(self.body))[:74]
 
-        if not self.pub_date and self.get_status_display() == 'published':
+        if not self.pub_date and self.status == self.STATUS_CHOICES.published:
             self.pub_date = self.created_time
 
         super().save(*args, **kwargs)
@@ -122,6 +129,7 @@ class Post(models.Model):
             'markdown.extensions.extra',
             'markdown.extensions.codehilite',
         ])
+        # TODO: refactor and test
         return len(strip_tags(md.convert(self.body)))
 
     def is_tutorial(self):
@@ -130,4 +138,5 @@ class Post(models.Model):
         return self.category.get_genre_display() == 'tutorial'
 
     def root_comments(self):
+        # TODO: move the logic to comment manager
         return self.comments.filter(parent__isnull=True, is_public=True, is_removed=False)
