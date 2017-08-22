@@ -44,9 +44,6 @@ class PostDetailView(DetailView):
         post.body = md.convert(post.body)
         post.toc = md.toc
 
-        if post.category.genre == Category.GENRE_CHOICES.tutorial:
-            self.template_name = 'blog/tutorial.html'
-
         return post
 
     def get_context_data(self, **kwargs):
@@ -63,8 +60,14 @@ class PostDetailView(DetailView):
         except Post.DoesNotExist:
             next_post = None
 
+        if post.category.genre == Category.GENRE_CHOICES.tutorial:
+            self.template_name = 'blog/tutorial.html'
+            post_list = post.category.post_set.all().order_by('created_time')
+            context['post_list'] = post_list
+
         context['previous_post'] = previous_post
         context['next_post'] = next_post
+
         return context
 
 

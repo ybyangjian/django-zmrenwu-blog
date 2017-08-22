@@ -9,7 +9,7 @@
                 <div class="unit flex-right">
                     <a class="text-muted text-small" href="{% url 'blog:notification_unread' %}">未读</a>
                     <a class="text-muted text-small" href="{% url 'blog:notification_all' %}">全部</a>
-                    <a class="text-muted text-small unit-0" href="">
+                    <a class="text-muted text-small unit-0" href="{% url 'notifications:mark_all_as_read' %}">
                         <i class="fa fa-check" aria-hidden="true"></i> 全部标为已读</a>
                 </div>
             </div>

@@ -41,6 +41,7 @@
             s.parentNode.insertBefore(bp, s);
         })();
     </script>
+    {% block style %}{% endblock style %}
 </head>
 <body class="bg-faded">
 <header>
@@ -96,7 +97,7 @@
 </header>
 <section class="flex-center">
     <div class="container-wider">
-        <div class="flex-left flex-wrap units-gap-big">
+        <div class="flex-left flex-wrap {% block units_gap %}units-gap-big{% endblock %}">
             {% block main %}{% endblock main %}
             {% block side %}
                 <div class="unit-1-4 unit-1-on-mobile top-gap">

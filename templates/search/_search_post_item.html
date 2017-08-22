@@ -1,0 +1,6 @@
+{% extends 'blog/_post_item.html' %}
+
+{% load highlight %}
+
+{% block post_title %}{% highlight post.title with query %}{% endblock %}
+{% block post_excerpt %}{% highlight post.body with query %}{% endblock %}

@@ -8,10 +8,12 @@
             <div class="text-muted">
                 {% block type %}<i class="fa fa-comment" aria-hidden="true"></i>{% endblock %}
                 <time>{{ notification.timestamp|timesince }}前</time>
-                <a class="text-small text-muted mark-as-read"
-                   href="{% url 'notifications:mark_as_read' notification.slug %}"><i class="fa fa-check"
-                                                                                      aria-hidden="true"></i>
-                    标为已读</a>
+                {% if notification.unread %}
+                    <a class="text-small text-muted mark-as-read"
+                       href="{% url 'notifications:mark_as_read' notification.slug %}"><i class="fa fa-check"
+                                                                                          aria-hidden="true"></i>
+                        标为已读</a>
+                {% endif %}
             </div>
         </div>
     </div>
