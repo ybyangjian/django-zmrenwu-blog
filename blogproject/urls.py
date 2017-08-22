@@ -21,12 +21,14 @@ from django.contrib.sitemaps.views import sitemap
 
 from blog.feeds import AllPostsRssFeed
 from blog import sitemaps
+import debug_toolbar
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('blog.urls')),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^comments/', include('comments.urls')),
+    url(r'^notifications/', include('contrib.blog_notifications.urls')),
     url(r'^notifications/', include('notifications.urls')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^search/', include('haystack.urls')),
@@ -37,3 +39,10 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]

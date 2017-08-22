@@ -4,7 +4,8 @@
         <div class="bg-white card">
             <ul>
                 {% for category in category_list %}
-                    <li><a href=""><i class="ion-ios-albums"></i> {{ category }}（2658）</a></li>
+                    <li><a href="{% url 'blog:category_slug' category.slug %}"><i
+                            class="ion-ios-albums"></i> {{ category }}（{{ category.num_posts }}）</a></li>
                 {% endfor %}
             </ul>
         </div>

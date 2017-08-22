@@ -41,6 +41,15 @@
             s.parentNode.insertBefore(bp, s);
         })();
     </script>
+    <style>
+        .current a {
+            color: red
+        }
+
+        .pagination li {
+            margin-right: 5px;
+        }
+    </style>
     {% block style %}{% endblock style %}
 </head>
 <body class="bg-faded">
@@ -70,7 +79,7 @@
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </a>
                 <div class="notification">
-                    <a class="nav-link" href="{% url 'notifications:all' %}">
+                    <a class="nav-link" href="{% url 'blog_notifications:notification_all' %}">
                         <i class="fa fa-bell-o" aria-hidden="true"></i>{% if unread_count %}
                         <span class="notification-count">{{ unread_count }}</span>{% endif %}
                     </a>
@@ -134,6 +143,10 @@
                     <div class="bg-white top-gap card">
                         <div class="card-header">
                             友情链接
+                            <ul>
+                                <li><a class="text-muted" target="_blank" href="http://www.pythonzh.cn/">Python中文社区</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>

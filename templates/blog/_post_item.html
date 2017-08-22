@@ -37,7 +37,7 @@
     {% if post.cover %}
         <div class="unit-0 hide-on-mobile flex-middle">
             <figure>
-                <a href=""><img class="post-item-cover" src="images/60.jpg" alt=""></a>
+                <a href=""><img class="post-item-cover" src="{{ post.cover_thumbnail.url }}" alt=""></a>
             </figure>
         </div>
     {% endif %}

@@ -7,13 +7,22 @@
                     <div class="unit-1-3 unit-1-on-mobile">
                         <div class="card tutorial-card">
                             <div class="card-image">
-                                <img class="" src="{{ tutorial.cover.url }}" alt="">
+                                <img class="" src="{{ tutorial.cover_thumbnail.url }}" alt="">
                             </div>
                             <h6 class="top-gap"><a href="">{{ tutorial }}</a></h6>
                             <div class="text-small tutorial-meta">
-                                <span>2018人学习</span>
-                                <span class="state"><i class="fa fa-check-circle-o"
-                                                       aria-hidden="true"></i> 已完成</span>
+                                {% comment %}<span>2018人学习</span>{% endcomment %}
+                                <span>{{ tutorial.total_views.category_views }}次阅读</span>
+                                {% if tutorial.status == 2 %}
+                                    <span class="state">
+                                        <i class="fa fa-check-circle-o"
+                                           aria-hidden="true"></i> 已完成</span>
+                                {% else %}
+                                    <span class="state" style="color: green">
+                                        <i class="fa fa-check-circle-o"
+                                           aria-hidden="true"></i> 进行中</span>
+                                {% endif %}
+
                             </div>
                         </div>
                     </div>

@@ -15,6 +15,9 @@ from model_utils.fields import AutoCreatedField, AutoLastModifiedField
 
 from comments.models import BlogComment
 
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
+
 
 class Tag(models.Model):
     name = models.CharField(_('name'), max_length=100)
@@ -43,6 +46,10 @@ class Category(models.Model):
                                              default=GENRE_CHOICES.collection)
     status = models.PositiveSmallIntegerField(_('status'), choices=STATUS_CHOICES, blank=True, null=True)
     cover = models.ImageField(_('cover'), upload_to='covers/categories/%Y/%m/%d/', blank=True)
+    cover_thumbnail = ImageSpecField(source='cover',
+                                     processors=[ResizeToFill(500, 300)],
+                                     format='JPEG',
+                                     options={'quality': 90})
     cover_caption = models.CharField(_('cover caption'), max_length=255, blank=True)
     resource = models.URLField(_('resource'), blank=True)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('creator'))
@@ -92,6 +99,10 @@ class Post(models.Model):
     created_time = AutoCreatedField(_('creation time'))
     modified_time = AutoLastModifiedField(_('modification time'))
     cover = models.ImageField(_('cover'), upload_to=post_cover_path, blank=True)
+    cover_thumbnail = ImageSpecField(source='cover',
+                                     processors=[ResizeToFill(60, 60)],
+                                     format='JPEG',
+                                     options={'quality': 90})
     category = models.ForeignKey(Category, verbose_name=_('category'), null=True, blank=True)
     tags = models.ManyToManyField(Tag, verbose_name=_('tags'), blank=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('author'))

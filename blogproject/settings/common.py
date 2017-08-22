@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'blog',
     'users',
     'comments',
+    'contrib.blog_notifications',
+    'debug_toolbar',
 ]
 
 COMMENTS_APP = 'comments'
@@ -57,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'blogproject.urls'
@@ -170,3 +173,7 @@ CKEDITOR_CONFIGS = {
         ]
     }
 }
+
+# debug toolbar
+INTERNAL_IPS = ['127.0.0.1']
+JQUERY_URL = 'https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js'

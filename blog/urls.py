@@ -12,6 +12,4 @@ urlpatterns = [
     url(r'^tutorials/$', views.TutorialListView.as_view(), name='tutorials'),
     url(r'^categories/$', views.CategoryListView.as_view(), name='categories'),
     url(r'^archives/$', views.PostArchivesView.as_view(), name='archives'),
-    url(r'^notifications/$', views.AllNotificationsListView.as_view(), name='notification_all'),
-    url(r'^notifications/unread/$', views.UnreadNotificationsListView.as_view(), name='notification_unread'),
 ]

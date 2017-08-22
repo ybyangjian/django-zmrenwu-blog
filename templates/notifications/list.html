@@ -1,24 +1,26 @@
 {% extends 'base.html' %}
 
-{% load blog_tags %}
+{% load blog_notifications_tags %}
 {% block main %}
     <div class="unit-3-4 unit-1-on-mobile top-gap">
         <div class="bg-white list-group notification-list">
             <div class="flex-bottom list-group-item notification-list-header">
                 <h3 class="top-gap-0 unit-0">通知</h3>
                 <div class="unit flex-right">
-                    <a class="text-muted text-small" href="{% url 'blog:notification_unread' %}">未读</a>
-                    <a class="text-muted text-small" href="{% url 'blog:notification_all' %}">全部</a>
+                    <a class="text-muted text-small" href="{% url 'blog_notifications:notification_unread' %}">未读</a>
+                    <a class="text-muted text-small" href="{% url 'blog_notifications:notification_all' %}">全部</a>
                     <a class="text-muted text-small unit-0" href="{% url 'notifications:mark_all_as_read' %}">
                         <i class="fa fa-check" aria-hidden="true"></i> 全部标为已读</a>
                 </div>
             </div>
             {% for notification in notifications %}
                 <div class="list-group-item notification-item {% if notification.unread %}unread{% endif %}">
-                    {{ notification|describe }}
+                    {% display notification %}
                 </div>
             {% endfor %}
-            {% include 'blog/pagination.html' %}
+            <div class="list-group-item notification-item {% if notification.unread %}unread{% endif %}">
+                {% include 'blog/pagination.html' %}
+            </div>
         </div>
     </div>
 {% endblock main %}

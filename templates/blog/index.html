@@ -13,54 +13,12 @@
                 </div>
                 <div class="unit-0">
                     <a class="text-muted text-small rss" href="/all/rss"><i class="fa fa-rss"
-                                                                    aria-hidden="true"></i>RSS
+                                                                            aria-hidden="true"></i>RSS
                         订阅</a>
                 </div>
             </div>
             {% for post in post_list %}
-                <article class="list-group-item flex-left post-item">
-                    <div class="unit unit-1-on-mobile">
-                        <ul class="list-inline dot-divider post-item-meta">
-                            {% comment %}
-                            <li class="list-inline-item"><a class="text-muted text-small pinned" href="">顶</a>
-                            </li>
-                            <li class="list-inline-item"><a class="text-muted text-small recommended"
-                                                            href="">荐</a>
-                            </li>
-                            {% endcomment %}
-                            <li class="list-inline-item"><span class="text-muted text-small"
-                                                               href="">{{ post.author.name }}</span></li>
-                            <li class="list-inline-item"><a class="text-muted text-small"
-                                                            href="{{ post.get_absolute_url }}">{{ post.created_time|timesince }}前</a>
-                            </li>
-                            <li class="list-inline-item"><span class="text-muted text-small"
-                                                               href="">{{ post.category }}</span>
-                            </li>
-                        </ul>
-                        <h3 class="top-gap-0 post-item-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-                        </h3>
-                        <div class="text-small hide-on-mobile post-item-excerpt">
-                            {{ post.excerpt }} ...
-                        </div>
-                        <div class="top-gap post-item-statistic tool-bar">
-                            <a class="text-muted text-small" role="button"
-                               href="{{ post.get_absolute_url }}"><i class="fa fa-eye"
-                                                                     aria-hidden="true"></i> {{ post.views }}
-                            </a>
-                            <a class="text-muted text-small" role="button"
-                               href="{{ post.get_absolute_url }}#comment-area"><i class="fa fa-comments"
-                                                                                  aria-hidden="true"></i> {{ post.comment_count }}
-                            </a>
-                        </div>
-                    </div>
-                    {% if post.cover %}
-                        <div class="unit-0 hide-on-mobile flex-middle">
-                            <figure>
-                                <a href=""><img class="post-item-cover" src="images/60.jpg" alt=""></a>
-                            </figure>
-                        </div>
-                    {% endif %}
-                </article>
+                {% include 'blog/_post_item.html' %}
             {% endfor %}
             <div class="flex-center list-group-item">
                 {% include 'blog/pagination.html' %}

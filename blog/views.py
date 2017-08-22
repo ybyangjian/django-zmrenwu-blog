@@ -1,12 +1,10 @@
 import markdown
 from markdown.extensions.toc import TocExtension
 
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.db.models import Count
 from django.utils.text import slugify
 from django.views.generic import ListView, DetailView
-
-from notifications.views import AllNotificationsList, UnreadNotificationsList
 
 from blog.models import Post, Category
 from .view_mixins import PaginationMixin
@@ -113,17 +111,9 @@ class CategoryListView(ListView):
     template_name = 'blog/category_list.html'
 
     # TODO: refactor to manager
-    queryset = Category.objects.exclude(genre=Category.GENRE_CHOICES.tutorial)
+    queryset = Category.objects.exclude(genre=Category.GENRE_CHOICES.tutorial).annotate(num_posts=Count('post'))
 
 
 class PostArchivesView(ListView):
     model = Post
     template_name = 'blog/archives.html'
-
-
-class AllNotificationsListView(PaginationMixin, AllNotificationsList):
-    paginate_by = 20
-
-
-class UnreadNotificationsListView(PaginationMixin, UnreadNotificationsList):
-    paginate_by = 20
