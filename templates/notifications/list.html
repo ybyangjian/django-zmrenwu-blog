@@ -1,83 +1,24 @@
 {% extends 'base.html' %}
-{% load notifications_tags blog_tags %}
 
-{% block title %}通知 - 追梦人物的博客{% endblock title %}
-
+{% load blog_tags %}
 {% block main %}
-    <main class="unit-3-4 unit-1-on-mobile">
-        {% notifications_unread as unread_count %}
-        <h3>通知</h3>
-        <div class="flex-right text-small notification-options">
-            <a href="{% url 'blog:notification_all' %}">全部</a>
-            <a href="{% url 'blog:notification_unread' %}">未读</a>
-        </div>
-        <hr>
-        <ul class="notification-list">
+    <div class="unit-3-4 unit-1-on-mobile top-gap">
+        <div class="bg-white list-group notification-list">
+            <div class="flex-bottom list-group-item notification-list-header">
+                <h3 class="top-gap-0 unit-0">通知</h3>
+                <div class="unit flex-right">
+                    <a class="text-muted text-small" href="{% url 'blog:notification_unread' %}">未读</a>
+                    <a class="text-muted text-small" href="{% url 'blog:notification_all' %}">全部</a>
+                    <a class="text-muted text-small unit-0" href="">
+                        <i class="fa fa-check" aria-hidden="true"></i> 全部标为已读</a>
+                </div>
+            </div>
             {% for notification in notifications %}
-                <li {% if notification.unread %}class="unread{% endif %}">
-                    {{ notification | describe }}
-                    <footer class="flex-right top-gap">
-                        <span class="text-small text-muted">{{ notification.timestamp|timesince }}前</span>
-                        {% if notification.unread %}
-                            <a class="text-small delete-noti-btn js-mark-as-read"
-                               href="{% url 'notifications:mark_as_read' notification.slug %}">标为已读</a>
-                        {% endif %}
-                        {% comment %}
-                        <a class="text-small delete-noti-btn" href="{% url 'notifications:delete' notification.slug %}">删除</a>
-                        {% endcomment %}
-                    </footer>
-                </li>
-            {% empty %}
-                <li>暂无通知</li>
+                <div class="list-group-item notification-item {% if notification.unread %}unread{% endif %}">
+                    {{ notification|describe }}
+                </div>
             {% endfor %}
-        </ul>
-        {% if is_paginated %}
-            <aside class="pagination flex-center">
-                <ul class="pagination-bar list-unstyle-inline">
-                    {% if first %}
-                        <li><a href="?page=1">1</a></li>
-                    {% endif %}
-                    {% if left %}
-                        {% if left_has_more %}
-                            <li><span>...</span></li>
-                        {% endif %}
-                        {% for i in left %}
-                            <li><a href="?page={{ i }}">{{ i }}</a></li>
-                        {% endfor %}
-                    {% endif %}
-                    <li class="current"><a
-                            href="?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>
-                    {% if right %}
-                        {% for i in right %}
-                            <li><a href="?page={{ i }}">{{ i }}</a></li>
-                        {% endfor %}
-                        {% if right_has_more %}
-                            <li><span>...</span></li>
-                        {% endif %}
-                    {% endif %}
-                    {% if last %}
-                        <li>
-                            <a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </aside>
-        {% endif %}
-    </main>
+            {% include 'blog/pagination.html' %}
+        </div>
+    </div>
 {% endblock main %}
-
-{% block script %}
-    <script>
-        $(document).ready(function () {
-            $('.js-read').on('click', function (e) {
-                var $this = $(this);
-                var $state = $this.attr('data-state');
-                if (parseInt($state)) {
-                    var $target = $this.parents('li.unread').find('.js-mark-as-read').attr('href');
-                    $.get($target);
-                    return true
-                }
-            })
-        })
-    </script>
-{% endblock script %}

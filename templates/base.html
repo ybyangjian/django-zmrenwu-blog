@@ -1,27 +1,20 @@
-<!doctype html>
-{% load staticfiles %}
-{% load blog_tags %}
-{% load notifications_tags %}
+<!DOCTYPE html>
+{% load staticfiles blog_tags notifications_tags %}
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- 友言验证代码 -->
-    <meta name="uyan_auth" content="f0b6554d43"/>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>{% if unread_count %}({{ unread_count }}) {% endif %}首页 - 追梦人物的博客</title>
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'blog/css/mobi.min.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
+
     <!-- 百度验证代码 -->
     <meta name="baidu-site-verification" content="GOgEP8c1pN"/>
 
-    {% block description %}{% endblock description %}
-
-    <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css"/>
-    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'blog/css/friendly.css' %}">
-    <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}"/>
-
-    {% notifications_unread as unread_count %}
-    <title>{% if unread_count %}({{ unread_count }}) {% endif %}{% block title %}追梦人物的博客{% endblock title %}</title>
     <!-- 百度统计代码 -->
     <script>
         var _hmt = _hmt || [];
@@ -32,7 +25,8 @@
             s.parentNode.insertBefore(hm, s);
         })();
     </script>
-    <!-- 百度自动推送链接 -->
+
+    <!-- 百度自动推送链接代码 -->
     <script>
         (function () {
             var bp = document.createElement('script');
@@ -48,118 +42,108 @@
         })();
     </script>
 </head>
-<body>
-<header id="blog-header">
-    <nav class="nav-bar">
-        <div class="flex-center">
-            <div class="container flex-left">
-                <div class="unit-0 hide-on-mobile nav-bar-item">
-                    <a href="{% url 'blog:index' %}" id="logo">追梦人物的博客</a>
+<body class="bg-faded">
+<header>
+    <nav class="flex-center bg-white nav-bar">
+        <div class="container-wider flex-middle">
+            <a class="unit-0 nav-bar-logo" href="{% url 'blog:index' %}">
+                <img src="{% static 'blog/images/logo.png' %}" alt="">
+            </a>
+            <ul class="unit-0 hide-on-mobile nav-bar-nav">
+                <li class="nav-item"><a class="nav-link" href="{% url 'blog:tutorials' %}">教程</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'blog:categories' %}">分类</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'blog:archives' %}">归档</a></li>
+            </ul>
+            <div class="unit flex-right">
+                <form class="hide-on-mobile search-form" id="search-form" action="{% url 'haystack_search' %}">
+                    <div class="flex-left">
+                        <input class="unit" type="search" name="q" placeholder="搜索..."/>
+                        <button class="unit-0" type="submit" role="button">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </form>
+                <div class="musk" id="js-search-musk"></div>
+                <a class="show-on-mobile nav-link mr" id="js-search-btn" href="" role="button">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </a>
+                <div class="notification">
+                    <a class="nav-link" href="{% url 'notifications:all' %}">
+                        <i class="fa fa-bell-o" aria-hidden="true"></i>{% if unread_count %}
+                        <span class="notification-count">{{ unread_count }}</span>{% endif %}
+                    </a>
                 </div>
-                {% block menu_btn %}{% endblock menu_btn %}
-                <div class="unit-0 show-on-mobile nav-bar-item" id="home-btn">
-                    <a href="{% url 'blog:index' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
-                </div>
-                <div class="unit flex-right flex-middle search-area">
-                    <form class="form" action="{% url 'haystack_search' %}" id="search-form">
-                        <input type="search" name="q" placeholder="搜索"/>
-                        <button class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </form>
-                </div>
-                <div class="unit-0">
-                    {% if user.is_authenticated %}
-                        <a class="nav-bar-item" href="{% url 'notifications:all' %}" id="notification">
-                            <i class="fa fa-bell-o" aria-hidden="true"></i>
-                            <span class="hide-on-mobile">通知</span>
-                            {% if unread_count %}
-                                <span class="counter">{{ unread_count }}</span>
-                            {% endif %}
-                        </a>
-                    {% else %}
-                        <a class="nav-bar-item" href="{% url 'account_login' %}?next={{ request.path }}">
-                            <i class="fa fa-sign-in" aria-hidden="true"></i>
-                            <span class="hide-on-mobile">登录</span>
-                        </a>
-                    {% endif %}
+                <div class="show-on-mobile">
+                    <a class="nav-link" id="menu-toggle" href="#">
+                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                    </a>
+                    <ul class="menu bg-white" data-menu data-menu-toggle="#menu-toggle">
+                        <li>
+                            <a href="tutorial-list.html">教程</a>
+                        </li>
+                        <li>
+                            <a href="category.html">分类</a>
+                        </li>
+                        <li>
+                            <a href="archives.html">归档</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </nav>
 </header>
-<div class="flex-center site-60">
-    <div class="container">
-        <div class="flex-left {% block flex_wrap %}flex-wrap {% endblock flex_wrap %}units-gap-big">
-            {% block main %}
-            {% endblock main %}
-            {% block aside %}
-                <aside class="unit-1-4 unit-1-on-mobile">
-                    <section class="show-on-mobile recommendation-tutorials">
-                        {% get_categories as category_list %}
-                        <h6>推荐教程</h6>
-                        <ul>
-                            {% for category in category_list %}
-                                <li>
-                                    <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </section>
-                    <section class="recent-posts">
-                        {% get_recent_posts 6 as recent_post_list %}
-                        <h3 class="hide-on-mobile">推荐阅读</h3>
-                        <h6 class="show-on-mobile">推荐阅读</h6>
-                        <ul class="list-unstyle text-small">
-                            {% for post in recent_post_list %}
-                                <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-                            {% endfor %}
-                        </ul>
-                    </section>
-                    <section>
-                        <h5>Django 学习小组 QQ 群</h5>
-                        <ul>
-                            <li>561422498 (已满)</li>
-                            <li>645793268</li>
-                        </ul>
-                    </section>
-                    <section>
-                        <h3>Python 中文社区</h3>
-                        <div class="top-gap">加入
-                            <a href="http://www.pythonzh.cn/" target="_blank"><span class="py">Python</span><span
-                                    class="zhcn">zhcn</span></a></div>
-                    </section>
-                    <section class="tip top-gap hide-on-mobile">
-                        <h3>小提示</h3>
-                        <div class="text-muted text-small favorite-tip">按 <span
-                                class="favorite-shotcuts">Ctrl + D</span>
-                            键，把博客加入收藏夹，随时回来查看最新文章
+<section class="flex-center">
+    <div class="container-wider">
+        <div class="flex-left flex-wrap units-gap-big">
+            {% block main %}{% endblock main %}
+            {% block side %}
+                <div class="unit-1-4 unit-1-on-mobile top-gap">
+                    <div class="bg-white card donate">
+                        <div class="card-header">
+                            <span class="">捐助</span>
+                            <a class="text-muted text-small" id="js-weixin-btn" role="button">微信</a>
+                            <a class="text-muted text-small" id="js-alipay-btn" role="button">支付宝</a>
                         </div>
-                    </section>
-                    <section class="hide-on-mobile">
-                        <div class="top-gap-big text-small feeds">
-                            <i class="fa fa-rss" aria-hidden="true"></i>
-                            <a href="/all/rss">RSS</a>
-                            {% comment %}
-                            或
-                            <a href="">Atom</a>
-                            {% endcomment %}
-                            订阅此博客
+                        <div class="card-image donate-qr-code" id="weixin">
+                            <img src="images/IMG_1055.JPG" alt="">
                         </div>
-                    </section>
-                </aside>
-            {% endblock aside %}
+                        <div class="card-image donate-qr-code" id="alipay" style="display: none">
+                            <img src="images/IMG_1056.JPG" alt="">
+                        </div>
+                    </div>
+                    <div class="bg-white top-gap card ad">
+                        <div class="card-image">
+                            <a href=""><img src="images/ad.jpg" alt=""></a>
+                        </div>
+                        <span class="ad-reminder text-muted">广告</span>
+                    </div>
+                    <div class="bg-white top-gap card">
+                        <div class="card-header">
+                            Django学习小组 QQ 群
+                        </div>
+                        <ul>
+                            <li>415468651</li>
+                            <li>415468651</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white top-gap card">
+                        <div class="card-header">
+                            友情链接
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
         </div>
     </div>
-</div>
-<footer id="blog-footer">
-    <div class="flex-center">
-        <div>Copyright &copy; 2017 追梦人物的博客</div>
-    </div>
-    <div class="flex-center">
-        <div>蜀ICP备 16036143号-1</div>
-    </div>
-</footer>
+</section>
+<a href="" class="back-top" id="js-back-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-{% block script %}
-{% endblock script %}
+<script src="{% static 'blog/js/menu.min.js' %}"></script>
+<script src="{% static 'blog/js/blog.js' %}"></script>
+<script>
+    $('[data-menu]').menu();
+</script>
 </body>
 </html>

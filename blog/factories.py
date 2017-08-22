@@ -3,6 +3,7 @@ from factory.django import DjangoModelFactory
 
 from .models import Tag, Category, Post
 from users.factories import UserFactory
+from notifications.models import Notification
 
 
 class TagFactory(DjangoModelFactory):
@@ -29,3 +30,12 @@ class PostFactory(DjangoModelFactory):
     title = 'post title'
     body = 'post body'
     author = factory.SubFactory(UserFactory)
+
+
+class NotificationFactory(DjangoModelFactory):
+    class Meta:
+        model = Notification
+
+    recipient = factory.SubFactory(UserFactory)
+    actor = factory.SubFactory(UserFactory)
+    verb = 'notify'

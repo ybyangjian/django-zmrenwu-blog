@@ -1,635 +1,513 @@
-/**
- * 目录
- *
- * 1.0 - 导航栏
- *
- * 2.0 -
-
- */
-
-/**
- *  助手类
- */
-.site-60 {
-    margin-top: 5rem;
+@charset "UTF-8";
+.bg-white {
+  background-color: white;
 }
 
-.list-unstyle, .list-unstyle-inline {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-.list-unstyle-inline > li {
-    display: inline-block;
-}
-
-/**
- * 1.0 - 导航栏
- */
-
-#blog-header {
-    background-color: #fff;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
+.bg-faded {
+  background-color: #f2f2f2;
 }
 
 .nav-bar {
-    height: 5rem;
-    border-bottom: solid 1px #eee;
+  height: 48px;
+  border-bottom: 1px solid #f1f1f1;
 }
-
-.nav-bar .nav-bar-item {
-    line-height: 5rem;
-}
-
-/**
- * 1.1 - Logo 和 mobile 首页按钮
- */
-
-#logo {
-    color: #ea6f5a;
-    font-size: 2.5rem;
-}
-
-#logo:hover {
-    text-decoration: none;
-}
-
-#home-btn {
-    margin-right: 15px;
-}
-
-/**
- * 1.2 - 搜索框
- */
-
-.nav-bar .search-area {
-    margin-right: 15px;
-}
-
-.nav-bar .search-area {
-    height: 5rem;
-}
-
-#search-form {
-    width: 50%;
-    position: relative;
-}
-
-#search-form .search-btn {
-    font-size: 2rem;
-    position: absolute;
-    top: 2px;
-    right: 0.6rem;
-    cursor: pointer;
-    background-color: #fff;
-    border: none;
-}
-
-#search-form input[type='search'] {
-    margin: 0;
-    padding: 0.7rem 2.8rem 0.7rem 1.6rem;
-    border-radius: 45px;
-}
-
-@media screen and (max-width: 568px) {
-    #search-form {
-        width: 100%;
-    }
-}
-
-/**
- * 1.3 - 通知
- */
-
-#notification {
-    font-size: 1.8rem;
-    color: #333;
-}
-
-#notification:hover {
-    text-decoration: none;
-}
-
-#notification .counter {
-    color: #fff;
-    font-size: 1.4rem;
-    text-align: center;
-    height: 1.6rem;
-    width: 1.6rem;
-    line-height: 1.6rem;
-    display: inline-block;
-    background-color: #ea6f5a;
-    border-radius: 45px;
-    position: relative;
-    top: -0.8rem;
-}
-
-.notification-options > a {
-    margin-left: 8px;
-}
-
-/**
- * 2.0 - 推荐教程
- */
-
-.category-widget {
-    border-bottom: 1px solid #eee;
-}
-
-.category-list li {
-    margin-right: 15px;
-    margin-bottom: 15px;
-    font-size: 14px;
-}
-
-.category-list li a.category-label {
-    color: #333;
-    display: inline-block;
-    padding: 5px 10px;
-    border: solid 1px rgb(220, 220, 220);
-    border-radius: 4px;
-}
-
-.category-list li a.category-label:hover {
-    text-decoration: none;
-}
-
-/**
- * 3.0 - 文章列表
- */
-
-.post-list article {
-    border-bottom: 1px solid #eee;
-    padding: 1.5rem 0;
-}
-
-.post-header-meta .author {
-    color: #2f2f2f;
-    margin-right: 0.5rem;
-}
-
-.post-main-info .title {
-    font-size: 1.8rem;
-    color: #2f2f2f;
-    font-weight: bold;
-}
-
-.post-main-info,
-.post-main-info .excerpt,
-.post-footer-meta {
-    margin-top: 7px;
-}
-
-.post-footer-meta span {
-    margin-right: 7px;
-}
-
-.post-footer-meta span a {
-    text-decoration: none;
-}
-
-.post-footer-meta .category {
-    display: inline-block;
-    padding: 2px 6px;
-    border-radius: 4px;
-    border: 1px solid #ec6149;
-}
-
-.post-footer-meta .category a {
-    color: #ec6149;
-}
-
-.post-footer-meta .category a:hover {
-    text-decoration: none;
-}
-
-.post-cover-image {
-    width: 100%;
-    border-radius: 4px;
-}
-
-/**
- * 3.0 - 侧边栏
- */
-
-.recent-posts ul,
-.recommendation-posts ul {
-    margin-top: 7px;
-}
-
-.recent-posts ul li,
-.recommendation-posts ul li {
-    margin-bottom: 7px;
-}
-
-.recent-posts ul li a,
-.recommendation-posts ul li a {
-    color: #333;
-}
-
-.recommendation-tutorials a {
-    color: #ec6149;
-}
-
-.favorite-tip {
-    margin-top: 7px;
-}
-
-.favorite-shotcuts {
-    color: #ea6f5a;
-}
-
-.feeds a {
-    color: #ea6f5a;
-}
-
-/**
- * 4.0 - 分页
- */
-.pagination-bar li {
-    width: 1.6rem;
-    height: 1.6rem;
-    line-height: 1.6rem;
-    padding: 5px;
-}
-
-.pagination-bar li a {
-    color: #777;
-}
-
-.pagination-bar li.current a {
-    color: #ea6f5a;
-}
-
-/**
- * 5.0 - 站脚
- */
-
-#blog-footer {
-    color: #777;
-    font-size: 1.4rem;
-    height: 5rem;
-    margin-top: 1rem;
-}
-
-/**
- * 6.0 - 文章详情页
- */
-.post .post-meta span {
-    margin-right: 3px;
-}
-
-.table-of-content li {
-    margin-bottom: 7px
-}
-
-.table-of-content > li ul {
-    margin-top: 7px;
-}
-
-.table-of-content li a {
-    color: #333;
-}
-
-.tutorial-reminder .tutorial {
-    color: #ea6f5a;
-}
-
-.tutorial-reminder a {
-    color: #333;
-    border-bottom: 1px solid #333;
-}
-
-.tutorial-reminder a:hover {
-    text-decoration: none;
-}
-
-.tags .tag-label {
-    margin-right: 7px;
-}
-
-.tags .tag-item {
-    margin-right: 10px;
-}
-
-.tags .tag-item a {
-    color: #333;
-}
-
-.share .share-icon {
-    margin-left: 7px;
-}
-
-.pre-next a {
-    color: #333;
-}
-
-.musk {
-    display: none;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(255, 255, 255, 0.8);
-    z-index: 2;
-}
-
-.sidebar-on-mobile {
-    max-width: 70%;
-    top: 0;
-    background-color: RGB(255, 255, 255);
+@media (max-width: 767px) {
+  .nav-bar .container-wider {
     padding: 0 15px;
+  }
+}
+.nav-bar > .container-wider {
+  padding-bottom: 0;
+}
+.nav-bar .nav-bar-logo {
+  width: 40px;
+}
+.nav-bar .nav-bar-nav {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.nav-bar .nav-bar-nav .nav-item {
+  display: inline-block;
+  margin-left: 30px;
+}
+.nav-bar .nav-link {
+  color: #777;
+  text-decoration: none;
+}
+.nav-bar .nav-link:hover {
+  color: black;
+}
+.nav-bar .notification .notification-count {
+  display: inline-block;
+  font-size: 12px;
+  color: #fff;
+  background-color: #006700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  text-align: center;
+  padding: 0 4px;
+  position: relative;
+  top: -9px;
+}
+
+#menu-toggle {
+  margin-left: 15px;
+}
+
+.fa-bell-o,
+.fa-search,
+.fa-chevron-right,
+#menu-toggle {
+  font-size: 18px;
+}
+
+.list-group {
+  border: 1px solid #f1f1f1;
+}
+.list-group .list-group-item {
+  padding: 15px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.card {
+  padding: 15px;
+  border: 1px solid #f1f1f1;
+}
+.card .card-header {
+  border-bottom: 1px solid #f1f1f1;
+  margin: -15px -15px 0 -15px;
+  padding: 10px;
+}
+.card .card-image {
+  margin: -15px -15px -15px -15px;
+}
+.card .card-image img {
+  width: 100%;
+  max-width: 100%;
+}
+
+.list-inline {
+  list-style: none;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+.list-inline .list-inline-item {
+  display: inline-block;
+}
+
+.dot-divider > * {
+  float: left;
+}
+.dot-divider > *:not(:last-child):after {
+  margin: 0 5px;
+  content: '·';
+}
+
+.post-items a {
+  color: #777;
+  text-decoration: none;
+}
+.post-items a:hover {
+  color: black;
+}
+.post-items .post-items-header {
+  padding: 7px 15px;
+}
+.post-items .post-items-header .rss i {
+  margin-right: 5px;
+}
+.post-items .post-items-nav li {
+  margin-right: 15px;
+  color: #777;
+  text-decoration: none;
+}
+.post-items .post-items-nav li:hover {
+  color: black;
+}
+
+.post-item .post-item-meta .pinned {
+  color: red;
+}
+.post-item .post-item-meta .pinned:hover {
+  color: #ff8080;
+}
+.post-item .post-item-meta .recommended {
+  color: #b71ed7;
+}
+.post-item .post-item-meta .recommended:hover {
+  color: #dc86ee;
+}
+.post-item .post-item-title {
+  font-size: 18px;
+}
+.post-item .post-item-title a {
+  color: #333;
+}
+.post-item .post-item-title a:hover {
+  text-decoration: underline;
+}
+.post-item .post-item-excerpt {
+  margin-top: 7px;
+}
+.post-item .post-item-excerpt p {
+  margin-top: 0;
+}
+.post-item .post-item-cover {
+  width: 60px;
+  margin-left: 30px;
+}
+
+.donate .donate-qr-code {
+  margin-top: 0;
+}
+
+.ad {
+  position: relative;
+}
+.ad .ad-reminder {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 0 3px;
+  border: 1px solid #fff;
+  font-size: 10px;
+  color: #fff;
+  border-radius: 3px;
+}
+
+.toc-sidebar-tutorial {
+  height: 100%;
+}
+
+@media (max-width: 767px) {
+  .toc-sidebar {
+    position: fixed;
+    width: 70%;
     height: 100%;
+    left: -70%;
+    top: 0;
+    margin-top: 0 !important;
+    background-color: RGB(255, 255, 255);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    z-index: 3;
+    z-index: 99;
+  }
+}
+.tool-bar a {
+  border: 1px solid #f1f1f1;
+  float: left;
+  padding: 0 7px;
+}
+.tool-bar a:last-child {
+  border-left: none;
+}
+.tool-bar a:hover {
+  background-color: #f2f2f2;
 }
 
-#menu-btn {
-    margin-right: 15px;
+.back-top {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  border: 1px solid #ddd;
+  padding: 0 5px 3px 5px;
+  border-radius: 3px;
+  background-color: #f2f2f2;
+  color: #777;
+  text-decoration: none;
+}
+.back-top:hover {
+  color: black;
 }
 
-#home-btn a {
-    color: #333;
+@media (max-width: 767px) {
+  .back-top {
+    bottom: 15px;
+    right: 15px;
+  }
 }
-
-/**
- * 7.0 - 评论
- */
-.comment-form div.django-ckeditor-widget {
-    max-width: 100%;
+.post .post-meta {
+  margin-top: 7px;
 }
-
-#cke_id_comment {
-    max-width: 100%;
+.post .post-tags {
+  margin-top: 30px;
+}
+.post .post-tags li {
+  margin-right: 7px;
+}
+.post .post-tags a {
+  text-decoration: none;
+  color: #777;
+  border: 1px solid #f1f1f1;
+  background-color: #f2f2f2;
+  padding: 2px 7px;
+}
+.post .post-tags a:hover {
+  background-color: #b3b3b3;
 }
 
 .comment-area .login-panel {
-    width: 100%;
-    border: 1px solid #ddd;
-    padding: 15px 0;
-    border-radius: 4px;
+  border: 1px solid #f1f1f1;
+  padding: 30px 0;
+}
+.comment-area .login-panel .social-icons {
+  margin-top: 7px;
+}
+.comment-area .login-panel .social-icons span:not(:last-child) {
+  margin-right: 7px;
+}
+.comment-area .login-panel .social-icons span {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  line-height: 26px;
+  border-radius: 50%;
+}
+.comment-area .login-panel .social-icons .weixin {
+  border: 1px solid #7bc549;
+}
+.comment-area .login-panel .social-icons .weixin a {
+  color: #7bc549;
+}
+.comment-area .login-panel .social-icons .weibo {
+  border: 1px solid #ff763b;
+}
+.comment-area .login-panel .social-icons .weibo a {
+  color: #ff763b;
+}
+.comment-area .login-panel .social-icons .qq {
+  border: 1px solid #333;
+}
+.comment-area .login-panel .social-icons .qq a {
+  color: #333;
+}
+.comment-area .login-panel .social-icons .github {
+  border: 1px solid #2680d9;
+}
+.comment-area .login-panel .social-icons .github a {
+  color: #2680d9;
+}
+.comment-area .comment-form textarea {
+  padding: 10px;
+  height: 120px;
+}
+.comment-area .comment-list > div {
+  border-bottom: 1px solid #f1f1f1;
+  padding-top: 15px;
+}
+.comment-area .comment-list > div:last-child {
+  border-bottom: none;
+}
+.comment-area .comment-list .comment-avatar {
+  width: 48px;
+  border-radius: 4px;
+}
+.comment-area .comment-list .comment-main {
+  padding-left: 7px;
+  padding-bottom: 15px;
+}
+.comment-area .comment-list .comment-main .master {
+  color: red;
+}
+.comment-area .comment-list .comment-main:hover .edit {
+  display: inline;
+}
+.comment-area .comment-list .comment-footer a {
+  text-decoration: none;
+}
+.comment-area .comment-list .comment-footer a:hover {
+  color: black;
+}
+.comment-area .comment-list .comment-footer .edit {
+  display: none;
+}
+.comment-area .comment-list .comment-descendant-list {
+  padding-left: 7px;
+}
+.comment-area .comment-list .comment-descendant-list > div {
+  padding-top: 15px;
+  border-top: 1px solid #f1f1f1;
+}
+.comment-area .comment-list .comment-descendant-list .comment-avatar {
+  width: 36px;
 }
 
-.comment-area .social-icon {
-    margin-top: 10px;
+.notification-list .notification-list-header {
+  padding: 7px 15px;
+}
+.notification-list .notification-list-header a {
+  color: #777;
+  text-decoration: none;
+  margin-left: 15px;
+}
+.notification-list .notification-list-header a:hover {
+  color: black;
+}
+.notification-list .notification-avatar {
+  width: 48px;
+  border-radius: 50%;
+}
+.notification-list .notification-main {
+  padding-left: 15px;
 }
 
-.social-icon span:not(:last-child) {
-    margin-right: 10px;
+.notification-meta {
+  margin-top: 5px;
 }
-
-.social-icon span {
-    display: inline-block;
-    height: 30px;
-    width: 30px;
-    line-height: 26px;
-    border-radius: 50%;
-}
-
-.social-icon .weixin {
-    border: 1px solid #7bc549;
-}
-
-.social-icon .weixin a {
-    color: #7bc549;
-}
-
-.social-icon .weibo {
-    border: 1px solid #ff763b;
-}
-
-.social-icon .weibo a {
-    color: #ff763b;
-}
-
-.social-icon .qq {
-    border: 1px solid #333;
-}
-
-.social-icon .qq a {
-    color: #333;
-}
-
-.social-icon .github {
-    border: 1px solid #2680d9;
-}
-
-.social-icon .github a {
-    color: #2680d9;
-}
-
-.avatar {
-    margin-top: 5px;
-    padding-right: 7px;
-}
-
-.avatar-img {
-    border-radius: 4px;
-    width: 48px;
-}
-
-.comment-header-meta .master {
-    color: #ec6149;
-}
-
-.comment-footer a {
-    text-decoration: none;
-}
-
-.comment-footer a:before {
-    color: #333;
-    content: '· ';
-}
-
-.child-comments .avatar-img {
-    width: 36px;
-}
-
-.comment-list > div {
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.child-comments {
-    margin-top: 7px;
-}
-
-.child-comments > div {
-    padding: 15px 0;
-    border-top: 1px solid #eee;
-}
-
-.child-comments > div:last-child {
-    padding-bottom: 0;
-}
-
-.commet-form-panel .comment-form textarea {
-    padding: 10px;
-    height: 120px;
-}
-
-.preview-btn {
-    margin-right: 15px;
-}
-
-.login-panel .login-title {
-    position: relative;
-}
-
-.login-panel .login-title span {
-    background-color: #fff;
-    padding: 7px;
-}
-
-.login-panel .login-title:before {
-    content: '';
-    display: inline-block;
-    width: 100%;
-    height: 2px;
-    border: 1px solid #ccc;
-    position: absolute;
-    top: 50%;
-    margin-top: -1px;
-    z-index: -1;
-    margin-left: -19%;
-}
-
-.comment-form input[name=honeypot] {
-    display: none !important;
-}
-
-/**
- * 8.0 - 教程介绍
- */
-
-.tutorial-cover {
-    margin-top: 0;
-    position: relative;
-}
-
-.tutorial-heading-on-mobile {
-    position: absolute;
-    bottom: 0;
-    padding: 10px;
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 4px;
-    margin-right: 30px;
-    width: 100%;
-}
-
-div.tutorial-heading {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.tutorial-cover-img {
-    width: 100%;
-    border-radius: 4px;
-}
-
-.tutorial-headings {
-    list-style: none;
-    border-left: 2px solid #eee;
-    padding-left: 0;
-    margin-left: 5px;
-}
-
-.tutorial-headings li {
-    margin: 20px 0;
-    position: relative;
-    padding-left: 20px;
-}
-
-.tutorial-headings li:before {
-    line-height: 24px;
-    content: '';
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-color: #ccc;
-    position: absolute;
-    left: 0;
-    top: 50%;
-    margin-top: -5px;
-    border-radius: 45px;
-    margin-left: -6px;
-}
-
-.tutorial-headings li a {
-    color: #333;
-}
-
-.tutotial-meta ul li {
-    margin-bottom: 7px;
-}
-
-span.done {
-    color: red;
-}
-
-/**
- * 8.0 - 通知
- */
-
-.notification-list {
-    list-style: none;
-    padding-left: 0;
-}
-
-.notification-list li {
-    padding: 15px 8px;
-    border-bottom: 1px solid #eee;
-}
-
-.notification-content {
-    margin-top: 5px;
-}
-
-.delete-noti-btn {
-    margin-left: 10px;
-    margin-top: 0;
+.notification-meta div > i,
+.notification-meta div > time,
+.notification-meta div > a {
+  margin-right: 7px;
 }
 
 .unread {
-    background-color: rgb(255, 249, 234);
+  background-color: #ffffe6;
 }
 
-/*
-.unread header {
-    position: relative;
+.search-form {
+  margin-right: 25px;
+}
+.search-form input[type=search] {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+  border-radius: 0;
+  outline: 0;
+  line-height: 1.25;
+  font-size: 80%;
+  padding-bottom: 5px;
+  width: 200px;
+  margin-right: 7.5px;
+}
+.search-form input[type=search]:focus {
+  border-bottom: 1px solid black;
+}
+.search-form button[type=submit] {
+  color: #777;
+  text-decoration: none;
+  border: 0;
+  background-color: transparent;
+  padding: 0;
+}
+.search-form button[type=submit]:hover {
+  color: black;
+}
+.search-form button[type=submit]:focus {
+  border: 0;
+  outline: 0;
+}
+@media (max-width: 767px) {
+  .search-form {
+    position: fixed;
+    top: 48px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 99;
+    padding: 0 15px;
+  }
+  .search-form input[type=search] {
+    width: 100%;
+    font-size: 16px;
+  }
 }
 
-.unread header:before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: 45px;
-    display: inline-block;
-    background-color: red;
-    position: absolute;
-    top: 50%;
-    margin-top: -4px;
+.menu {
+  border-radius: 2px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+  color: #777;
+  padding: 16px 0;
+  position: absolute;
+  top: 48px;
+  transform: scale(0);
+  transition: transform 0.2s;
+  z-index: 96;
 }
-*/
-
-.py {
-    color: #2b5b84 !important;
+.menu.show {
+  transform: scale(1);
+}
+.menu.menu--right {
+  transform-origin: top right;
+}
+.menu.menu--left {
+  transform-origin: top left;
+}
+.menu li {
+  display: block;
+  min-height: 32px;
+  line-height: 16px;
+  margin: 8px 0;
+  padding: 0 16px;
+  width: 100%;
+}
+.menu li.menu-separator {
+  background: #eee;
+  height: 1px;
+  min-height: 0;
+  margin: 12px 0;
+  padding: 0;
+}
+.menu li.menu-separator:hover {
+  background: #eee;
+}
+.menu li:first-child {
+  margin-top: 0;
+}
+.menu li:last-child {
+  margin-bottom: 0;
+}
+.menu li:hover {
+  background: #eee;
+}
+.menu a {
+  color: inherit;
+  display: block;
+  height: 32px;
+  line-height: 32px;
+  padding: 0;
+  text-decoration: none;
+  width: 100%;
+  white-space: nowrap;
+}
+.menu a:hover {
+  color: #444;
 }
 
-.zhcn {
-    color: #ffd343 !important;
+@media (max-width: 767px) {
+  .container-wider {
+    padding: 0 0;
+  }
+}
+.mr {
+  margin-right: 15px;
 }
 
-/* 搜索结果关键词高亮*/
-span.highlighted {
-    color: red;
+.musk {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 2;
 }
 
+.tutorial-card {
+  margin-bottom: 15px;
+}
+.tutorial-card h6 {
+  padding-top: 5px;
+}
+.tutorial-card .tutorial-meta {
+  margin-top: 7px;
+}
+.tutorial-card .tutorial-meta .state {
+  float: right;
+  color: red;
+}
+
+/*# sourceMappingURL=blog.css.map */

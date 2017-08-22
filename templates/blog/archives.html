@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block main %}
+    <div class="unit-3-4 unit-1-on-mobile top-gap">
+        <div class="bg-white card">
+            {% regroup post_list by created_time.year as year_post_group %}
+            <ul>
+                {% for year in year_post_group %}
+                    <li>{{ year.grouper }} 年
+                        {% regroup year.list by created_time.month as month_post_group %}
+                        <ul>
+                            {% for month in month_post_group %}
+                                <li>{{ month.grouper }} 月
+                                    <ul>
+                                        {% for post in month.list %}
+                                            <li><a href="">{{ post.title }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock main %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block main %}
+    <div class="unit-3-4 unit-1-on-mobile top-gap">
+        <div class="bg-white card">
+            <ul>
+                {% for category in category_list %}
+                    <li><a href=""><i class="ion-ios-albums"></i> {{ category }}（2658）</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock main %}

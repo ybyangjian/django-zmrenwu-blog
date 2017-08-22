@@ -1,10 +1,9 @@
-<header class="text-small">
-    <span class="text-muted nickname">{{ actor.name }}</span>
-    在文章
-    <a class="js-read" data-state="{% if notification.unread %}1{% else %}0{% endif %}"
-       href="{{ target.content_object.get_absolute_url }}#c{{ target.pk }}">{{ target.content_object.title }}</a>
-    中回复了你：
-</header>
-<div class="notification-content">
-    {{ target.comment|linebreaksbr }}
-</div>
+{% extends 'notifications/base.html' %}
+{% block header %}
+    <div class="">
+        <span class="text-muted">{{ actor.name }}</span>
+        在文章
+        <a class="" href="{{ target.content_object.get_absolute_url }}#c{{ target.pk }}">{{ target.content_object.title }}</a>
+        中回复了你
+    </div>
+{% endblock header %}

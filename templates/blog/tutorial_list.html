@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block main %}
+    <div class="unit-3-4 unit-1-on-mobile top-gap">
+        <div class="bg-white card">
+            <div class="flex-left flex-wrap units-gap-big">
+                {% for tutorial in tutorial_list %}
+                    <div class="unit-1-3 unit-1-on-mobile">
+                        <div class="card tutorial-card">
+                            <div class="card-image">
+                                <img class="" src="{{ tutorial.cover.url }}" alt="">
+                            </div>
+                            <h6 class="top-gap"><a href="">{{ tutorial }}</a></h6>
+                            <div class="text-small tutorial-meta">
+                                <span>2018人学习</span>
+                                <span class="state"><i class="fa fa-check-circle-o"
+                                                       aria-hidden="true"></i> 已完成</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock main %}

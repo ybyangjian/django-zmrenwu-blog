@@ -1,99 +1,76 @@
 {% extends 'base.html' %}
-{% block title %}首页 - 追梦人物的博客{% endblock title %}
-{% load blog_tags comments %}
+
 {% block main %}
-    <main class="unit-3-4 unit-1-on-mobile">
-        <section class="category-widget hide-on-mobile">
-            {% get_categories as category_list %}
-            <h6>推荐教程</h6>
-            <ul class="list-unstyle-inline category-list">
-                {% for category in category_list %}
-                    <li>
-                        <a class="category-label" href="{{ category.get_absolute_url }}">{{ category.name }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </section>
-        <section class="post-list">
-            {% for post in post_list %}
-                <article>
-                    <div class="flex-left units-gap">
-                        <div class="unit-0">
-                            <header class="text-small post-header-meta">
-                                <span class="author">{{ post.author.name }}</span>
-                                <span class="pub-date text-muted"><time
-                                        title="{{ post.created_time }}">{{ post.created_time|timesince }}</time>前</span>
-                            </header>
-                            <div class="post-main-info">
-                                <a class="title" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-                                <div class="text-small excerpt">
-                                    {{ post.excerpt }}...
-                                </div>
-                            </div>
-                            <footer class="text-small post-footer-meta">
-                                {% if post.category %}
-                                    <span class="category">
-                                <a href="{{ post.category.get_absolute_url }}">{{ post.category.name }}</a>
-                            </span>
-                                {% endif %}
-                                <span class="views">
-                                <a class="text-muted" href="{{ post.get_absolute_url }}">
-                                    <i class="fa fa-eye" aria-hidden="true"></i> {{ post.views }}</a>
-                            </span>
-                                {% get_comment_count for post as comment_count %}
-                                <span class="comments"><a class="text-muted"
-                                                          href="{{ post.get_absolute_url }}#comment-area"><i
-                                        class="fa fa-comments-o"
-                                        aria-hidden="true"></i> {{ comment_count }}</a></span>
-                            </footer>
-                        </div>
-                        {% if post.cover %}
-                            <div class="unit-1-4 hide-on-mobile flex-right flex-middle">
-                                <figure class="post-cover">
-                                    <a href="detail.html"><img class="post-cover-image" src="images/500_400.jpg"
-                                                               alt=""></a>
-                                </figure>
-                            </div>
-                        {% endif %}
-                    </div>
-                </article>
-            {% empty %}
-                <div class="no-post">暂时还没有发布的文章！</div>
-            {% endfor %}
-        </section>
-        {% block pagination %}
-            {% if is_paginated %}
-                <aside class="pagination flex-center">
-                    <ul class="pagination-bar list-unstyle-inline">
-                        {% if first %}
-                            <li><a href="?page=1">1</a></li>
-                        {% endif %}
-                        {% if left %}
-                            {% if left_has_more %}
-                                <li><span>...</span></li>
-                            {% endif %}
-                            {% for i in left %}
-                                <li><a href="?page={{ i }}">{{ i }}</a></li>
-                            {% endfor %}
-                        {% endif %}
-                        <li class="current"><a
-                                href="?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>
-                        {% if right %}
-                            {% for i in right %}
-                                <li><a href="?page={{ i }}">{{ i }}</a></li>
-                            {% endfor %}
-                            {% if right_has_more %}
-                                <li><span>...</span></li>
-                            {% endif %}
-                        {% endif %}
-                        {% if last %}
-                            <li>
-                                <a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
-                            </li>
-                        {% endif %}
+    <div class="unit-3-4 unit-1-on-mobile top-gap">
+        <div class="bg-white list-group post-items">
+            <div class="flex-left list-group-item post-items-header">
+                <div class="unit">
+                    <ul class="list-inline post-items-nav">
+                        <li class="list-inline-item"><a class="text-muted text-small" href="">最新</a></li>
+                        <li class="list-inline-item"><a class="text-muted text-small" href="">热门</a></li>
+                        <li class="list-inline-item"><a class="text-muted text-small" href="">全部</a></li>
                     </ul>
-                </aside>
-            {% endif %}
-        {% endblock pagination %}
-    </main>
-{% endblock main %}
+                </div>
+                <div class="unit-0">
+                    <a class="text-muted text-small rss" href=""><i class="fa fa-rss"
+                                                                    aria-hidden="true"></i>RSS
+                        订阅</a>
+                </div>
+            </div>
+            {% for post in post_list %}
+                <article class="list-group-item flex-left post-item">
+                    <div class="unit unit-1-on-mobile">
+                        <ul class="list-inline dot-divider post-item-meta">
+                            {% comment %}
+                            <li class="list-inline-item"><a class="text-muted text-small pinned" href="">顶</a>
+                            </li>
+                            <li class="list-inline-item"><a class="text-muted text-small recommended"
+                                                            href="">荐</a>
+                            </li>
+                            {% endcomment %}
+                            <li class="list-inline-item"><span class="text-muted text-small"
+                                                               href="">{{ post.author.name }}</span></li>
+                            <li class="list-inline-item"><a class="text-muted text-small"
+                                                            href="{{ post.get_absolute_url }}">{{ post.created_time|timesince }}前</a>
+                            </li>
+                            <li class="list-inline-item"><span class="text-muted text-small"
+                                                               href="">{{ post.category }}</span>
+                            </li>
+                        </ul>
+                        <h3 class="top-gap-0 post-item-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                        </h3>
+                        <div class="text-small hide-on-mobile post-item-excerpt">
+                            {{ post.excerpt }}
+                        </div>
+                        <div class="top-gap post-item-statistic tool-bar">
+                            <a class="text-muted text-small" role="button"
+                               href="{{ post.get_absolute_url }}"><i class="fa fa-eye"
+                                                                     aria-hidden="true"></i> {{ post.views }}
+                            </a>
+                            <a class="text-muted text-small" role="button"
+                               href="{{ post.get_absolute_url }}#comment-area"><i class="fa fa-comments"
+                                                                                  aria-hidden="true"></i> {{ post.comment_count }}
+                            </a>
+                        </div>
+                    </div>
+                    {% if post.cover %}
+                        <div class="unit-0 hide-on-mobile flex-middle">
+                            <figure>
+                                <a href=""><img class="post-item-cover" src="images/60.jpg" alt=""></a>
+                            </figure>
+                        </div>
+                    {% endif %}
+                </article>
+            {% endfor %}
+            <div class="flex-center list-group-item">
+                {% include 'blog/pagination.html' %}
+            </div>
+            {% comment %}
+            <div class="list-group-item flex-center">
+                <a class="text-muted text-small load-more" href="">加载更多 <i class="fa fa-chevron-down"
+                                                                           aria-hidden="true"></i></a>
+            </div>
+            {% endcomment %}
+        </div>
+    </div>
+{% endblock %}

@@ -72,6 +72,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'blog.context_processors.notification_count',  # notification
             ],
         },
     },
@@ -162,7 +163,8 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'Custom',
         'toolbar_Custom': [
             ['Bold', 'Italic', 'Underline'],
-            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter',
+             'JustifyRight', 'JustifyBlock'],
             ['Link', 'Unlink'],
             ['RemoveFormat', 'Source']
         ]
