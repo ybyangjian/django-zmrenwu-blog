@@ -1,83 +1,471 @@
 {% extends 'base.html' %}
-
-{% block title %}{{ category.title }} - 追梦人物的博客{% endblock title %}
-{% block description %}
-    <meta name="description" content="{{ category.description }}">
-{% endblock description %}
-{% load blog_tags %}
+{% block sidebar_btn %}
+    <a class="show-on-mobile nav-link mr" id="js-sidebar-btn" href="#" role="button">
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+    </a>
+{% endblock sidebar_btn %}
 {% block main %}
-    <main class="unit-3-4 unit-1-on-mobile">
-        <div class="flex-left flex-wrap units-gap top-gap-big">
-            <div class="unit-2-3 unit-1-on-mobile ">
-                <figure class="tutorial-cover">
-                    {% if category.cover %}
-                        <img class="tutorial-cover-img" src="{{ category.cover.url }}" alt="">
-                    {% endif %}
-                    <div class="tutorial-heading-on-mobile">{{ category.name }}</div>
-                </figure>
+    <div class="unit-1-4 unit-1-on-mobile top-gap" id="toc-sidebar">
+        <div class="scroll-view bg-white card toc-sidebar toc-sidebar-tutorial">
+            <div class="card-header">
+                目录
             </div>
-            <div class="tutotial-meta unit-1-3 unit-1-on-mobile">
-                <div class="tutorial-heading hide-on-mobile">{{ category.name }}</div>
-                <ul class="list-unstyle text-small">
-                    <li>状态：<span class="done">{% if category.get_status_display == 'finished' %}已完结{% else %}
-                        进行中{% endif %}</span></li>
-                    <li>最后更新时间：{{ category.last_modified.last_modified|timesince }}前</li>
-                    <li>总阅读量：{{ category.total_views.category_views }}</li>
-                    {% if category.resource %}
-                        <li><a href="{{ category.resource }}" class="btn text-small" target="_blank">查看 GitHub 仓库</a>
+            <ul class="text-small table-of-content">
+                <li>
+                    <a href="">搭建开发环境</a>
+                </li>
+                <li>
+                    <a href="">修改语言版本</a>
+                    <ul>
+                        <li>
+                            <a href="">搭建开发环境</a>
                         </li>
-                    {% endif %}
+                        <li><a href="">开启服务器</a></li>
+                        <li><a href="">修改语言版本</a></li>
+                    </ul>
+                </li>
+                <li><a href="">创建第一个 app，并且在本地迁移数据库</a></li>
+                <li><a href="">Hello world</a></li>
+                <li>
+                    <a href="">修改语言版本</a>
+                    <ul>
+                        <li>
+                            <a href="">搭建开发环境</a>
+                        </li>
+                        <li><a href="">开启服务器</a></li>
+                        <li><a href="">修改语言版本</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="">修改语言版本</a>
+                    <ul>
+                        <li>
+                            <a href="">搭建开发环境</a>
+                        </li>
+                        <li><a href="">开启服务器</a></li>
+                        <li><a href="">修改语言版本</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="">修改语言版本</a>
+                    <ul>
+                        <li>
+                            <a href="">搭建开发环境</a>
+                        </li>
+                        <li><a href="">开启服务器</a></li>
+                        <li><a href="">修改语言版本</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="">修改语言版本</a>
+                    <ul>
+                        <li>
+                            <a href="">搭建开发环境</a>
+                        </li>
+                        <li><a href="">开启服务器</a></li>
+                        <li><a href="">修改语言版本</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock main %}
+{% block side %}
+    <div class="unit-3-4 unit-1-on-mobile top-gap">
+        <div class="bg-white card post-card">
+            <article class="post">
+                <h1 class="top-gap-0">不积跬步,无以至千里;不积小流,无以成江海</h1>
+                <ul class="list-inline dot-divider post-meta">
+                    <li class="list-inline-item text-small text-muted">3天前</li>
+                    <li class="list-inline-item text-small text-muted">2858 字</li>
+                    <li class="list-inline-item text-small text-muted">25895 阅读</li>
+                    <li class="list-inline-item text-small text-muted">59 评论</li>
+                </ul>
+                <div class="post-body top-gap-big">
+                    <p>通常情况下，Django 的视图函数（View）是一个纯粹的 Python 函数，它接收一个 request（HTTP 请求），返回一个 response（HTTP
+                        响应）。在其内部，它主要还负责从数据库中获取数据、处理表单数据、保存数据到数据库、以及渲染指定的 HTML 模板等。我们可以把这些操作逻辑写在一个直观的 Python
+                        函数里，但是
+                        Django 开发者们意识到很多视图函数中的逻辑代码都是重复和通用的，因此在较早的版本中，Django 便开始引入 <strong>Class-based
+                            View</strong>（基于类的视图，这里简称<strong>类视图</strong>）。
+                    </p>
+                    <p>类视图比函数视图提供了更加高层的抽象，它将上边提及的数据库操作、表单处理、模板渲染等通用操作抽取为类视图中的方法，函数的参数、状态等则抽取为类视图的属性，最终通过一个
+                        as_view
+                        方法将整个类视图转换为一个可调用对象（可理解为最终用于 Django URL Pattern 设置中的视图函数）。相比于书写函数视图，在 Django
+                        中使用类视图可使得重复代码更少、代码可复用性更高、代码也更加简洁优雅，但缺点是由于比函数更加高级的抽象层次，理解其代码逻辑更加困难。即使是通读过官方文档的类视图部分，新手在使用过程中依然感到有一定障碍，无法灵活运用各种内置的类通用视图，以及在必要时通过继承的方式拓展类视图（至少对我来说，刚接触类视图时就是这种状态）。</p>
+                    <p>因此，本系列教程将从源码层面解析 Django 类视图的工作原理和设计理念，一旦掌握这些，以后在项目中使用类视图就可以更加得心应手和运用自如。</p>
+                    <h2 id="源码目录结构">源码目录结构</h2>
+                    <p>Django 类视图的源码位于 django.views.generic 包中，其目录结构如下：</p>
+                    <div class="codehilite"><pre><span></span>generic/
+|—— __init__.py
+|—— base.py
+|—— dates.py
+|—— detail.py
+|—— edit.py
+|—— list.py
+</pre>
+                    </div>
+
+
+                    <p>各个模块中存放的功能代码大致如下：</p>
+                    <ul>
+                        <li>base.py 主要存放所有类视图的基类 <code>View</code> ，以及一些和数据库操作无关的类视图如
+                            <code>TemplateView</code>、<code>RedirectView</code>。
+                        </li>
+                        <li>dates.py 主要存放用于按时间归档的类视图，如 <code>ArchiveIndexView</code>，一些视图在博客系统中非常有用，例如获取某个日期下的全部文章列表。
+                        </li>
+                        <li>detail.py 主要存放用于从数据库获取单条记录的类视图，例如从数据库中获取某一篇博客文章。</li>
+                        <li>edit.py 主要包含了表单处理，创建、更新和删除数据库中的单条记录的类视图。</li>
+                        <li>list.py 主要包含了从数据库中获取多条记录的类视图，例如从数据库中获取全部博客文章列表。</li>
+                    </ul>
+                    <p>当然这仅仅是一个粗略的概述，后续的系列教程中将详细讲解各个模块中的具体类的作用。</p>
+                    <h2 id="类的继承关系与命名规律">类的继承关系与命名规律</h2>
+                    <p>学习 Django 类视图的一个最大障碍在于代码中类的种类繁多，而且继承关系复杂，各种基类和
+                        Mixin，初看之下会让人眼花缭乱。但是类视图的设计者并非随心所欲，随意而为地设计各个类以及为类命名的，设计者充分采纳了一个类只负责一件事的设计理念（即单一责任原则），而且命名也是遵循一套统一的规范（或者可以叫做命名规律）。举一个例子，<code>ListView</code>
+                        主要用于从数据库中获取多条记录，它的继承关系如下：</p>
+                    <div class="codehilite"><pre><span></span>ContextMixin --&gt; MultipleObjectMixin +
+|                                    |
+|                                    | --&gt; BaseListView ----  +
+|                                    |                        |
+View ------------------------------- +                        | --&gt; ListView
+                                                              |
+TemplateResponseMixin --&gt; MultipleObjectTemplateResponseMixin +
+</pre>
+                    </div>
+
+
+                    <p>整个体系非常清晰，各个类的职责也非常明确，且类的职责从命名就可以读出。例如 <code>ContextMixin</code>
+                        及其子类负责获取渲染模板所需的模板变量；<code>MultipleObjectMixin</code>
+                        负责从数据库获取模型对应的多条数据；<code>View</code> 负责处理 HTTP 请求（如 get 请求，post
+                        请求）；<code>TemplateResponseMixin</code>
+                        及其子类负责渲染模板。各个类组合在一起就构成了功能完整的 <code>ListView</code>。</p>
+                    <p>完全类似的，<code>DetailView</code> 也是同一套路：</p>
+                    <div class="codehilite"><pre><span></span>ContextMixin --&gt; SingleObjectMixin - +
+|                                    |
+|                                    | --&gt; BaseDetailView --  +
+|                                    |                        |
+View ------------------------------- +                        | --&gt; DetailView
+                                                              |
+TemplateResponseMixin --&gt; SingleObjectTemplateResponseMixin - +
+</pre>
+                    </div>
+
+
+                    <p>总结起来就是一个类提供一个视图所需的功能，然后将各个类通过多继承的方式组合到一起，就提供了一个功能完整的类视图。</p>
+                    <h2 id="总结">总结</h2>
+                    <p>我们从一个很高的层面概览了 Django
+                        类视图的源码结构和类继承体系，建立这样一个宏观的源码结构地图有助于接下来对源码细节的深入探索。接下来我们便要开始深入到各个模块和各个类的源码中一探类视图的究竟了。不过在此之前，如果你还没有读过
+                        Django 关于类视图的文档的话，建议先通读一遍，代码和实例相结合，才能更加直观地理解代码的工作原理。阅读地址：<a
+                                href="https://docs.djangoproject.com/en/1.11/topics/class-based-views/">Class-based
+                            views</a>。</p>
+                    <p>如果遇到问题，请通过下面的方式寻求帮助。</p>
+                    <ul>
+                        <li>在下方评论区留言。</li>
+                        <li>加入 <a href="http://www.pythonzh.cn">Pythonzhcn 社区</a>。</li>
+                    </ul>
+                    <p>更多 Django 相关教程，请访问我的个人博客：<a href="http://zmrenwu.com/">追梦人物的博客</a>。</p>
+                    <div class="post-tags">
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><a class="text-small" href="">Django</a></li>
+                            <li class="list-inline-item"><a class="text-small" href="">Python</a></li>
+                            <li class="list-inline-item"><a class="text-small" href="">教程</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+            <div class="reward">
+                <span>赏</span>
+            </div>
+            <div class="ad">
+                广告预留
+            </div>
+            <div class="top-gap-big card related-posts">
+                <div class="card-header">相关文章</div>
+                <ul class="">
+                    <li><a href="">前端每周清单半年盘点之 Vue.js 篇</a></li>
+                    <li><a href="">ES6 变量声明与赋值：值传递、浅拷贝与深拷贝详解</a></li>
+                    <li><a href="">前端每周清单第 26 期：Node.js 微服务实践，Vue.js 与 GraphQL，Angular 组件技巧，HeadlessChrome
+                        攻防</a></li>
+                    <li><a href="">前端每周清单半年盘点之 React 与 ReactNative 篇</a></li>
                 </ul>
             </div>
+            <section class="comment-area top-gap-big">
+                <h5>128 条评论 / 110 人参与</h5>
+                <div class="flex-center top-gap login-panel">
+                    <div>
+                        <div class="text-muted text-center login-header"><span>登录后回复</span></div>
+                        <div class="flex-center text-center social-icons">
+                                    <span class="weibo"><a href=""><i class="fa fa-weibo"
+                                                                      aria-hidden="true"></i></a></span>
+                            <span class="weixin"><a href=""><i class="fa fa-weixin"
+                                                               aria-hidden="true"></i></a></span>
+                            <span class="qq"><a href=""><i class="fa fa-qq" aria-hidden="true"></i></a></span>
+                            <span class="github"><a href=""><i class="fa fa-github"
+                                                               aria-hidden="true"></i></a></span>
+                        </div>
+                    </div>
+                </div>
+                <form class="form comment-form" action="">
+                    <textarea></textarea>
+                    <div class="flex-right">
+                        <button class="btn text-small"><i class="fa fa-paper-plane" aria-hidden="true"></i> 发布
+                        </button>
+                    </div>
+                </form>
+                <div class="top-gap-big comment-list">
+                    <div class="flex-left">
+                        <div class="unit-0">
+                            <img class="comment-avatar" src="images/avatar.jpg"/>
+                        </div>
+                        <div class="unit">
+                            <div class="comment-main">
+                                <header class="comment-user">
+                                            <span class="text-small text-muted nickname">追梦人物
+                                                <span class="master">[博主]</span>
+                                            </span>
+                                </header>
+                                <div class="comment-body">
+                                    我们酒店的，有些人就是经常来前台买饮料，拿一瓶红牛，他给100，然后说7块钱，后来他说我有零钱，然后把100块钱给回他，他给2块钱我，叫我找95块钱给他，我说你把钱给我啊，然后识破他的诡计了，他把红牛放回去就走了，我同事都被这样的骗过几次
+                                </div>
+                                <footer class="comment-footer flex-left">
+                                    <ul class="unit list-inline dot-divider">
+                                        <li class="list-inline-item">
+                                            <a class="text-small text-muted up-count" href="">
+                                                <i class="fa fa-caret-up" aria-hidden="true"></i> 12</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <time class="text-small text-muted">3 天前</time>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="" class="reply-btn text-small text-muted">回复</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="" class="comment-btn text-small text-muted">5 条评论 <i
+                                                    class="fa fa-angle-down"
+                                                    aria-hidden="true"></i></a>
+                                        </li>
+                                    </ul>
+                                    <a class="unit-0 flex-right edit" href="">编辑</a>
+                                </footer>
+                            </div>
+                            <div class="comment-descendant-list">
+                                <div class="flex-left">
+                                    <div class="unit-0">
+                                        <img class="comment-avatar" src="images/avatar.jpg"/>
+                                    </div>
+                                    <div class="unit">
+                                        <div class="comment-main">
+                                            <header class="comment-users">
+                                                    <span class="nickname text-small text-muted">追梦人物
+                                                        <span class="master">[博主]</span>
+                                                    </span>
+                                                <span class="reply-label text-small text-muted">
+                                                        <i class="fa fa-share" aria-hidden="true"></i>
+                                                    </span>
+                                                <span class="nickname text-small text-muted">zmrenwu</span>
+                                            </header>
+                                            <div class="comment-body">
+                                                说实话，美帝好，刘翔要是在美帝哪里还会被喷，这就是环境差别，中国人只看重成绩不注重过程。
+                                            </div>
+                                            <footer class="comment-footer">
+                                                <ul class="list-inline dot-divider">
+                                                    <li class="list-inline-item">
+                                                        <a class="text-small text-muted up-count" href="">
+                                                            <i class="fa fa-caret-up" aria-hidden="true"></i> 89</a>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <time class="text-small text-muted">3 天前</time>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <a href="" class="reply-btn text-small text-muted">回复</a>
+                                                    </li>
+                                                </ul>
+                                            </footer>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-left">
+                                    <div class="unit-0">
+                                        <img class="comment-avatar" src="images/avatar.jpg"/>
+                                    </div>
+                                    <div class="unit">
+                                        <div class="comment-main">
+                                            <header class="comment-users">
+                                                    <span class="nickname text-small text-muted">追梦人物
+                                                        <span class="master">[博主]</span>
+                                                    </span>
+                                                <span class="reply-label text-small text-muted">
+                                                        <i class="fa fa-share" aria-hidden="true"></i>
+                                                    </span>
+                                                <span class="nickname text-small text-muted">zmrenwu</span>
+                                            </header>
+                                            <div class="comment-body">
+                                                说实话，美帝好，刘翔要是在美帝哪里还会被喷，这就是环境差别，中国人只看重成绩不注重过程。
+                                            </div>
+                                            <footer class="comment-footer">
+                                                <ul class="list-inline dot-divider">
+                                                    <li class="list-inline-item">
+                                                        <a class="text-small text-muted up-count" href="">
+                                                            <i class="fa fa-caret-up" aria-hidden="true"></i> 89</a>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <time class="text-small text-muted">3 天前</time>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <a href="" class="reply-btn text-small text-muted">回复</a>
+                                                    </li>
+                                                </ul>
+                                            </footer>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-left">
+                                    <div class="unit-0">
+                                        <img class="comment-avatar" src="images/avatar.jpg"/>
+                                    </div>
+                                    <div class="unit">
+                                        <div class="comment-main">
+                                            <header class="comment-users">
+                                                    <span class="nickname text-small text-muted">追梦人物
+                                                        <span class="master">[博主]</span>
+                                                    </span>
+                                                <span class="reply-label text-small text-muted">
+                                                        <i class="fa fa-share" aria-hidden="true"></i>
+                                                    </span>
+                                                <span class="nickname text-small text-muted">zmrenwu</span>
+                                            </header>
+                                            <div class="comment-body">
+                                                说实话，美帝好，刘翔要是在美帝哪里还会被喷，这就是环境差别，中国人只看重成绩不注重过程。
+                                            </div>
+                                            <footer class="comment-footer">
+                                                <ul class="list-inline dot-divider">
+                                                    <li class="list-inline-item">
+                                                        <a class="text-small text-muted up-count" href="">
+                                                            <i class="fa fa-caret-up" aria-hidden="true"></i> 89</a>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <time class="text-small text-muted">3 天前</time>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <a href="" class="reply-btn text-small text-muted">回复</a>
+                                                    </li>
+                                                </ul>
+                                            </footer>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-left">
+                        <div class="unit-0">
+                            <img class="comment-avatar" src="images/avatar.jpg"/>
+                        </div>
+                        <div class="unit">
+                            <div class="comment-main">
+                                <header class="comment-user">
+                                            <span class="text-small text-muted nickname">追梦人物
+                                                <span class="master">[博主]</span>
+                                            </span>
+                                </header>
+                                <div class="comment-body">
+                                    我们酒店的，有些人就是经常来前台买饮料，拿一瓶红牛，他给100，然后说7块钱，后来他说我有零钱，然后把100块钱给回他，他给2块钱我，叫我找95块钱给他，我说你把钱给我啊，然后识破他的诡计了，他把红牛放回去就走了，我同事都被这样的骗过几次
+                                </div>
+                                <footer class="comment-footer">
+                                    <ul class="list-inline dot-divider">
+                                        <li class="list-inline-item">
+                                            <a class="text-small text-muted up-count" href="">
+                                                <i class="fa fa-caret-up" aria-hidden="true"></i> 12</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <time class="text-small text-muted">3 天前</time>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="" class="reply-btn text-small text-muted">回复</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="" class="comment-btn text-small text-muted">5 条评论 <i
+                                                    class="fa fa-angle-down"
+                                                    aria-hidden="true"></i></a>
+                                        </li>
+                                    </ul>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-left">
+                        <div class="unit-0">
+                            <img class="comment-avatar" src="images/avatar.jpg"/>
+                        </div>
+                        <div class="unit">
+                            <div class="comment-main">
+                                <header class="comment-user">
+                                            <span class="text-small text-muted nickname">追梦人物
+                                                <span class="master">[博主]</span>
+                                            </span>
+                                </header>
+                                <div class="comment-body">
+                                    我们酒店的，有些人就是经常来前台买饮料，拿一瓶红牛，他给100，然后说7块钱，后来他说我有零钱，然后把100块钱给回他，他给2块钱我，叫我找95块钱给他，我说你把钱给我啊，然后识破他的诡计了，他把红牛放回去就走了，我同事都被这样的骗过几次
+                                </div>
+                                <footer class="comment-footer">
+                                    <ul class="list-inline dot-divider">
+                                        <li class="list-inline-item">
+                                            <a class="text-small text-muted up-count" href="">
+                                                <i class="fa fa-caret-up" aria-hidden="true"></i> 12</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <time class="text-small text-muted">3 天前</time>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="" class="reply-btn text-small text-muted">回复</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="" class="comment-btn text-small text-muted">5 条评论 <i
+                                                    class="fa fa-angle-down"
+                                                    aria-hidden="true"></i></a>
+                                        </li>
+                                    </ul>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-left">
+                        <div class="unit-0">
+                            <img class="comment-avatar" src="images/avatar.jpg"/>
+                        </div>
+                        <div class="unit">
+                            <div class="comment-main">
+                                <header class="comment-user">
+                                            <span class="text-small text-muted nickname">追梦人物
+                                                <span class="master">[博主]</span>
+                                            </span>
+                                </header>
+                                <div class="comment-body">
+                                    我们酒店的，有些人就是经常来前台买饮料，拿一瓶红牛，他给100，然后说7块钱，后来他说我有零钱，然后把100块钱给回他，他给2块钱我，叫我找95块钱给他，我说你把钱给我啊，然后识破他的诡计了，他把红牛放回去就走了，我同事都被这样的骗过几次
+                                </div>
+                                <footer class="comment-footer">
+                                    <ul class="list-inline dot-divider">
+                                        <li class="list-inline-item">
+                                            <a class="text-small text-muted up-count" href="">
+                                                <i class="fa fa-caret-up" aria-hidden="true"></i> 12</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <time class="text-small text-muted">3 天前</time>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="" class="reply-btn text-small text-muted">回复</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="" class="comment-btn text-small text-muted">5 条评论 <i
+                                                    class="fa fa-angle-down"
+                                                    aria-hidden="true"></i></a>
+                                        </li>
+                                    </ul>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-        <div class="top-gap hide-on-mobile text-small">
-            简介：{{ category.description }}
-        </div>
-        <section class="top-gap">
-            <ul class="tutorial-headings">
-                {% for post in post_list %}
-                    <li class="tutorial-heading"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
-                {% endfor %}
-            </ul>
-        </section>
-        <section class="share top-gap">
-            <div class="jiathis_style">
-                <span class="jiathis_txt">分享到：</span>
-                <a class="jiathis_button_qzone">QQ空间</a>
-                <a class="jiathis_button_tsina">新浪微博</a>
-                <a class="jiathis_button_tqq">腾讯微博</a>
-                <a class="jiathis_button_weixin">微信</a>
-                <a href="http://www.jiathis.com/share?uid=2128865"
-                   class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
-                <a class="jiathis_counter_style"></a>
-            </div>
-            <script type="text/javascript">
-                var jiathis_config = {data_track_clickback: 'true'};
-            </script>
-            <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2128865"
-                    charset="utf-8"></script>
-            <!-- JiaThis Button END -->
-        </section>
-        <br>
-    </main>
-{% endblock main %}
-{% block aside %}
-    <aside class="unit-1-4 unit-1-on-mobile">
-        {% get_categories as category_list %}
-        <section class="recommendation-tutorials">
-            <h3 class="hide-on-mobile">更多教程</h3>
-            <h6 class="show-on-mobile">更多教程</h6>
-            <ul>
-                {% for category in category_list %}
-                    <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
-                {% endfor %}
-            </ul>
-        </section>
-        <section class="tip top-gap hide-on-mobile">
-            <h3>小提示</h3>
-            <div class="text-muted text-small favorite-tip">按 <span class="favorite-shotcuts">Ctrl + D</span>
-                键，把教程加入收藏夹，随时回来阅读
-            </div>
-        </section>
-    </aside>
-{% endblock aside %}
+    </div>
+{% endblock side %}

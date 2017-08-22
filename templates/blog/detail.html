@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% block sidebar_btn %}
+    <a class="show-on-mobile nav-link mr" id="js-sidebar-btn" href="#" role="button">
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+    </a>
+{% endblock sidebar_btn %}
 {% block main %}
     <div class="unit-3-4 unit-1-on-mobile top-gap">
         <div class="bg-white card post-card">
@@ -60,264 +65,29 @@
                         </button>
                     </div>
                 </form>
-                <div class="top-gap-big comment-list">
-                    <div class="flex-left">
-                        <div class="unit-0">
-                            <img class="comment-avatar" src="images/avatar.jpg"/>
-                        </div>
-                        <div class="unit">
-                            <div class="comment-main">
-                                <header class="comment-user">
-                                            <span class="text-small text-muted nickname">追梦人物
-                                                <span class="master">[博主]</span>
-                                            </span>
-                                </header>
-                                <div class="comment-body">
-                                    我们酒店的，有些人就是经常来前台买饮料，拿一瓶红牛，他给100，然后说7块钱，后来他说我有零钱，然后把100块钱给回他，他给2块钱我，叫我找95块钱给他，我说你把钱给我啊，然后识破他的诡计了，他把红牛放回去就走了，我同事都被这样的骗过几次
-                                </div>
-                                <footer class="comment-footer flex-left">
-                                    <ul class="unit list-inline dot-divider">
-                                        <li class="list-inline-item">
-                                            <a class="text-small text-muted up-count" href="">
-                                                <i class="fa fa-caret-up" aria-hidden="true"></i> 12</a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <time class="text-small text-muted">3 天前</time>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="" class="reply-btn text-small text-muted">回复</a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="" class="comment-btn text-small text-muted">5 条评论 <i
-                                                    class="fa fa-angle-down"
-                                                    aria-hidden="true"></i></a>
-                                        </li>
-                                    </ul>
-                                    <a class="unit-0 flex-right edit" href="">编辑</a>
-                                </footer>
-                            </div>
-                            <div class="comment-descendant-list">
-                                <div class="flex-left">
-                                    <div class="unit-0">
-                                        <img class="comment-avatar" src="images/avatar.jpg"/>
-                                    </div>
-                                    <div class="unit">
-                                        <div class="comment-main">
-                                            <header class="comment-users">
-                                                    <span class="nickname text-small text-muted">追梦人物
-                                                        <span class="master">[博主]</span>
-                                                    </span>
-                                                <span class="reply-label text-small text-muted">
-                                                        <i class="fa fa-share" aria-hidden="true"></i>
-                                                    </span>
-                                                <span class="nickname text-small text-muted">zmrenwu</span>
-                                            </header>
-                                            <div class="comment-body">
-                                                说实话，美帝好，刘翔要是在美帝哪里还会被喷，这就是环境差别，中国人只看重成绩不注重过程。
-                                            </div>
-                                            <footer class="comment-footer">
-                                                <ul class="list-inline dot-divider">
-                                                    <li class="list-inline-item">
-                                                        <a class="text-small text-muted up-count" href="">
-                                                            <i class="fa fa-caret-up" aria-hidden="true"></i> 89</a>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <time class="text-small text-muted">3 天前</time>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <a href=""
-                                                           class="reply-btn text-small text-muted">回复</a>
-                                                    </li>
-                                                </ul>
-                                            </footer>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex-left">
-                                    <div class="unit-0">
-                                        <img class="comment-avatar" src="images/avatar.jpg"/>
-                                    </div>
-                                    <div class="unit">
-                                        <div class="comment-main">
-                                            <header class="comment-users">
-                                                    <span class="nickname text-small text-muted">追梦人物
-                                                        <span class="master">[博主]</span>
-                                                    </span>
-                                                <span class="reply-label text-small text-muted">
-                                                        <i class="fa fa-share" aria-hidden="true"></i>
-                                                    </span>
-                                                <span class="nickname text-small text-muted">zmrenwu</span>
-                                            </header>
-                                            <div class="comment-body">
-                                                说实话，美帝好，刘翔要是在美帝哪里还会被喷，这就是环境差别，中国人只看重成绩不注重过程。
-                                            </div>
-                                            <footer class="comment-footer">
-                                                <ul class="list-inline dot-divider">
-                                                    <li class="list-inline-item">
-                                                        <a class="text-small text-muted up-count" href="">
-                                                            <i class="fa fa-caret-up" aria-hidden="true"></i> 89</a>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <time class="text-small text-muted">3 天前</time>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <a href=""
-                                                           class="reply-btn text-small text-muted">回复</a>
-                                                    </li>
-                                                </ul>
-                                            </footer>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex-left">
-                                    <div class="unit-0">
-                                        <img class="comment-avatar" src="images/avatar.jpg"/>
-                                    </div>
-                                    <div class="unit">
-                                        <div class="comment-main">
-                                            <header class="comment-users">
-                                                    <span class="nickname text-small text-muted">追梦人物
-                                                        <span class="master">[博主]</span>
-                                                    </span>
-                                                <span class="reply-label text-small text-muted">
-                                                        <i class="fa fa-share" aria-hidden="true"></i>
-                                                    </span>
-                                                <span class="nickname text-small text-muted">zmrenwu</span>
-                                            </header>
-                                            <div class="comment-body">
-                                                说实话，美帝好，刘翔要是在美帝哪里还会被喷，这就是环境差别，中国人只看重成绩不注重过程。
-                                            </div>
-                                            <footer class="comment-footer">
-                                                <ul class="list-inline dot-divider">
-                                                    <li class="list-inline-item">
-                                                        <a class="text-small text-muted up-count" href="">
-                                                            <i class="fa fa-caret-up" aria-hidden="true"></i> 89</a>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <time class="text-small text-muted">3 天前</time>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <a href=""
-                                                           class="reply-btn text-small text-muted">回复</a>
-                                                    </li>
-                                                </ul>
-                                            </footer>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex-left">
-                        <div class="unit-0">
-                            <img class="comment-avatar" src="images/avatar.jpg"/>
-                        </div>
-                        <div class="unit">
-                            <div class="comment-main">
-                                <header class="comment-user">
-                                            <span class="text-small text-muted nickname">追梦人物
-                                                <span class="master">[博主]</span>
-                                            </span>
-                                </header>
-                                <div class="comment-body">
-                                    我们酒店的，有些人就是经常来前台买饮料，拿一瓶红牛，他给100，然后说7块钱，后来他说我有零钱，然后把100块钱给回他，他给2块钱我，叫我找95块钱给他，我说你把钱给我啊，然后识破他的诡计了，他把红牛放回去就走了，我同事都被这样的骗过几次
-                                </div>
-                                <footer class="comment-footer">
-                                    <ul class="list-inline dot-divider">
-                                        <li class="list-inline-item">
-                                            <a class="text-small text-muted up-count" href="">
-                                                <i class="fa fa-caret-up" aria-hidden="true"></i> 12</a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <time class="text-small text-muted">3 天前</time>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="" class="reply-btn text-small text-muted">回复</a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="" class="comment-btn text-small text-muted">5 条评论 <i
-                                                    class="fa fa-angle-down"
-                                                    aria-hidden="true"></i></a>
-                                        </li>
-                                    </ul>
-                                </footer>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex-left">
-                        <div class="unit-0">
-                            <img class="comment-avatar" src="images/avatar.jpg"/>
-                        </div>
-                        <div class="unit">
-                            <div class="comment-main">
-                                <header class="comment-user">
-                                            <span class="text-small text-muted nickname">追梦人物
-                                                <span class="master">[博主]</span>
-                                            </span>
-                                </header>
-                                <div class="comment-body">
-                                    我们酒店的，有些人就是经常来前台买饮料，拿一瓶红牛，他给100，然后说7块钱，后来他说我有零钱，然后把100块钱给回他，他给2块钱我，叫我找95块钱给他，我说你把钱给我啊，然后识破他的诡计了，他把红牛放回去就走了，我同事都被这样的骗过几次
-                                </div>
-                                <footer class="comment-footer">
-                                    <ul class="list-inline dot-divider">
-                                        <li class="list-inline-item">
-                                            <a class="text-small text-muted up-count" href="">
-                                                <i class="fa fa-caret-up" aria-hidden="true"></i> 12</a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <time class="text-small text-muted">3 天前</time>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="" class="reply-btn text-small text-muted">回复</a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="" class="comment-btn text-small text-muted">5 条评论 <i
-                                                    class="fa fa-angle-down"
-                                                    aria-hidden="true"></i></a>
-                                        </li>
-                                    </ul>
-                                </footer>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex-left">
-                        <div class="unit-0">
-                            <img class="comment-avatar" src="images/avatar.jpg"/>
-                        </div>
-                        <div class="unit">
-                            <div class="comment-main">
-                                <header class="comment-user">
-                                            <span class="text-small text-muted nickname">追梦人物
-                                                <span class="master">[博主]</span>
-                                            </span>
-                                </header>
-                                <div class="comment-body">
-                                    我们酒店的，有些人就是经常来前台买饮料，拿一瓶红牛，他给100，然后说7块钱，后来他说我有零钱，然后把100块钱给回他，他给2块钱我，叫我找95块钱给他，我说你把钱给我啊，然后识破他的诡计了，他把红牛放回去就走了，我同事都被这样的骗过几次
-                                </div>
-                                <footer class="comment-footer">
-                                    <ul class="list-inline dot-divider">
-                                        <li class="list-inline-item">
-                                            <a class="text-small text-muted up-count" href="">
-                                                <i class="fa fa-caret-up" aria-hidden="true"></i> 12</a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <time class="text-small text-muted">3 天前</time>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="" class="reply-btn text-small text-muted">回复</a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="" class="comment-btn text-small text-muted">5 条评论 <i
-                                                    class="fa fa-angle-down"
-                                                    aria-hidden="true"></i></a>
-                                        </li>
-                                    </ul>
-                                </footer>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% include 'comments/list.html' %}
             </section>
         </div>
     </div>
 {% endblock main %}
+{% block side %}
+    <div class="unit-1-4 unit-1-on-mobile top-gap">
+        {% comment %}
+        <div class="bg-white card ad">
+            <div class="card-image">
+                <a href=""><img src="images/ad.jpg" alt=""></a>
+            </div>
+            <span class="ad-reminder text-muted">广告</span>
+        </div>
+        {% endcomment %}
+        <div class="scroll-view bg-white card toc-sidebar">
+            <div class="card-header">
+                目录
+            </div>
+            <ul class="text-small table-of-content">
+                {{ post.toc|safe }}
+            </ul>
+        </div>
+        <div class="musk" id='js-sidebar-musk'></div>
+    </div>
+{% endblock side %}

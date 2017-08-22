@@ -43,6 +43,10 @@ class PostDetailView(DetailView):
         ])
         post.body = md.convert(post.body)
         post.toc = md.toc
+
+        if post.category.genre == Category.GENRE_CHOICES.tutorial:
+            self.template_name = 'blog/tutorial.html'
+
         return post
 
     def get_context_data(self, **kwargs):

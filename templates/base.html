@@ -46,6 +46,7 @@
 <header>
     <nav class="flex-center bg-white nav-bar">
         <div class="container-wider flex-middle">
+            {% block sidebar_btn %}{% endblock sidebar_btn %}
             <a class="unit-0 nav-bar-logo" href="{% url 'blog:index' %}">
                 <img src="{% static 'blog/images/logo.png' %}" alt="">
             </a>
@@ -79,13 +80,13 @@
                     </a>
                     <ul class="menu bg-white" data-menu data-menu-toggle="#menu-toggle">
                         <li>
-                            <a href="tutorial-list.html">教程</a>
+                            <a href="{% url 'blog:tutorials' %}">教程</a>
                         </li>
                         <li>
-                            <a href="category.html">分类</a>
+                            <a href="{% url 'blog:categories' %}">分类</a>
                         </li>
                         <li>
-                            <a href="archives.html">归档</a>
+                            <a href="{% url 'blog:archives' %}">归档</a>
                         </li>
                     </ul>
                 </div>
@@ -99,6 +100,7 @@
             {% block main %}{% endblock main %}
             {% block side %}
                 <div class="unit-1-4 unit-1-on-mobile top-gap">
+                    {% comment %}
                     <div class="bg-white card donate">
                         <div class="card-header">
                             <span class="">捐助</span>
@@ -118,7 +120,8 @@
                         </div>
                         <span class="ad-reminder text-muted">广告</span>
                     </div>
-                    <div class="bg-white top-gap card">
+                    {% endcomment %}
+                    <div class="bg-white card">
                         <div class="card-header">
                             Django学习小组 QQ 群
                         </div>

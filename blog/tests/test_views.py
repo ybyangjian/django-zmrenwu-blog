@@ -25,7 +25,7 @@ class IndexViewCBVTestCase(CBVTestCase):
         PostFactory.create_batch(10)
         view = self.get_instance(views.IndexView)
 
-        with self.assertNumQueries(2):
+        with self.assertNumQueries(1):
             len(view.get_queryset())
 
 
