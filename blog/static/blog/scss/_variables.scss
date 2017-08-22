@@ -1,0 +1,28 @@
+// override mobi.css defaultsd
+$font-size-small: 80%;
+
+//navigation-bar
+$height-nav-bar: $size-base * 4.8;
+$width-logo: $size-base * 4.0;
+$margin-nav-item: 30px;
+
+//search form
+$margin-search-form: 25px;
+$width-search-input: 200px;
+
+$nav-bar-search-form-input-font-size: 1.3 * $size-base;
+$nav-bar-search-form-input-border-bottom: 1px;
+$nav-bar-search-form-input-border-color: $color-text-muted;
+$nav-bar-search-form-input-padding: 5px;
+
+//menu
+$menu-grid: 8px !default;
+$menu-z-index: 96 !default;
+
+$menu-bg: $color-background-faded !default;
+$menu-color: #757575 !default;
+$menu-separator: #eee !default;
+$menu-item-hover: #eee !default;
+
+$menu-link: $menu-color !default;
+$menu-link-hover: #444 !default;

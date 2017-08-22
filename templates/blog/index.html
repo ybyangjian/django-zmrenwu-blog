@@ -6,9 +6,12 @@
             <div class="flex-left list-group-item post-items-header">
                 <div class="unit">
                     <ul class="list-inline post-items-nav">
-                        <li class="list-inline-item"><a class="text-muted text-small" href="">最新</a></li>
-                        <li class="list-inline-item"><a class="text-muted text-small" href="">热门</a></li>
+                        <li class="list-inline-item"><a class="text-muted text-small" href="{% url 'blog:index' %}">最新</a></li>
+                        <li class="list-inline-item"><a class="text-muted text-small"
+                                                        href="{% url 'blog:popular' %}">热门</a></li>
+                        {% comment %}
                         <li class="list-inline-item"><a class="text-muted text-small" href="">全部</a></li>
+                        {% endcomment %}
                     </ul>
                 </div>
                 <div class="unit-0">

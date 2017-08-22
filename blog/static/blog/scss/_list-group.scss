@@ -1,0 +1,8 @@
+.list-group {
+  border: $width-border solid #f1f1f1;
+
+  .list-group-item {
+    padding: $width-gap;
+    @include border-bottom();
+  }
+}

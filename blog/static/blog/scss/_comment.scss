@@ -1,0 +1,121 @@
+.comment-area {
+  .login-panel {
+    border: 1px solid #f1f1f1;
+    padding: 30px 0;
+
+    .login-header {
+    }
+
+    .social-icons {
+      margin-top: 7px;
+
+      span:not(:last-child) {
+        margin-right: 7px;
+      }
+
+      span {
+        display: inline-block;
+        height: 30px;
+        width: 30px;
+        line-height: 26px;
+        border-radius: 50%;
+      }
+
+      .weixin {
+        border: 1px solid #7bc549;
+        a {
+          color: #7bc549;
+        }
+      }
+
+      .weibo {
+        border: 1px solid #ff763b;
+
+        a {
+          color: #ff763b;
+        }
+      }
+
+      .qq {
+        border: 1px solid #333;
+
+        a {
+          color: #333;
+        }
+      }
+
+      .github {
+        border: 1px solid #2680d9;
+
+        a {
+          color: #2680d9;
+        }
+      }
+    }
+  }
+
+  .comment-form {
+    textarea {
+      padding: 10px;
+      height: 120px;
+    }
+  }
+
+  .comment-list {
+    > div {
+      border-bottom: 1px solid #f1f1f1;
+      padding-top: 15px;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    .comment-avatar {
+      width: 48px;
+      border-radius: 4px;
+    }
+
+    .comment-main {
+      padding-left: 7px;
+      padding-bottom: 15px;
+
+      .master {
+        color: red;
+      }
+
+      &:hover {
+        .edit {
+          display: inline;
+        }
+      }
+    }
+
+    .comment-footer {
+      a {
+        text-decoration: none;
+
+        &:hover {
+          color: darken($color-text-muted, 85%);
+        }
+      }
+
+      .edit {
+        display: none;
+      }
+    }
+
+    .comment-descendant-list {
+      padding-left: 7px;
+
+      > div {
+        padding-top: 15px;
+        border-top: 1px solid #f1f1f1;
+      }
+
+      .comment-avatar {
+        width: 36px;
+      }
+    }
+  }
+}

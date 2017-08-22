@@ -1,0 +1,47 @@
+.search-form {
+  margin-right: $margin-search-form;
+
+  input[type=search] {
+    background-color: transparent;
+    border: 0;
+    @include border-bottom($color: $color-border);
+    border-radius: 0; // reset for safari
+    outline: 0;
+    line-height: $line-height-input;
+    font-size: $font-size-small;
+    padding-bottom: $width-padding-input;
+    width: $width-search-input;
+    margin-right: $width-gap-half; // prevent from closing to button
+
+    &:focus {
+      @include border-bottom($color: darken($color-text-muted, 85%));
+    }
+  }
+
+  button[type=submit] {
+    @include link-effect();
+    border: 0;
+    background-color: transparent;
+    padding: 0;
+
+    &:focus {
+      border: 0;
+      outline: 0;
+    }
+  }
+
+  @media (max-width: $width-breakpoint - 1px) {
+    position: fixed;
+    top: $height-nav-bar;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 99;
+    padding: 0 15px;
+
+    input[type=search] {
+      width: 100%;
+      font-size: 16px;
+    }
+  }
+}

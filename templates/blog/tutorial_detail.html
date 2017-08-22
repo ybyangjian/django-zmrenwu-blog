@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block sidebar_btn %}
+    <a class="show-on-mobile nav-link mr" id="js-sidebar-btn" href="#" role="button">
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+    </a>
+{% endblock sidebar_btn %}
+{% block units_gap %}{% endblock %}
+{% block main %}
+    <div class="unit-1-4 unit-1-on-mobile top-gap" id="toc-sidebar">
+        <div class="scroll-view bg-white card toc-sidebar toc-sidebar-tutorial">
+            <div class="card-header">
+                目录
+            </div>
+            <h5 class="top-gap"><a href="">{{ category }}</a></h5>
+            <ul class="text-small table-of-content">
+                {% for post in post_list %}
+                    <li>
+                        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock main %}
+{% block side %}
+    <div class="unit-3-4 unit-1-on-mobile top-gap">
+        <div class="bg-white card post-card">
+            <article class="post">
+                {{ category.description }}
+            </article>
+            <div class="reward">
+                <span>赏</span>
+            </div>
+            <div class="ad">
+                广告预留
+            </div>
+        </div>
+    </div>
+{% endblock side %}

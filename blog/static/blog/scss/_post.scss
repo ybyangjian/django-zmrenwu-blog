@@ -1,0 +1,25 @@
+.post {
+  .post-meta {
+    margin-top: 7px;
+  }
+
+  .post-tags {
+    margin-top: 30px;
+
+    li {
+      margin-right: 7px;
+    }
+
+    a {
+      text-decoration: none;
+      color: $color-text-muted;
+      border: 1px solid #f1f1f1;
+      background-color: $color-background-faded;
+      padding: 2px 7px;
+
+      &:hover {
+        background-color: darken($color-background-faded, 25%);
+      }
+    }
+  }
+}

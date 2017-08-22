@@ -11,7 +11,7 @@
             <div class="card-header">
                 目录
             </div>
-            <h5 class="top-gap">{{ post.category }}</h5>
+            <h5 class="top-gap"><a href="">{{ post.category }}</a></h5>
             <ul class="text-small table-of-content">
                 {% for tutorial_post in post_list %}
                     <li>
@@ -64,7 +64,7 @@
                 </ul>
             </div>
             <section class="comment-area top-gap-big" id="comment-area">
-                <h5>128 条评论 / 110 人参与</h5>
+                <h5>{{ post.comments.count }} 条评论 / {{ post.participants_count }} 人参与</h5>
                 <div class="flex-center top-gap login-panel">
                     <div>
                         <div class="text-muted text-center login-header"><span>登录后回复</span></div>

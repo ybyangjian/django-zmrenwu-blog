@@ -1,0 +1,35 @@
+.tool-bar {
+  a {
+    border: 1px solid #f1f1f1;
+    float: left;
+    padding: 0 7px;
+
+    &:last-child {
+      border-left: none;
+    }
+
+    &:hover {
+      background-color: $color-background-faded;
+    }
+  }
+}
+
+.back-top {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  border: $width-border solid $color-border;
+  padding: 0 5px 3px 5px;
+  border-radius: 3px;
+  background-color: $color-background-faded;
+
+  @include link-effect();
+}
+
+@media (max-width: $width-breakpoint - 1px) {
+  .back-top {
+    bottom: 15px;
+    right: 15px;
+  }
+}

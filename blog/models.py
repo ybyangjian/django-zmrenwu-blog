@@ -151,3 +151,6 @@ class Post(models.Model):
     def root_comments(self):
         # TODO: move the logic to comment manager
         return self.comments.filter(parent__isnull=True, is_public=True, is_removed=False)
+
+    def participants_count(self):
+        return self.comments.values_list('user_id', flat=True).distinct().count()

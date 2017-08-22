@@ -1,0 +1,36 @@
+.notification-list {
+  .notification-list-header {
+    padding: 7px 15px;
+
+    a {
+      @include link-effect();
+      margin-left: 15px;
+    }
+  }
+
+  .notification-avatar {
+    width: 48px;
+    border-radius: 50%;
+  }
+
+  .notification-main {
+    padding-left: 15px;
+  }
+}
+
+.notification-meta {
+  margin-top: 5px;
+
+  div {
+    > i,
+    > time,
+    > a {
+      margin-right: 7px;
+    }
+  }
+
+}
+
+.unread {
+  background-color: lighten(yellow, 45%);
+}

@@ -7,9 +7,12 @@
                     <div class="unit-1-3 unit-1-on-mobile">
                         <div class="card tutorial-card">
                             <div class="card-image">
-                                <img class="" src="{{ tutorial.cover_thumbnail.url }}" alt="">
+                                <a href="{% url 'blog:category_slug' tutorial.slug %}">
+                                    <img class="" src="{{ tutorial.cover_thumbnail.url }}" alt="">
+                                </a>
                             </div>
-                            <h6 class="top-gap"><a href="">{{ tutorial }}</a></h6>
+                            <h6 class="top-gap"><a
+                                    href="{% url 'blog:category_slug' tutorial.slug %}">{{ tutorial }}</a></h6>
                             <div class="text-small tutorial-meta">
                                 {% comment %}<span>2018人学习</span>{% endcomment %}
                                 <span>{{ tutorial.total_views.category_views }}次阅读</span>

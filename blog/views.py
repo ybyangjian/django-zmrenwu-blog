@@ -22,6 +22,11 @@ class IndexView(PaginationMixin, SelectRelatedMixin, ListView):
         return super().get_queryset().annotate(comment_count=Count('comments'))
 
 
+class PopularPostListView(IndexView):
+    def get_queryset(self):
+        return super().get_queryset().order_by('-views')
+
+
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/detail.html'
@@ -58,7 +63,7 @@ class PostDetailView(DetailView):
         except Post.DoesNotExist:
             next_post = None
 
-        if post.category.genre == Category.GENRE_CHOICES.tutorial:
+        if post.category and post.category.genre == Category.GENRE_CHOICES.tutorial:
             self.template_name = 'blog/tutorial.html'
             post_list = post.category.post_set.all().order_by('created_time')
             context['post_list'] = post_list
@@ -93,6 +98,9 @@ class CategoryPostListView(IndexView):
         cate = get_object_or_404(Category, slug=self.kwargs.get('slug'))
         context = super().get_context_data(**kwargs)
         context['category'] = cate
+
+        if cate.genre == Category.GENRE_CHOICES.tutorial:
+            self.template_name = 'blog/tutorial_detail.html'
 
         return context
 

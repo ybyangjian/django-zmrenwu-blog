@@ -1,0 +1,55 @@
+.nav-bar {
+  height: $height-nav-bar;
+  @include border-bottom();
+  @include container-padding-mobile();
+
+  // default 15px padding bottom for container
+  > .container-wider {
+    padding-bottom: 0;
+  }
+
+  .nav-bar-logo {
+    width: $width-logo;
+  }
+
+  .nav-bar-nav {
+    @include reset-ul;
+
+    .nav-item {
+      display: inline-block;
+      margin-left: $margin-nav-item;
+    }
+  }
+
+  .nav-link {
+    @include link-effect();
+  }
+
+  //-------- notification count -----------//
+  .notification {
+    .notification-count {
+      display: inline-block;
+      font-size: 12px;
+      color: #fff;
+      background-color: darken(green, 5%);
+      min-width: 18px;
+      height: 18px;
+      border-radius: 9px;
+      text-align: center;
+      padding: 0 4px;
+      position: relative;
+      top: -9px;
+    }
+  }
+}
+
+#menu-toggle {
+  margin-left: 15px;
+}
+
+.fa-bell-o,
+.fa-search,
+.fa-chevron-right,
+#menu-toggle {
+  font-size: 18px;
+}

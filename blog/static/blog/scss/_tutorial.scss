@@ -1,0 +1,16 @@
+.tutorial-card {
+  margin-bottom: 15px;
+
+  h6 {
+    padding-top: 5px;
+  }
+
+  .tutorial-meta {
+    margin-top: 7px;
+
+    .state {
+      float: right;
+      color: red;
+    }
+  }
+}
