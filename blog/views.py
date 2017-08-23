@@ -80,7 +80,7 @@ def category(request, pk):
 
 
 class CategoryPostListView(IndexView):
-    template_name = 'blog/category.html'
+    template_name = 'blog/category_post_list.html'
 
     def get_queryset(self):
         cate = get_object_or_404(Category, slug=self.kwargs.get('slug'))

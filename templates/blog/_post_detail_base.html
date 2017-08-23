@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load comments %}
+
+{% block title %}{{ post.title }}{% endblock title %}
+
+{% block sidebar_trigger %}
+    <a class="show-on-mobile nav-link mr" id="js-sidebar-btn" href="#" role="button">
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+    </a>
+{% endblock sidebar_trigger %}
+{% block main %}
+    <div class="unit-3-4 unit-1-on-mobile top-gap">
+        <div class="bg-white card post-card">
+            {% include 'blog/_post_detail_item.html' %}
+            {% block related_posts %}{% endblock related_posts %}
+            <section class="comment-area top-gap-big" id="comment-area">
+                <h5>{{ post.comments.count }} 条评论 / {{ post.participants_count }} 人参与</h5>
+                {% if user.is_authenticated %}
+                    {% render_comment_form for post %}
+                {% else %}
+                    {% include 'account/_login_panel.html' %}
+                {% endif %}
+                {% include 'comments/list.html' %}
+            </section>
+        </div>
+    </div>
+{% endblock main %}
+{% block side %}
+    <div class="unit-1-4 unit-1-on-mobile top-gap">
+        <div class="scroll-view bg-white card toc-sidebar">
+            <div class="card-header">
+                目录
+            </div>
+            <ul class="text-small table-of-content">
+                {{ post.toc|safe }}
+            </ul>
+        </div>
+        <div class="musk" id='js-sidebar-musk'></div>
+    </div>
+{% endblock side %}

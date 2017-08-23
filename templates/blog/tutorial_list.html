@@ -14,7 +14,6 @@
                             <h6 class="top-gap"><a
                                     href="{% url 'blog:category_slug' tutorial.slug %}">{{ tutorial }}</a></h6>
                             <div class="text-small tutorial-meta">
-                                {% comment %}<span>2018人学习</span>{% endcomment %}
                                 <span>{{ tutorial.total_views.category_views }}次阅读</span>
                                 {% if tutorial.status == 2 %}
                                     <span class="state">
@@ -25,7 +24,6 @@
                                         <i class="fa fa-check-circle-o"
                                            aria-hidden="true"></i> 进行中</span>
                                 {% endif %}
-
                             </div>
                         </div>
                     </div>

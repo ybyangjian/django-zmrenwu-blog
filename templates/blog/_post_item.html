@@ -1,13 +1,15 @@
 <article class="list-group-item flex-left post-item">
     <div class="unit unit-1-on-mobile">
         <ul class="list-inline dot-divider post-item-meta">
-            <li class="list-inline-item"><span class="text-muted text-small"
-                                               href="">{{ post.author.name }}</span></li>
-            <li class="list-inline-item"><a class="text-muted text-small"
-                                            href="{{ post.get_absolute_url }}">{{ post.created_time|timesince }}前</a>
+            <li class="list-inline-item">
+                <span class="text-muted text-small" href="">{{ post.author.name }}</span>
             </li>
-            <li class="list-inline-item"><span class="text-muted text-small"
-                                               href="">{{ post.category }}</span>
+            <li class="list-inline-item">
+                <a class="text-muted text-small"
+                   href="{{ post.get_absolute_url }}">{{ post.created_time|timesince }}前</a>
+            </li>
+            <li class="list-inline-item">
+                <span class="text-muted text-small" href="">{{ post.category }}</span>
             </li>
         </ul>
         <h3 class="top-gap-0 post-item-title"><a href="{{ post.get_absolute_url }}">
@@ -17,13 +19,11 @@
             {% block post_excerpt %}{{ post.excerpt }} ...{% endblock %}
         </div>
         <div class="top-gap post-item-statistic tool-bar">
-            <a class="text-muted text-small" role="button"
-               href="{{ post.get_absolute_url }}"><i class="fa fa-eye"
-                                                     aria-hidden="true"></i> {{ post.views }}
+            <a class="text-muted text-small" role="button" href="{{ post.get_absolute_url }}">
+                <i class="fa fa-eye" aria-hidden="true"></i> {{ post.views }}
             </a>
-            <a class="text-muted text-small" role="button"
-               href="{{ post.get_absolute_url }}#comment-area"><i class="fa fa-comments"
-                                                                  aria-hidden="true"></i> {{ post.comment_count }}
+            <a class="text-muted text-small" role="button" href="{{ post.get_absolute_url }}#comment-area">
+                <i class="fa fa-comments" aria-hidden="true"></i> {{ post.comment_count }}
             </a>
         </div>
     </div>

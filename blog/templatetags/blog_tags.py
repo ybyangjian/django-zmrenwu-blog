@@ -1,8 +1,7 @@
 from django import template
-from django.template.loader import render_to_string
-from django.conf import settings
+from django.utils.html import mark_safe
 
-from ..models import Post, Category
+from ..models import Post
 
 register = template.Library()
 
@@ -13,22 +12,31 @@ def get_recent_posts(num=10):
 
 
 @register.simple_tag
-def archives():
-    return Post.objects.dates('created_time', 'month', order='DESC')
+def baidu_scripts():
+    scripts = """
+    <script>
+        // baidu statistics
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?fb59b2a6022bccc02671a750f61c356b";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
 
-
-@register.simple_tag
-def get_categories():
-    return Category.objects.filter(genre=2)
-
-
-@register.filter
-def describe(obj):
-    verb = obj.verb
-    tmpl = getattr(settings, 'NOTIFICATION_TEMPLATES')[verb]
-    context = {
-        'notification': obj,
-        'actor': obj.actor,
-        'target': obj.target,
-    }
-    return render_to_string(tmpl, context=context)
+        // baidu auto push
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    """
+    return mark_safe(scripts)

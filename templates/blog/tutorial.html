@@ -29,48 +29,13 @@
 {% block side %}
     <div class="unit-3-4 unit-1-on-mobile top-gap">
         <div class="bg-white card post-card">
-            <article class="post">
-                <h1 class="top-gap-0">{{ post.title }}</h1>
-                <ul class="list-inline dot-divider post-meta">
-                    <li class="list-inline-item text-small text-muted">{{ post.created_time|timesince }}前</li>
-                    <li class="list-inline-item text-small text-muted">{{ post.word_count }} 字</li>
-                    <li class="list-inline-item text-small text-muted">{{ post.views }} 阅读</li>
-                    <li class="list-inline-item text-small text-muted">{{ post.comments.count }} 评论</li>
-                </ul>
-                <div class="top-gap-big post-body">
-                    {{ post.body|safe }}
-                    <div class="post-tags">
-                        <ul class="list-inline">
-                            <li class="list-inline-item"><a class="text-small" href="">Django</a></li>
-                            <li class="list-inline-item"><a class="text-small" href="">Python</a></li>
-                            <li class="list-inline-item"><a class="text-small" href="">教程</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </article>
-            <div class="reward">
-                <span>赏</span>
-            </div>
-            <div class="ad">
-                广告预留
-            </div>
-            <div class="top-gap-big card">
-                <div class="card-header">相关文章</div>
-                <ul class="">
-                    <li><a href="">前端每周清单半年盘点之 Vue.js 篇</a></li>
-                    <li><a href="">ES6 变量声明与赋值：值传递、浅拷贝与深拷贝详解</a></li>
-                    <li><a href="">前端每周清单第 26 期：Node.js 微服务实践，Vue.js 与 GraphQL，Angular 组件技巧，HeadlessChrome
-                        攻防</a></li>
-                    <li><a href="">前端每周清单半年盘点之 React 与 ReactNative 篇</a></li>
-                </ul>
-            </div>
+            {% include 'blog/_post_detail_item.html' %}
             <section class="comment-area top-gap-big" id="comment-area">
                 <h5>{{ post.comments.count }} 条评论 / {{ post.participants_count }} 人参与</h5>
-
                 {% if user.is_authenticated %}
                     {% render_comment_form for post %}
                 {% else %}
-                    {% include 'account/_login_panal.html' %}
+                    {% include 'account/_login_panel.html' %}
                 {% endif %}
                 {% include 'comments/list.html' %}
             </section>

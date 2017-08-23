@@ -1,0 +1,19 @@
+<article class="post">
+    <h1 class="top-gap-0">{{ post.title }}</h1>
+    <ul class="list-inline dot-divider post-meta">
+        <li class="list-inline-item text-small text-muted">{{ post.created_time|timesince }}前</li>
+        <li class="list-inline-item text-small text-muted">{{ post.word_count }} 字</li>
+        <li class="list-inline-item text-small text-muted">{{ post.views }} 阅读</li>
+        <li class="list-inline-item text-small text-muted">{{ post.comments.count }} 评论</li>
+    </ul>
+    <div class="top-gap-big post-body">
+        {{ post.body|safe }}
+        <div class="post-tags">
+            <ul class="list-inline">
+                <li class="list-inline-item"><a class="text-small" href="">Django</a></li>
+                <li class="list-inline-item"><a class="text-small" href="">Python</a></li>
+                <li class="list-inline-item"><a class="text-small" href="">教程</a></li>
+            </ul>
+        </div>
+    </div>
+</article>

@@ -6,41 +6,18 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="baidu-site-verification" content="GOgEP8c1pN"/>
+    {% block description %}{% endblock description %}
 
-    <title>{% if unread_count %}({{ unread_count }}) {% endif %}首页 - 追梦人物的博客</title>
+    <title>{% if unread_count %}({{ unread_count }}) {% endif %}
+        {% block title %}首页{% endblock title %} - 追梦人物的博客</title>
+
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'blog/css/mobi.min.css' %}">
     <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
 
-    <!-- 百度验证代码 -->
-    <meta name="baidu-site-verification" content="GOgEP8c1pN"/>
+    {% baidu_scripts %}
 
-    <!-- 百度统计代码 -->
-    <script>
-        var _hmt = _hmt || [];
-        (function () {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?fb59b2a6022bccc02671a750f61c356b";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
-
-    <!-- 百度自动推送链接代码 -->
-    <script>
-        (function () {
-            var bp = document.createElement('script');
-            var curProtocol = window.location.protocol.split(':')[0];
-            if (curProtocol === 'https') {
-                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-            }
-            else {
-                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-            }
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(bp, s);
-        })();
-    </script>
     <style>
         .current a {
             color: red
@@ -56,7 +33,7 @@
 <header>
     <nav class="flex-center bg-white nav-bar">
         <div class="container-wider flex-middle">
-            {% block sidebar_btn %}{% endblock sidebar_btn %}
+            {% block sidebar_trigger %}{% endblock sidebar_trigger %}
             <a class="unit-0 nav-bar-logo" href="{% url 'blog:index' %}">
                 <img src="{% static 'blog/images/logo.png' %}" alt="">
             </a>
@@ -111,31 +88,10 @@
 </header>
 <section class="flex-center">
     <div class="container-wider">
-        <div class="flex-left flex-wrap {% block units_gap %}units-gap-big{% endblock %}">
+        <div class="flex-left flex-wrap {% block units_gap %}units-gap-big{% endblock units_gap %}">
             {% block main %}{% endblock main %}
             {% block side %}
                 <div class="unit-1-4 unit-1-on-mobile top-gap">
-                    {% comment %}
-                    <div class="bg-white card donate">
-                        <div class="card-header">
-                            <span class="">捐助</span>
-                            <a class="text-muted text-small" id="js-weixin-btn" role="button">微信</a>
-                            <a class="text-muted text-small" id="js-alipay-btn" role="button">支付宝</a>
-                        </div>
-                        <div class="card-image donate-qr-code" id="weixin">
-                            <img src="images/IMG_1055.JPG" alt="">
-                        </div>
-                        <div class="card-image donate-qr-code" id="alipay" style="display: none">
-                            <img src="images/IMG_1056.JPG" alt="">
-                        </div>
-                    </div>
-                    <div class="bg-white top-gap card ad">
-                        <div class="card-image">
-                            <a href=""><img src="images/ad.jpg" alt=""></a>
-                        </div>
-                        <span class="ad-reminder text-muted">广告</span>
-                    </div>
-                    {% endcomment %}
                     <div class="bg-white card">
                         <div class="card-header">
                             Django学习小组 QQ 群
@@ -155,7 +111,7 @@
                         </div>
                     </div>
                 </div>
-            {% endblock %}
+            {% endblock side %}
         </div>
     </div>
 </section>

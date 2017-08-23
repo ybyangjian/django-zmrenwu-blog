@@ -1,79 +1,13 @@
-{% extends 'base.html' %}
-{% load comments %}
-
-{% block sidebar_btn %}
-    <a class="show-on-mobile nav-link mr" id="js-sidebar-btn" href="#" role="button">
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-    </a>
-{% endblock sidebar_btn %}
-{% block main %}
-    <div class="unit-3-4 unit-1-on-mobile top-gap">
-        <div class="bg-white card post-card">
-            <article class="post">
-                <h1 class="top-gap-0">{{ post.title }}</h1>
-                <ul class="list-inline dot-divider post-meta">
-                    <li class="list-inline-item text-small text-muted">{{ post.created_time|timesince }}前</li>
-                    <li class="list-inline-item text-small text-muted">{{ post.word_count }} 字</li>
-                    <li class="list-inline-item text-small text-muted">{{ post.views }} 阅读</li>
-                    <li class="list-inline-item text-small text-muted">{{ post.comments.count }} 评论</li>
-                </ul>
-                <div class="top-gap-big post-body">
-                    {{ post.body|safe }}
-                    <div class="post-tags">
-                        <ul class="list-inline">
-                            <li class="list-inline-item"><a class="text-small" href="">Django</a></li>
-                            <li class="list-inline-item"><a class="text-small" href="">Python</a></li>
-                            <li class="list-inline-item"><a class="text-small" href="">教程</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </article>
-            <div class="reward">
-                <span>赏</span>
-            </div>
-            <div class="ad">
-                广告预留
-            </div>
-            <div class="top-gap-big card">
-                <div class="card-header">相关文章</div>
-                <ul class="">
-                    <li><a href="">前端每周清单半年盘点之 Vue.js 篇</a></li>
-                    <li><a href="">ES6 变量声明与赋值：值传递、浅拷贝与深拷贝详解</a></li>
-                    <li><a href="">前端每周清单第 26 期：Node.js 微服务实践，Vue.js 与 GraphQL，Angular 组件技巧，HeadlessChrome
-                        攻防</a></li>
-                    <li><a href="">前端每周清单半年盘点之 React 与 ReactNative 篇</a></li>
-                </ul>
-            </div>
-            <section class="comment-area top-gap-big" id="comment-area">
-                <h5>{{ post.comments.count }} 条评论 / {{ post.participants_count }} 人参与</h5>
-                {% if user.is_authenticated %}
-                    {% render_comment_form for post %}
-                {% else %}
-                    {% include 'account/_login_panal.html' %}
-                {% endif %}
-                {% include 'comments/list.html' %}
-            </section>
-        </div>
+{% extends 'blog/_post_detail_base.html' %}
+{% block related_posts %}
+    <div class="top-gap-big card">
+        <div class="card-header">相关文章</div>
+        <ul class="">
+            <li><a href="">前端每周清单半年盘点之 Vue.js 篇</a></li>
+            <li><a href="">ES6 变量声明与赋值：值传递、浅拷贝与深拷贝详解</a></li>
+            <li><a href="">前端每周清单第 26 期：Node.js 微服务实践，Vue.js 与 GraphQL，Angular 组件技巧，HeadlessChrome
+                攻防</a></li>
+            <li><a href="">前端每周清单半年盘点之 React 与 ReactNative 篇</a></li>
+        </ul>
     </div>
-{% endblock main %}
-{% block side %}
-    <div class="unit-1-4 unit-1-on-mobile top-gap">
-        {% comment %}
-        <div class="bg-white card ad">
-            <div class="card-image">
-                <a href=""><img src="images/ad.jpg" alt=""></a>
-            </div>
-            <span class="ad-reminder text-muted">广告</span>
-        </div>
-        {% endcomment %}
-        <div class="scroll-view bg-white card toc-sidebar">
-            <div class="card-header">
-                目录
-            </div>
-            <ul class="text-small table-of-content">
-                {{ post.toc|safe }}
-            </ul>
-        </div>
-        <div class="musk" id='js-sidebar-musk'></div>
-    </div>
-{% endblock side %}
+{% endblock related_posts %}
