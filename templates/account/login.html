@@ -1,24 +1,10 @@
 {% extends 'base.html' %}
-{% load socialaccount %}
-{% block title %}登录 - 追梦人物的博客{% endblock title %}
 {% load blog_tags comments %}
 {% block main %}
-    <main class="unit-3-4 unit-1-on-mobile">
-        <h2 class="text-center">使用第三方账户账户登录</h2>
-        <div class="social-icon flex-center text-center top-gap-big">
-                        <span class="weibo"><a
-                                href="{% provider_login_url 'weibo' %}"><i
-                                class="fa fa-weibo"
-                                aria-hidden="true"></i></a></span>
-            {% comment %}
-                        <span class="weixin"><a href=""><i class="fa fa-weixin"
-                                                           aria-hidden="true"></i></a></span>
-                        <span class="qq"><a href=""><i class="fa fa-qq" aria-hidden="true"></i></a></span>
-                        {% endcomment %}
-            <span class="github"><a
-                    href="{% provider_login_url 'github' %}">
-                            <i class="fa fa-github" aria-hidden="true"></i></a></span>
-
+    <main class="unit-3-4 unit-1-on-mobile top-gap">
+        <div class="bg-white card">
+            <h2 class="text-center top-gap">使用第三方账户账户登录</h2>
+            {% include 'account/_login_panal.html' %}
         </div>
     </main>
 {% endblock main %}

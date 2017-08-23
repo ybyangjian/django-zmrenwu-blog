@@ -1,0 +1,24 @@
+<div class="top-gap-big comment-list">
+    {% for comment in post.root_comments %}
+        <div class="flex-left" id="c{{ comment.pk }}">
+            <div class="unit-0">
+                <img class="comment-avatar" src="{{ comment.user.social_avatar }}"/>
+            </div>
+            <div class="unit">
+            {% block comment %}{% endblock comment %}
+                <div class="comment-descendant-list">
+                    {% for child_comment in comment.get_descendants_reversely %}
+                        <div class="flex-left" id="c{{ child_comment.pk }}">
+                            <div class="unit-0">
+                                <img class="comment-avatar" src="{{ child_comment.user.social_avatar }}"/>
+                            </div>
+                            <div class="unit">
+                                {% block decendant_comment %}{% endblock decendant_comment %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

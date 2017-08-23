@@ -1,28 +1,14 @@
 {% extends 'base.html' %}
 {% block main %}
-    <main class="unit-3-4 unit-1-on-mobile">
-        <section class="comment-area top-gap-big" id="comment-area">
-            <div class="flex-left">
-                <figure class="avatar unit-0">
-                    <img src="{{ blogcomment.user.social_avatar }}" class="avatar-img"/>
-                </figure>
-                <div class="unit">
-                    <header class="comment-header-meta">
-                        <span class="nickname text-small text-muted">{{ blogcomment.user.name }}
-                            {% if blogcomment.user.name == "追梦人物" %}
-                                <span class="master">[博主]</span>
-                            {% endif %}
-                        </span>
-                    </header>
-                    <div class="comment-body">
-                        {{ blogcomment.comment|linebreaksbr }}
-                    </div>
-                    <footer class="comment-footer">
-                        <time class="reply-date text-small text-muted">{{ blogcomment.submit_date|timesince }}前</time>
-                    </footer>
-                </div>
+    <main class="unit-3-4 unit-1-on-mobile top-gap card bg-white">
+        <div class="flex-left" id="c{{ child_comment.pk }}">
+            <div class="unit-0">
+                <img class="comment-avatar" src="{{ blogcomment.user.social_avatar }}"/>
             </div>
-        </section>
+            <div class="unit">
+                {% include 'comments/_comment_item.html' with comment=blogcomment %}
+            </div>
+        </div>
         <hr class="top-gap-big">
         <h5>回复<span class=""> {{ blogcomment.user.name }} </span>的评论</h5>
         <div class="commet-form-panel top-gap">
@@ -56,27 +42,7 @@
                     </form>
                 </div>
             {% else %}
-                {% load socialaccount %}
-                <div class="login-panel flex-center top-gap">
-                    <div>
-                        <div class="login-title text-muted text-center"><span>登录后评论</span></div>
-                        <div class="social-icon flex-center text-center">
-                        <span class="weibo"><a
-                                href="{% provider_login_url 'weibo' %}?next={{ request.path }}#comment-area"><i
-                                class="fa fa-weibo"
-                                aria-hidden="true"></i></a></span>
-                            {% comment %}
-                        <span class="weixin"><a href=""><i class="fa fa-weixin"
-                                                           aria-hidden="true"></i></a></span>
-                        <span class="qq"><a href=""><i class="fa fa-qq" aria-hidden="true"></i></a></span>
-                        {% endcomment %}
-                            <span class="github"><a
-                                    href="{% provider_login_url 'github' %}?next={{ request.path }}#comment-area">
-                            <i class="fa fa-github" aria-hidden="true"></i></a></span>
-
-                        </div>
-                    </div>
-                </div>
+                {% include 'account/_login_panal.html' %}
             {% endif %}
         </div>
     </main>

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load comments %}
 {% block sidebar_btn %}
     <a class="show-on-mobile nav-link mr" id="js-sidebar-btn" href="#" role="button">
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
@@ -65,27 +66,12 @@
             </div>
             <section class="comment-area top-gap-big" id="comment-area">
                 <h5>{{ post.comments.count }} 条评论 / {{ post.participants_count }} 人参与</h5>
-                <div class="flex-center top-gap login-panel">
-                    <div>
-                        <div class="text-muted text-center login-header"><span>登录后回复</span></div>
-                        <div class="flex-center text-center social-icons">
-                                    <span class="weibo"><a href=""><i class="fa fa-weibo"
-                                                                      aria-hidden="true"></i></a></span>
-                            <span class="weixin"><a href=""><i class="fa fa-weixin"
-                                                               aria-hidden="true"></i></a></span>
-                            <span class="qq"><a href=""><i class="fa fa-qq" aria-hidden="true"></i></a></span>
-                            <span class="github"><a href=""><i class="fa fa-github"
-                                                               aria-hidden="true"></i></a></span>
-                        </div>
-                    </div>
-                </div>
-                <form class="form comment-form" action="">
-                    <textarea></textarea>
-                    <div class="flex-right">
-                        <button class="btn text-small"><i class="fa fa-paper-plane" aria-hidden="true"></i> 发布
-                        </button>
-                    </div>
-                </form>
+
+                {% if user.is_authenticated %}
+                    {% render_comment_form for post %}
+                {% else %}
+                    {% include 'account/_login_panal.html' %}
+                {% endif %}
                 {% include 'comments/list.html' %}
             </section>
         </div>

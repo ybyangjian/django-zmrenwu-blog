@@ -1,0 +1,24 @@
+<div class="comment-main">
+    <header class="comment-user">
+        <span class="text-small text-muted nickname">{{ comment.user.name }}
+            {% if comment.user.name == "追梦人物" %}
+                <span class="master">[博主]</span>
+            {% endif %}
+        </span>
+        {% block replied_user %}{% endblock replied_user %}
+    </header>
+    <div class="comment-body">
+        {{ comment.comment|linebreaksbr }}
+    </div>
+    <footer class="comment-footer flex-left">
+        <ul class="unit list-inline dot-divider">
+            <li class="list-inline-item">
+                <time class="text-small text-muted">{{ comment.submit_date|timesince }}前</time>
+            </li>
+            <li class="list-inline-item">
+                <a href="{% url 'comments:reply' comment.pk %}"
+                   class="reply-btn text-small text-muted">回复</a>
+            </li>
+        </ul>
+    </footer>
+</div>

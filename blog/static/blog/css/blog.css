@@ -264,47 +264,6 @@
   background-color: #b3b3b3;
 }
 
-.comment-area .login-panel {
-  border: 1px solid #f1f1f1;
-  padding: 30px 0;
-}
-.comment-area .login-panel .social-icons {
-  margin-top: 7px;
-}
-.comment-area .login-panel .social-icons span:not(:last-child) {
-  margin-right: 7px;
-}
-.comment-area .login-panel .social-icons span {
-  display: inline-block;
-  height: 30px;
-  width: 30px;
-  line-height: 26px;
-  border-radius: 50%;
-}
-.comment-area .login-panel .social-icons .weixin {
-  border: 1px solid #7bc549;
-}
-.comment-area .login-panel .social-icons .weixin a {
-  color: #7bc549;
-}
-.comment-area .login-panel .social-icons .weibo {
-  border: 1px solid #ff763b;
-}
-.comment-area .login-panel .social-icons .weibo a {
-  color: #ff763b;
-}
-.comment-area .login-panel .social-icons .qq {
-  border: 1px solid #333;
-}
-.comment-area .login-panel .social-icons .qq a {
-  color: #333;
-}
-.comment-area .login-panel .social-icons .github {
-  border: 1px solid #2680d9;
-}
-.comment-area .login-panel .social-icons .github a {
-  color: #2680d9;
-}
 .comment-area .comment-form textarea {
   padding: 10px;
   height: 120px;
@@ -316,29 +275,6 @@
 .comment-area .comment-list > div:last-child {
   border-bottom: none;
 }
-.comment-area .comment-list .comment-avatar {
-  width: 48px;
-  border-radius: 4px;
-}
-.comment-area .comment-list .comment-main {
-  padding-left: 7px;
-  padding-bottom: 15px;
-}
-.comment-area .comment-list .comment-main .master {
-  color: red;
-}
-.comment-area .comment-list .comment-main:hover .edit {
-  display: inline;
-}
-.comment-area .comment-list .comment-footer a {
-  text-decoration: none;
-}
-.comment-area .comment-list .comment-footer a:hover {
-  color: black;
-}
-.comment-area .comment-list .comment-footer .edit {
-  display: none;
-}
 .comment-area .comment-list .comment-descendant-list {
   padding-left: 7px;
 }
@@ -348,6 +284,78 @@
 }
 .comment-area .comment-list .comment-descendant-list .comment-avatar {
   width: 36px;
+}
+
+.comment-avatar {
+  width: 48px;
+  border-radius: 4px;
+}
+
+.comment-main {
+  padding-left: 7px;
+  padding-bottom: 15px;
+}
+.comment-main .master {
+  color: red;
+}
+.comment-main:hover .edit {
+  display: inline;
+}
+
+.comment-footer a {
+  text-decoration: none;
+}
+.comment-footer a:hover {
+  color: black;
+}
+.comment-footer .edit {
+  display: none;
+}
+
+.login-panel {
+  border: 1px solid #f1f1f1;
+  padding: 30px 0;
+}
+.login-panel .social-icons {
+  margin-top: 7px;
+}
+.login-panel .social-icons span:not(:last-child) {
+  margin-right: 7px;
+}
+.login-panel .social-icons span {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  line-height: 26px;
+  border-radius: 50%;
+}
+.login-panel .social-icons .weixin {
+  border: 1px solid #7bc549;
+}
+.login-panel .social-icons .weixin a {
+  color: #7bc549;
+}
+.login-panel .social-icons .weibo {
+  border: 1px solid #ff763b;
+}
+.login-panel .social-icons .weibo a {
+  color: #ff763b;
+}
+.login-panel .social-icons .qq {
+  border: 1px solid #333;
+}
+.login-panel .social-icons .qq a {
+  color: #333;
+}
+.login-panel .social-icons .github {
+  border: 1px solid #2680d9;
+}
+.login-panel .social-icons .github a {
+  color: #2680d9;
+}
+
+#id_honeypot {
+  display: none;
 }
 
 .notification-list .notification-list-header {

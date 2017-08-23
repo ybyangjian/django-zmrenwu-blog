@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'', include('blog.urls')),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^comments/', include('comments.urls')),
-    url(r'^notifications/', include('contrib.blog_notifications.urls')),
+    url(r'^notifications/', include('notify.urls')),
     url(r'^notifications/', include('notifications.urls')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^search/', include('haystack.urls')),

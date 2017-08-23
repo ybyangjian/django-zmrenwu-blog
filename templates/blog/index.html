@@ -9,9 +9,6 @@
                         <li class="list-inline-item"><a class="text-muted text-small" href="{% url 'blog:index' %}">最新</a></li>
                         <li class="list-inline-item"><a class="text-muted text-small"
                                                         href="{% url 'blog:popular' %}">热门</a></li>
-                        {% comment %}
-                        <li class="list-inline-item"><a class="text-muted text-small" href="">全部</a></li>
-                        {% endcomment %}
                     </ul>
                 </div>
                 <div class="unit-0">
@@ -26,12 +23,6 @@
             <div class="flex-center list-group-item">
                 {% include 'blog/pagination.html' %}
             </div>
-            {% comment %}
-            <div class="list-group-item flex-center">
-                <a class="text-muted text-small load-more" href="">加载更多 <i class="fa fa-chevron-down"
-                                                                           aria-hidden="true"></i></a>
-            </div>
-            {% endcomment %}
         </div>
     </div>
 {% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'comments/_comment_item.html' %}
+{% block replied_user %}
+    <span class="reply-label text-small text-muted">
+                                                        <i class="fa fa-share" aria-hidden="true"></i>
+                                                    </span>
+    <span class="nickname text-small text-muted">{{ child_comment.parent.user.name }}
+        {% if child_comment.parent.user.name == "追梦人物" %}
+            <span class="master">[博主]</span>
+        {% endif %}
+{% endblock replied_user %}
