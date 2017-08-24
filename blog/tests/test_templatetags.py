@@ -1,23 +1,37 @@
 from django.template import Template, Context
-import factory
 
 from test_plus import TestCase
 
-from ..templatetags.blog_tags import get_recent_posts, get_categories, archives
-from ..factories import PostFactory, CategoryFactory
-from ..models import Category, Post
-
 
 class TemplatetagsTestCase(TestCase):
-    def test_get_recent_posts(self):
-        pass
+    BAIDU_SCRIPTS = """
+    <script>
+        // baidu statistics
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?fb59b2a6022bccc02671a750f61c356b";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
 
-    def test_archives(self):
-        PostFactory.create_batch(10)
-        # self.assertQuerysetEqual(archives(), Post.objects.dates('created_time', 'month', order='DESC'))
+        // baidu auto push
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    """
 
-    def test_get_categories(self):
-        pass
-
-    def test_describe(self):
-        pass
+    def test_baidu_scripts_tag(self):
+        template = Template('{% load blog_tags %}{% baidu_scripts %}')
+        rendered = template.render(context=Context({}))
+        self.assertInHTML(self.BAIDU_SCRIPTS, rendered)

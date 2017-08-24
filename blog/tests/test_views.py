@@ -1,18 +1,34 @@
 from django.test import RequestFactory
-from django.urls import reverse
 
 from test_plus.test import TestCase, CBVTestCase
 
-from ..factories import PostFactory, CategoryFactory
-from ..models import Category
 from .. import views
+from ..factories import PostFactory, CategoryFactory
+from ..models import Category, Post
+
+
+class BasePostListViewCBVTestCase(CBVTestCase):
+    def test_get_queryset(self):
+        PostFactory.create_batch(10)
+        view = self.get_instance(views.BasePostListView)
+        posts = view.get_queryset()
+
+        self.assertEqual(posts.count(), 10)
+        self.assertTrue(hasattr(posts[0], 'comment_count'))
+
+    def test_get_queryset_num_queries(self):
+        PostFactory.create_batch(10)
+        view = self.get_instance(views.BasePostListView)
+
+        with self.assertNumQueries(1):
+            len(view.get_queryset())
 
 
 class IndexViewTestCase(TestCase):
     def test_template_used(self):
         self.get('blog:index')
-        self.response_200()
-        self.assertTemplateUsed(self.last_response, 'blog/index.html')
+        response = self.response_200()
+        self.assertTemplateUsed(response, 'blog/index.html')
 
     def test_good_view(self):
         """http://django-test-plus.readthedocs.io/en/latest/low_query_counts.html#assertgoodview-url-name-args-kwargs
@@ -20,13 +36,92 @@ class IndexViewTestCase(TestCase):
         self.assertGoodView('blog:index')
 
 
-class IndexViewCBVTestCase(CBVTestCase):
-    def test_get_queryset_num_queries(self):
-        PostFactory.create_batch(10)
-        view = self.get_instance(views.IndexView)
+class PopularPostListViewTestCase(TestCase):
+    def test_template_used(self):
+        self.get('blog:popular')
+        response = self.response_200()
+        self.assertTemplateUsed(response, 'blog/index.html')
 
-        with self.assertNumQueries(1):
-            len(view.get_queryset())
+    def test_good_view(self):
+        """http://django-test-plus.readthedocs.io/en/latest/low_query_counts.html#assertgoodview-url-name-args-kwargs
+        """
+        self.assertGoodView('blog:index')
+
+
+class PopularPostListViewCBVTestCase(CBVTestCase):
+    def test_get_queryset(self):
+        PostFactory.create_batch(10)
+        view = self.get_instance(views.BasePostListView)
+        posts = view.get_queryset()
+
+        # https://stackoverflow.com/questions/16058571/comparing-querysets-in-django-testcase
+        self.assertQuerysetEqual(Post.objects.all().reverse(), map(repr, posts))
+
+
+class CategoryPostListViewTestCase(TestCase):
+    def setUp(self):
+        self.category = CategoryFactory()
+
+    def test_template_used(self):
+        self.get('blog:category_slug', slug=self.category.slug)
+        self.response_200()
+        self.assertTemplateUsed(self.last_response, 'blog/category_post_list.html')
+
+    def test_tutorial_category_template_used(self):
+        tutorial_category = CategoryFactory(genre=Category.GENRE_CHOICES.tutorial)
+        self.get('blog:category_slug', slug=tutorial_category.slug)
+        self.assertTemplateUsed(self.last_response, 'blog/tutorial_detail.html')
+        self.assertContext('is_paginated', False)
+
+    def test_good_views(self):
+        """http://django-test-plus.readthedocs.io/en/latest/low_query_counts.html#assertgoodview-url-name-args-kwargs
+        """
+        self.assertGoodView('blog:category_slug', slug=self.category.slug)
+
+    def test_redirect_pk_url_to_slug_url(self):
+        self.get('blog:category', pk=self.category.pk)
+        self.response_301()
+
+        self.get('blog:category', pk='does not exist pk')
+        self.response_404()
+
+    def test_404(self):
+        self.get('blog:category_slug', slug='dose not exist slug')
+        self.response_404()
+
+
+class CategoryPostListViewCBVTestCase(CBVTestCase):
+    def setUp(self):
+        self.category = CategoryFactory(genre=Category.GENRE_CHOICES.tutorial)
+        self.req = RequestFactory().get(
+            self.reverse('blog:category_slug', slug=self.category.slug)
+        )
+        self.req.user = self.make_user()
+
+    def test_dispatch(self):
+        view = self.get_instance(views.CategoryPostListView, slug=self.category.slug, request=self.req)
+        view.dispatch(self.req, )
+        self.assertEqual(view.category, self.category)
+        self.assertEqual(view.template_name, 'blog/tutorial_detail.html')
+        self.assertIsNone(view.paginate_by)
+
+    def test_get_queryset(self):
+        PostFactory()
+        post = PostFactory(category=self.category)
+        view = self.get_instance(views.CategoryPostListView, slug=self.category.slug, request=self.req)
+        view.dispatch(self.req)
+        self.assertQuerysetEqual(view.get_queryset(), [repr(post)])
+
+    def test_context_data(self):
+        post_list = [PostFactory(category=self.category), PostFactory(category=self.category)]
+        view = self.get_instance(views.CategoryPostListView,
+                                 initkwargs={'object_list': post_list},
+                                 request=self.req,
+                                 slug=self.category.slug
+                                 )
+        view.dispatch(self.req)
+        context = view.get_context_data()
+        self.assertEqual(context['category'], self.category)
 
 
 class PostDetailViewTestCase(TestCase):
@@ -86,72 +181,6 @@ class PostDetailViewTestCase(TestCase):
         self.assertContext('post', self.first_post)
         self.assertInContext('previous_post')
         self.assertInContext('next_post')
-
-
-class CategoryPostListViewTestCase(TestCase):
-    def setUp(self):
-        self.category = CategoryFactory()
-
-    def test_template_used(self):
-        self.get('blog:category_slug', slug=self.category.slug)
-        self.response_200()
-        self.assertTemplateUsed(self.last_response, 'blog/category.html')
-
-    def test_good_views(self):
-        """http://django-test-plus.readthedocs.io/en/latest/low_query_counts.html#assertgoodview-url-name-args-kwargs
-        """
-        self.assertGoodView('blog:category_slug', slug=self.category.slug)
-
-    def test_redirect_pk_url_to_slug_url(self):
-        self.get('blog:category', pk=self.category.pk)
-        self.response_301()
-
-        self.get('blog:category', pk='does not exist pk')
-        self.response_404()
-
-    def test_404(self):
-        self.get('blog:category_slug', slug='dose not exist slug')
-        self.response_404()
-
-    def test_tutorial_category_template_used(self):
-        tutorial_category = CategoryFactory(genre=Category.GENRE_CHOICES.tutorial)
-        self.get('blog:category_slug', slug=tutorial_category.slug)
-        self.assertTemplateUsed(self.last_response, 'blog/tutorial.html')
-
-
-class CategoryPostListViewCBVTestCase(CBVTestCase):
-    def setUp(self):
-        self.category = CategoryFactory()
-        self.req = RequestFactory().get(
-            self.reverse('blog:category_slug', slug=self.category.slug)
-        )
-        self.req.user = self.make_user()
-
-    def test_get_queryset(self):
-        post1 = PostFactory(category=self.category)
-        post2 = PostFactory(category=self.category)
-        PostFactory()
-        view = self.get_instance(views.CategoryPostListView, slug=self.category.slug)
-        self.assertQuerysetEqual(view.get_queryset(), [repr(post2), repr(post1)])
-
-    def test_visit_turorial_category(self):
-        self.category.genre = Category.GENRE_CHOICES.tutorial
-        self.category.save()
-        view = self.get_instance(views.CategoryPostListView, slug=self.category.slug)
-        view.get_queryset()
-
-        self.assertIsNone(view.paginate_by)
-        self.assertEqual(view.template_name, 'blog/tutorial.html')
-
-    def test_context_data(self):
-        post_list = [PostFactory(category=self.category), PostFactory(category=self.category)]
-
-        view = self.get_instance(views.CategoryPostListView, initkwargs={'paginate_by': 1, 'object_list': post_list},
-                                 request=self.req,
-                                 slug=self.category.slug)
-        context = view.get_context_data()
-
-        self.assertEqual(context['category'], self.category)
 
 
 class TutorialListViewTestCase(TestCase):

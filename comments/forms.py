@@ -1,7 +1,6 @@
 from django import forms
 
 from django_comments.forms import CommentForm
-from ckeditor.widgets import CKEditorWidget
 
 from . import get_model
 
@@ -16,7 +15,6 @@ class BlogCommentForm(CommentForm):
         initial.update({'parent': self.parent})
         super().__init__(target_object, data=data, initial=initial, **kwargs)
         self.fields['email'].required = False
-        # self.fields['comment'].widget = CKEditorWidget()
 
     def get_comment_model(self):
         return get_model()

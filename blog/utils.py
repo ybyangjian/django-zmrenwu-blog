@@ -15,6 +15,7 @@ class Highlighter(HaystackHighlighter):
 
         if text_len <= self.max_length:
             start_offset = 0
+
         # elif (text_len - 1 - start_offset) <= self.max_length:
         #     end_offset = text_len
         #     start_offset = end_offset - self.max_length

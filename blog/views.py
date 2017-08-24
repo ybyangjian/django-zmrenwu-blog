@@ -1,25 +1,27 @@
-import markdown
-from markdown.extensions.toc import TocExtension
-
-from django.shortcuts import get_object_or_404, redirect
 from django.db.models import Count
+from django.shortcuts import get_object_or_404, redirect
 from django.utils.text import slugify
 from django.views.generic import ListView, DetailView
 
-from blog.models import Post, Category
-from .view_mixins import PaginationMixin
-
+import markdown
+from markdown.extensions.toc import TocExtension
 from braces.views import SelectRelatedMixin
 
+from .models import Post, Category
+from .view_mixins import PaginationMixin
 
-class IndexView(PaginationMixin, SelectRelatedMixin, ListView):
+
+class BasePostListView(PaginationMixin, SelectRelatedMixin, ListView):
     model = Post
     paginate_by = 10
-    template_name = 'blog/index.html'
     select_related = ('author', 'category')
 
     def get_queryset(self):
         return super().get_queryset().annotate(comment_count=Count('comments'))
+
+
+class IndexView(BasePostListView):
+    template_name = 'blog/index.html'
 
 
 class PopularPostListView(IndexView):
@@ -27,10 +29,34 @@ class PopularPostListView(IndexView):
         return super().get_queryset().order_by('-views')
 
 
+class CategoryPostListView(BasePostListView):
+    template_name = 'blog/category_post_list.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.category = get_object_or_404(Category, slug=self.kwargs.get('slug'))
+
+        if self.category.genre == Category.GENRE_CHOICES.tutorial:
+            self.template_name = 'blog/tutorial_detail.html'
+            self.paginate_by = None
+
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        post_list = qs.filter(category=self.category)
+
+        return post_list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = self.category
+
+        return context
+
+
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/detail.html'
-    context_object_name = 'post'
 
     def get(self, request, *args, **kwargs):
         response = super().get(request, *args, **kwargs)
@@ -38,7 +64,7 @@ class PostDetailView(DetailView):
         return response
 
     def get_object(self, queryset=None):
-        post = super().get_object(queryset=None)
+        post = super().get_object(queryset=queryset)
         md = markdown.Markdown(extensions=[
             'markdown.extensions.extra',
             'markdown.extensions.codehilite',
@@ -79,46 +105,16 @@ def category(request, pk):
     return redirect(cate, permanent=True)
 
 
-class CategoryPostListView(IndexView):
-    template_name = 'blog/category_post_list.html'
-
-    def get_queryset(self):
-        cate = get_object_or_404(Category, slug=self.kwargs.get('slug'))
-        qs = super().get_queryset()
-        post_list = qs.filter(category=cate)
-
-        if cate.genre == Category.GENRE_CHOICES.tutorial:
-            post_list = post_list.order_by('created_time')
-            self.template_name = 'blog/tutorial.html'
-            self.paginate_by = None
-
-        return post_list
-
-    def get_context_data(self, **kwargs):
-        cate = get_object_or_404(Category, slug=self.kwargs.get('slug'))
-        context = super().get_context_data(**kwargs)
-        context['category'] = cate
-
-        if cate.genre == Category.GENRE_CHOICES.tutorial:
-            self.template_name = 'blog/tutorial_detail.html'
-
-        return context
-
-
 class TutorialListView(ListView):
     model = Category
     template_name = 'blog/tutorial_list.html'
     context_object_name = 'tutorial_list'
-
-    # TODO: refactor to manager
     queryset = Category.objects.filter(genre=Category.GENRE_CHOICES.tutorial)
 
 
 class CategoryListView(ListView):
     model = Category
     template_name = 'blog/category_list.html'
-
-    # TODO: refactor to manager
     queryset = Category.objects.exclude(genre=Category.GENRE_CHOICES.tutorial).annotate(num_posts=Count('post'))
 
 
