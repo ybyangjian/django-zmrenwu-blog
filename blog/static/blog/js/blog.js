@@ -23,17 +23,6 @@ $(function () {
         $(this).fadeOut(300);
     });
 
-    //fixed nav bar
-    $(window).on('scroll', function (e) {
-        s = $(document).scrollTop();
-        if (s > 0) {
-            $('.nav-bar').css(
-                {'position': 'fixed', 'top': 0, 'right': 0, 'left': 0, 'zIndex': 1});
-        } else {
-            $('.nav-bar').css('position', '');
-        }
-    });
-
     // back top
     $('#js-back-top').on('click', function (e) {
         if ($(window).scrollTop() > 0 && !$('html,body').is(':animated')) {

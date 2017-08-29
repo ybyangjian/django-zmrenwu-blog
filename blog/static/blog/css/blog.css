@@ -10,6 +10,10 @@
 .nav-bar {
   height: 48px;
   border-bottom: 1px solid #f1f1f1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 @media (max-width: 767px) {
   .nav-bar .container-wider {
@@ -178,19 +182,24 @@
   border-radius: 3px;
 }
 
-.table-of-content {
-  margin-top: 15px;
-  list-style: none;
-  margin-left: 7px;
-  padding-left: 7px;
-}
-.table-of-content li {
+.toc ul {
   margin-top: 5px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid #f1f1f1;
+  padding-left: 0;
+  list-style: none;
 }
-.table-of-content li ul {
-  margin-left: 15px;
+.toc ul li {
+  margin-top: 5px;
+}
+.toc ul li a {
+  color: #777;
+  text-decoration: none;
+}
+.toc ul li a:hover {
+  color: black;
+}
+.toc ul li ul {
+  padding-left: 30px;
+  font-size: 13px;
 }
 
 .toc-sidebar-tutorial {

@@ -19,19 +19,23 @@
   }
 }
 
-.table-of-content {
-  margin-top: 15px;
-  list-style: none;
-  margin-left: 7px;
-  padding-left: 7px;
-
-  li {
+.toc {
+  ul {
     margin-top: 5px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #f1f1f1;
+    padding-left: 0;
+    list-style: none;
 
-    ul {
-      margin-left: 15px;
+    li {
+      margin-top: 5px;
+
+      a {
+        @include link-effect();
+      }
+
+      ul {
+        padding-left: 30px;
+        font-size: 13px;
+      }
     }
   }
 }

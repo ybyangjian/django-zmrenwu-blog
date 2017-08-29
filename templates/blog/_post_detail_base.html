@@ -12,6 +12,20 @@
     <div class="unit-3-4 unit-1-on-mobile top-gap">
         <div class="bg-white card post-card">
             {% include 'blog/_post_detail_item.html' %}
+            <div class="top-gap">
+                {% if previous_post %}
+                    <a href="{{ previous_post.get_absolute_url }}">
+                        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                        {{ previous_post }}
+                    </a>
+                {% endif %}
+                {% if next_post %}
+                    <a href="{{ next_post.get_absolute_url }}" style="float: right">
+                        {{ next_post }}
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    </a>
+                {% endif %}
+            </div>
             {% block related_posts %}{% endblock related_posts %}
             <section class="comment-area top-gap-big" id="comment-area">
                 <h5>{{ post.comments.count }} 条评论 / {{ post.participants_count }} 人参与</h5>
@@ -31,9 +45,7 @@
             <div class="card-header">
                 目录
             </div>
-            <ul class="text-small table-of-content">
-                {{ post.toc|safe }}
-            </ul>
+            {{ post.toc|safe }}
         </div>
         <div class="musk" id='js-sidebar-musk'></div>
     </div>

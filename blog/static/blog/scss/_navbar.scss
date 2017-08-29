@@ -3,6 +3,11 @@
   @include border-bottom();
   @include container-padding-mobile();
 
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
   // default 15px padding bottom for container
   > .container-wider {
     padding-bottom: 0;

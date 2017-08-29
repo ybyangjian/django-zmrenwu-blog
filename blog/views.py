@@ -41,6 +41,12 @@ class CategoryPostListView(BasePostListView):
 
         return super().dispatch(request, *args, **kwargs)
 
+    def get(self, request, *args, **kwargs):
+        if self.category.genre == Category.GENRE_CHOICES.tutorial:
+            if self.category.post_set.exists():
+                return redirect(self.category.post_set.last())
+        return super().get(request, *args, **kwargs)
+
     def get_queryset(self):
         qs = super().get_queryset()
         post_list = qs.filter(category=self.category)
@@ -91,8 +97,20 @@ class PostDetailView(DetailView):
 
         if post.category and post.category.genre == Category.GENRE_CHOICES.tutorial:
             self.template_name = 'blog/tutorial.html'
-            post_list = post.category.post_set.all().order_by('created_time')
+            post_list = list(post.category.post_set.all().order_by('created_time'))
             context['post_list'] = post_list
+
+            idx = post_list.index(post)
+
+            try:
+                previous_post = post_list[idx - 1 if idx > 1 else None]
+            except (IndexError, TypeError):
+                previous_post = None
+
+            try:
+                next_post = post_list[idx + 1]
+            except IndexError:
+                next_post = None
 
         context['previous_post'] = previous_post
         context['next_post'] = next_post

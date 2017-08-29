@@ -176,4 +176,4 @@ CKEDITOR_CONFIGS = {
 
 # debug toolbar
 INTERNAL_IPS = ['127.0.0.1']
-JQUERY_URL = 'https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js'
+JQUERY_URL = ''
