@@ -21,7 +21,6 @@ from django.contrib.sitemaps.views import sitemap
 
 from blog.feeds import AllPostsRssFeed
 from blog import sitemaps
-import debug_toolbar
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
