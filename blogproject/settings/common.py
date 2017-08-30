@@ -40,12 +40,10 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     'django_comments',
     'notifications',
-    'ckeditor',
     'blog',
     'users',
     'comments',
     'notify',
-    'debug_toolbar',
 ]
 
 COMMENTS_APP = 'comments'
