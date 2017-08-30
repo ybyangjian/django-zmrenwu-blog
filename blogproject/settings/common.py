@@ -141,6 +141,8 @@ AUTHENTICATION_BACKENDS = (
 SOCIALACCOUNT_ADAPTER = 'users.adapter.SocialAccountAdapter'
 ACCOUNT_LOGOUT_ON_GET = True
 
+LOGIN_REDIRECT_URL = '/'
+
 # Notification
 NOTIFICATION_TEMPLATES = {
     'comment': 'notifications/comment.html',
@@ -157,5 +159,3 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 20
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 HAYSTACK_CUSTOM_HIGHLIGHTER = 'blog.utils.Highlighter'
-
-
