@@ -1,0 +1,4 @@
+factory_boy==2.9.2
+django-test-plus==1.0.18
+django-debug-toolbar==1.8
+selenium==3.5.0

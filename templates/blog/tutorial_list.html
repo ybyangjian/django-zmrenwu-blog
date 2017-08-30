@@ -8,9 +8,11 @@
                     <div class="unit-1-3 unit-1-on-mobile">
                         <div class="card tutorial-card">
                             <div class="card-image">
-                                <a href="{% url 'blog:category_slug' tutorial.slug %}">
-                                    <img class="" src="{{ tutorial.cover_thumbnail.url }}" alt="">
-                                </a>
+                                {% if tutorial.cover %}
+                                    <a href="{% url 'blog:category_slug' tutorial.slug %}">
+                                        <img class="" src="{{ tutorial.cover_thumbnail.url }}" alt="">
+                                    </a>
+                                {% endif %}
                             </div>
                             <h6 class="top-gap"><a
                                     href="{% url 'blog:category_slug' tutorial.slug %}">{{ tutorial }}</a></h6>
