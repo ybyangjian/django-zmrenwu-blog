@@ -10,7 +10,7 @@
     {% block description %}{% endblock description %}
 
     <title>{% if unread_count %}({{ unread_count }}) {% endif %}
-        {% block title %}首页{% endblock title %} - 追梦人物的博客</title>
+        {% block title %}{{ headline }}{% endblock title %}_追梦人物的博客</title>
 
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'blog/css/mobi.min.css' %}">

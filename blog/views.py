@@ -5,13 +5,13 @@ from django.views.generic import ListView, DetailView
 
 import markdown
 from markdown.extensions.toc import TocExtension
-from braces.views import SelectRelatedMixin
+from braces.views import SelectRelatedMixin, SetHeadlineMixin
 
 from .models import Post, Category
 from .view_mixins import PaginationMixin
 
 
-class BasePostListView(PaginationMixin, SelectRelatedMixin, ListView):
+class BasePostListView(PaginationMixin, SelectRelatedMixin, SetHeadlineMixin, ListView):
     model = Post
     paginate_by = 10
     select_related = ('author', 'category')
@@ -22,9 +22,12 @@ class BasePostListView(PaginationMixin, SelectRelatedMixin, ListView):
 
 class IndexView(BasePostListView):
     template_name = 'blog/index.html'
+    headline = '首页'
 
 
 class PopularPostListView(IndexView):
+    headline = '热门文章'
+
     def get_queryset(self):
         return super().get_queryset().order_by('-views')
 
@@ -40,6 +43,9 @@ class CategoryPostListView(BasePostListView):
             self.paginate_by = None
 
         return super().dispatch(request, *args, **kwargs)
+
+    def get_headline(self):
+        return '%s' % self.category
 
     def get(self, request, *args, **kwargs):
         if self.category.genre == Category.GENRE_CHOICES.tutorial:
@@ -60,7 +66,7 @@ class CategoryPostListView(BasePostListView):
         return context
 
 
-class PostDetailView(DetailView):
+class PostDetailView(SetHeadlineMixin, DetailView):
     model = Post
     template_name = 'blog/detail.html'
 
@@ -68,6 +74,11 @@ class PostDetailView(DetailView):
         response = super().get(request, *args, **kwargs)
         self.object.increase_views()
         return response
+
+    def get_headline(self):
+        if self.object.category:
+            return '%s_%s' % (self.object.title, self.object.category.name)
+        return '%s' % self.object.title
 
     def get_object(self, queryset=None):
         post = super().get_object(queryset=queryset)
@@ -123,19 +134,22 @@ def category(request, pk):
     return redirect(cate, permanent=True)
 
 
-class TutorialListView(ListView):
+class TutorialListView(SetHeadlineMixin, ListView):
     model = Category
+    headline = '教程'
     template_name = 'blog/tutorial_list.html'
     context_object_name = 'tutorial_list'
     queryset = Category.objects.filter(genre=Category.GENRE_CHOICES.tutorial)
 
 
-class CategoryListView(ListView):
+class CategoryListView(SetHeadlineMixin, ListView):
     model = Category
+    headline = '分类'
     template_name = 'blog/category_list.html'
     queryset = Category.objects.exclude(genre=Category.GENRE_CHOICES.tutorial).annotate(num_posts=Count('post'))
 
 
-class PostArchivesView(ListView):
+class PostArchivesView(SetHeadlineMixin, ListView):
+    headline = '归档'
     model = Post
     template_name = 'blog/archives.html'

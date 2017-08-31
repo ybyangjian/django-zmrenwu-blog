@@ -2,13 +2,16 @@ from django.views.generic import View, DetailView, RedirectView
 from django.views.generic.edit import FormMixin
 from django.core.exceptions import ObjectDoesNotExist
 
+from braces.views import SetHeadlineMixin
+
 from .models import BlogComment
 from .forms import BlogCommentForm
 
 import django_comments as comments
 
 
-class CommentReplyView(FormMixin, DetailView):
+class CommentReplyView(FormMixin, SetHeadlineMixin, DetailView):
+    headline = '回复评论'
     model = BlogComment
     form_class = BlogCommentForm
     pk_url_kwarg = 'pid'

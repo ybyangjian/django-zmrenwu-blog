@@ -121,7 +121,7 @@ class Post(models.Model):
                 'markdown.extensions.codehilite',
             ])
             # TODO: refactor and test
-            self.excerpt = strip_tags(md.convert(self.body))[:74]
+            self.excerpt = strip_tags(md.convert(self.body))[:150]
 
         if not self.pub_date and self.status == self.STATUS_CHOICES.published:
             self.pub_date = self.created_time
