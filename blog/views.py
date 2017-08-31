@@ -134,6 +134,11 @@ def category(request, pk):
     return redirect(cate, permanent=True)
 
 
+def django_advanced_blog_tutorial_redirect(request):
+    cate = get_object_or_404(Category, slug='django-blog-tutorial')
+    return redirect(cate, permanent=True)
+
+
 class TutorialListView(SetHeadlineMixin, ListView):
     model = Category
     headline = '教程'
