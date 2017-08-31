@@ -6,7 +6,7 @@ from django.db import migrations
 
 
 def alter_posts_category(apps, schema_editor):
-    Category = apps.get_model('blog', 'category')
+    Category = apps.get_model('blog', 'Category')
 
     basic = Category.objects.get(slug='django-blog-tutorial')
     advanced = Category.objects.get(slug='django-advanced-blog-tutorial')
