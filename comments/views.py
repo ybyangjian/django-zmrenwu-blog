@@ -1,4 +1,4 @@
-from django.views.generic import View, DetailView, RedirectView
+from django.views.generic import DetailView, RedirectView
 from django.views.generic.edit import FormMixin
 from django.core.exceptions import ObjectDoesNotExist
 

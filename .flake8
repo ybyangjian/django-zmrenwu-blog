@@ -1,0 +1,15 @@
+[flake8]
+ignore =
+    # .\manage.py:14:13: F401 'django' imported but unused
+    #F401,
+    # .\blog\tests\test_views.py:102:100: E501 line too long (103 > 99 characters)
+    #E501,
+max-line-length = 99
+exclude =
+    .git,
+    __pycache__,
+    whoosh_cn_backend.py,
+    migrations,
+    settings,
+    functional_tests,
+

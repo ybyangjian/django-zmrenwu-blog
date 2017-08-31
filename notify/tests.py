@@ -8,7 +8,8 @@ from .factories import NotificationFactory
 
 class NotificationUtilsTestCase(TestCase):
     def setUp(self):
-        self.req = RequestFactory().get('/')  # request conflicts with request method of test_plus TestCase
+        # request conflicts with request method of test_plus TestCase
+        self.req = RequestFactory().get('/')
         self.user = self.make_user()
 
     def test_anonymous_user(self):

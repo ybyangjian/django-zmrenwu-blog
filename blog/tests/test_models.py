@@ -2,7 +2,6 @@ import os
 
 from django.test import TestCase
 from django.urls import reverse
-from django.utils import timezone
 
 from ..factories import TagFactory, CategoryFactory, PostFactory
 from ..models import post_cover_path, Post, Category
@@ -48,12 +47,13 @@ class CategoryTestCase(TestCase):
         # TODO: find a way to override post modified_time for last_modified test
         self.assertIsNone(self.category.last_modified()['last_modified'])
 
-        post1 = PostFactory(category=self.category)
+        PostFactory(category=self.category)
         post2 = PostFactory(category=self.category)
         post3 = PostFactory(category=self.titled_category)
 
         self.assertEqual(self.category.last_modified()['last_modified'], post2.modified_time)
-        self.assertEqual(self.titled_category.last_modified()['last_modified'], post3.modified_time)
+        self.assertEqual(self.titled_category.last_modified()['last_modified'],
+                         post3.modified_time)
 
 
 class PostTestCase(TestCase):

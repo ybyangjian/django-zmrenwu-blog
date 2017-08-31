@@ -151,7 +151,9 @@ class CategoryListView(SetHeadlineMixin, ListView):
     model = Category
     headline = '分类'
     template_name = 'blog/category_list.html'
-    queryset = Category.objects.exclude(genre=Category.GENRE_CHOICES.tutorial).annotate(num_posts=Count('post'))
+    queryset = Category.objects.exclude(
+        genre=Category.GENRE_CHOICES.tutorial
+    ).annotate(num_posts=Count('post'))
 
 
 class PostArchivesView(SetHeadlineMixin, ListView):

@@ -44,7 +44,8 @@ class Category(models.Model):
     created = models.DateTimeField(_('creation time'), auto_now_add=True)
     genre = models.PositiveSmallIntegerField(_('genre'), choices=GENRE_CHOICES,
                                              default=GENRE_CHOICES.collection)
-    status = models.PositiveSmallIntegerField(_('status'), choices=STATUS_CHOICES, blank=True, null=True)
+    status = models.PositiveSmallIntegerField(_('status'), choices=STATUS_CHOICES,
+                                              blank=True, null=True)
     cover = models.ImageField(_('cover'), upload_to='covers/categories/%Y/%m/%d/', blank=True)
     cover_thumbnail = ImageSpecField(source='cover',
                                      processors=[ResizeToFill(500, 300)],
@@ -88,7 +89,8 @@ class Post(models.Model):
         (3, 'hidden', 'hidden'),
     )
 
-    status = models.PositiveSmallIntegerField(_('status'), choices=STATUS_CHOICES, default=STATUS_CHOICES.draft)
+    status = models.PositiveSmallIntegerField(_('status'), choices=STATUS_CHOICES,
+                                              default=STATUS_CHOICES.draft)
     title = models.CharField(_('title'), max_length=255)
     body = models.TextField(_('body'))
     excerpt = models.CharField(_('excerpt'), max_length=255, blank=True)
@@ -106,7 +108,8 @@ class Post(models.Model):
     category = models.ForeignKey(Category, verbose_name=_('category'), null=True, blank=True)
     tags = models.ManyToManyField(Tag, verbose_name=_('tags'), blank=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('author'))
-    comments = GenericRelation(BlogComment, object_id_field='object_pk', content_type_field='content_type')
+    comments = GenericRelation(BlogComment, object_id_field='object_pk',
+                               content_type_field='content_type')
 
     class Meta:
         ordering = ['-created_time']

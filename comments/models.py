@@ -11,7 +11,8 @@ class BlogCommentManager(TreeManager, CommentManager):
 
 
 class BlogComment(MPTTModel, CommentAbstractModel):
-    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', verbose_name=_('parent comment'))
+    parent = TreeForeignKey('self', null=True, blank=True,
+                            related_name='children', verbose_name=_('parent comment'))
     objects = BlogCommentManager()
 
     class Meta(CommentAbstractModel.Meta):
