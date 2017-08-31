@@ -1,5 +1,6 @@
-from haystack.utils import Highlighter as HaystackHighlighter
 from django.utils.html import strip_tags
+
+from haystack.utils import Highlighter as HaystackHighlighter
 
 
 class Highlighter(HaystackHighlighter):

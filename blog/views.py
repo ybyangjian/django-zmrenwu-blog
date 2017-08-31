@@ -1,13 +1,13 @@
 from django.db.models import Count
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.text import slugify
-from django.views.generic import ListView, DetailView
+from django.views.generic import DetailView, ListView
 
 import markdown
-from markdown.extensions.toc import TocExtension
 from braces.views import SelectRelatedMixin, SetHeadlineMixin
+from markdown.extensions.toc import TocExtension
 
-from .models import Post, Category
+from .models import Category, Post
 from .view_mixins import PaginationMixin
 
 

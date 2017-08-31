@@ -1,9 +1,9 @@
 from django.test import RequestFactory
 
-from test_plus.test import TestCase, CBVTestCase
+from test_plus.test import CBVTestCase, TestCase
 
 from .. import views
-from ..factories import PostFactory, CategoryFactory
+from ..factories import CategoryFactory, PostFactory
 from ..models import Category, Post
 
 

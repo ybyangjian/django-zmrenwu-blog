@@ -2,10 +2,10 @@ from django.contrib.sites.models import Site
 from django.utils import timezone
 
 import factory
-from factory.django import DjangoModelFactory
-
 from blog.factories import PostFactory
+from factory.django import DjangoModelFactory
 from users.factories import UserFactory
+
 from .models import BlogComment
 
 

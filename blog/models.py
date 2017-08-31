@@ -1,22 +1,20 @@
 import os
-import markdown
 
-from django.db import models
-from django.db.models import Sum, Max
 from django.conf import settings
+from django.contrib.contenttypes.fields import GenericRelation
+from django.db import models
+from django.db.models import Max, Sum
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
 from django.utils.html import strip_tags
 from django.utils.six import python_2_unicode_compatible
-from django.contrib.contenttypes.fields import GenericRelation
+from django.utils.translation import ugettext_lazy as _
 
-from model_utils import Choices
-from model_utils.fields import AutoCreatedField, AutoLastModifiedField
-
+import markdown
 from comments.models import BlogComment
-
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
+from model_utils import Choices
+from model_utils.fields import AutoCreatedField, AutoLastModifiedField
 
 
 class Tag(models.Model):

@@ -1,6 +1,6 @@
 from django.contrib.sitemaps import GenericSitemap
 
-from .models import Post, Category
+from .models import Category, Post
 
 post_info_dict = {
     'queryset': Post.objects.all(),

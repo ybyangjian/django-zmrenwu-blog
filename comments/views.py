@@ -1,13 +1,12 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import DetailView, RedirectView
 from django.views.generic.edit import FormMixin
-from django.core.exceptions import ObjectDoesNotExist
-
-from braces.views import SetHeadlineMixin
-
-from .models import BlogComment
-from .forms import BlogCommentForm
 
 import django_comments as comments
+from braces.views import SetHeadlineMixin
+
+from .forms import BlogCommentForm
+from .models import BlogComment
 
 
 class CommentReplyView(FormMixin, SetHeadlineMixin, DetailView):

@@ -2,8 +2,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from django_comments.abstracts import CommentAbstractModel
 from django_comments.managers import CommentManager
-from mptt.models import MPTTModel, TreeForeignKey
 from mptt.managers import TreeManager
+from mptt.models import MPTTModel, TreeForeignKey
 
 
 class BlogCommentManager(TreeManager, CommentManager):

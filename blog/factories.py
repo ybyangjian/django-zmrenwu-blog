@@ -1,9 +1,9 @@
 import factory
 from factory.django import DjangoModelFactory
-
-from .models import Tag, Category, Post
-from users.factories import UserFactory
 from notifications.models import Notification
+from users.factories import UserFactory
+
+from .models import Category, Post, Tag
 
 
 class TagFactory(DjangoModelFactory):

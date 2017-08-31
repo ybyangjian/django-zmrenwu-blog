@@ -1,4 +1,4 @@
-from django.template import Template, Context
+from django.template import Context, Template
 
 from test_plus import TestCase
 

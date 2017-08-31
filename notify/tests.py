@@ -1,8 +1,9 @@
 from django.contrib.auth.models import AnonymousUser
 from django.test import RequestFactory
-from test_plus import TestCase
 
 from notify.context_processors import notification_count
+from test_plus import TestCase
+
 from .factories import NotificationFactory
 
 

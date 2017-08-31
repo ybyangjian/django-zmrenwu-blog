@@ -3,8 +3,8 @@ import os
 from django.test import TestCase
 from django.urls import reverse
 
-from ..factories import TagFactory, CategoryFactory, PostFactory
-from ..models import post_cover_path, Post, Category
+from ..factories import CategoryFactory, PostFactory, TagFactory
+from ..models import Category, Post, post_cover_path
 
 
 class TagTestCase(TestCase):
