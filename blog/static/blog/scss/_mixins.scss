@@ -8,12 +8,12 @@
   border-bottom: $width solid $color;
 }
 
-@mixin link-effect($color:$color-text-muted, $darken: 85%) {
+@mixin link-effect($color:$color-text-muted, $hover-color:$color-text-muted, $darken: 85%) {
   color: $color;
   text-decoration: none;
 
   &:hover {
-    color: darken($color, $darken);
+    color: darken($hover-color, $darken);
   }
 }
 

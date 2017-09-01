@@ -20,21 +20,21 @@
 }
 
 .toc {
-  ul {
+  > ul {
     margin-top: 5px;
     padding-left: 0;
     list-style: none;
 
     li {
-      margin-top: 5px;
+      margin-top: 10px;
 
       a {
         @include link-effect();
       }
 
       ul {
-        padding-left: 30px;
-        font-size: 13px;
+        list-style: none;
+        padding-left: 20px;
       }
     }
   }

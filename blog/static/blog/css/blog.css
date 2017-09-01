@@ -8,12 +8,11 @@
 }
 
 .nav-bar {
-  height: 48px;
-  border-bottom: 1px solid #f1f1f1;
+  height: 60px;
   position: fixed;
-  top: 0;
   left: 0;
   right: 0;
+  border-bottom: 1px solid #f1f1f1;
 }
 @media (max-width: 767px) {
   .nav-bar .container-wider {
@@ -24,7 +23,8 @@
   padding-bottom: 0;
 }
 .nav-bar .nav-bar-logo {
-  width: 40px;
+  width: 50px;
+  margin-right: 15px;
 }
 .nav-bar .nav-bar-nav {
   padding: 0;
@@ -33,38 +33,40 @@
 }
 .nav-bar .nav-bar-nav .nav-item {
   display: inline-block;
-  margin-left: 30px;
+  padding: 0 15px;
+}
+.nav-bar .nav-bar-nav .active a {
+  color: #2680d9;
 }
 .nav-bar .nav-link {
   color: #777;
   text-decoration: none;
 }
 .nav-bar .nav-link:hover {
-  color: black;
+  color: #2680d9;
 }
-.nav-bar .notification .notification-count {
+.nav-bar .notification-count {
   display: inline-block;
-  font-size: 12px;
+  font-size: 14px;
   color: #fff;
-  background-color: #006700;
-  min-width: 18px;
-  height: 18px;
-  border-radius: 9px;
+  background-color: #2680d9;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
   text-align: center;
-  padding: 0 4px;
+  padding: 0 5px;
   position: relative;
-  top: -9px;
+  top: -10px;
 }
-
-#menu-toggle {
-  margin-left: 15px;
+.nav-bar .fa-bell-o,
+.nav-bar .fa-sign-in,
+.nav-bar .fa-ellipsis-v,
+.nav-bar #js-search-btn {
+  font-size: 20px;
+  margin-left: 20px;
 }
-
-.fa-bell-o,
-.fa-search,
-.fa-chevron-right,
-#menu-toggle {
-  font-size: 18px;
+.nav-bar #js-search-btn {
+  margin-bottom: 3px;
 }
 
 .list-group {
@@ -102,11 +104,7 @@
   display: inline-block;
 }
 
-.dot-divider > * {
-  float: left;
-}
 .dot-divider > *:not(:last-child):after {
-  margin: 0 5px;
   content: '·';
 }
 
@@ -118,20 +116,31 @@
   color: black;
 }
 .post-items .post-items-header {
-  padding: 7px 15px;
+  padding: 7px 20px;
+}
+.post-items .post-items-header a {
+  color: #777;
+  text-decoration: none;
+}
+.post-items .post-items-header a:hover {
+  color: #2680d9;
 }
 .post-items .post-items-header .rss i {
   margin-right: 5px;
 }
 .post-items .post-items-nav li {
   margin-right: 15px;
-  color: #777;
-  text-decoration: none;
 }
-.post-items .post-items-nav li:hover {
-  color: black;
+.post-items .post-items-nav li.active a {
+  color: #2680d9;
 }
 
+.post-item {
+  padding: 15px 20px !important;
+}
+.post-item .post-item-meta a, .post-item .post-item-meta span {
+  font-size: 12px;
+}
 .post-item .post-item-meta .pinned {
   color: red;
 }
@@ -163,6 +172,13 @@
   width: 60px;
   margin-left: 30px;
 }
+.post-item .post-item-statistic {
+  margin-top: 5px;
+}
+.post-item .post-item-statistic a {
+  font-size: 13px;
+  margin-right: 10px;
+}
 
 .donate .donate-qr-code {
   margin-top: 0;
@@ -182,24 +198,24 @@
   border-radius: 3px;
 }
 
-.toc ul {
+.toc > ul {
   margin-top: 5px;
   padding-left: 0;
   list-style: none;
 }
-.toc ul li {
-  margin-top: 5px;
+.toc > ul li {
+  margin-top: 10px;
 }
-.toc ul li a {
+.toc > ul li a {
   color: #777;
   text-decoration: none;
 }
-.toc ul li a:hover {
+.toc > ul li a:hover {
   color: black;
 }
-.toc ul li ul {
-  padding-left: 30px;
-  font-size: 13px;
+.toc > ul li ul {
+  list-style: none;
+  padding-left: 20px;
 }
 
 .toc-sidebar-tutorial {
@@ -219,18 +235,6 @@
     z-index: 99;
   }
 }
-.tool-bar a {
-  border: 1px solid #f1f1f1;
-  float: left;
-  padding: 0 7px;
-}
-.tool-bar a:last-child {
-  border-left: none;
-}
-.tool-bar a:hover {
-  background-color: #f2f2f2;
-}
-
 .back-top {
   display: none;
   position: fixed;
@@ -400,32 +404,28 @@
 }
 
 .search-form {
-  margin-right: 25px;
+  position: relative;
 }
 .search-form input[type=search] {
-  background-color: transparent;
-  border: 0;
-  border-bottom: 1px solid #ddd;
-  border-radius: 0;
+  background-color: #f2f2f2;
   outline: 0;
-  line-height: 1.25;
-  font-size: 80%;
-  padding-bottom: 5px;
+  line-height: 1;
+  font-size: 85%;
+  padding: 7px 25px 7px 10px;
   width: 200px;
-  margin-right: 7.5px;
+  border-radius: 3px;
+  border: 1px solid #f1f1f1;
 }
 .search-form input[type=search]:focus {
-  border-bottom: 1px solid black;
+  border: 1px solid #2680d9;
 }
 .search-form button[type=submit] {
-  color: #777;
-  text-decoration: none;
   border: 0;
   background-color: transparent;
-  padding: 0;
-}
-.search-form button[type=submit]:hover {
-  color: black;
+  padding: 7px 0;
+  position: absolute;
+  right: 10px;
+  line-height: 1;
 }
 .search-form button[type=submit]:focus {
   border: 0;
@@ -434,7 +434,7 @@
 @media (max-width: 767px) {
   .search-form {
     position: fixed;
-    top: 48px;
+    top: 60px;
     left: 0;
     right: 0;
     width: 100%;

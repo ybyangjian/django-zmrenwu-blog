@@ -1,37 +1,39 @@
-<article class="list-group-item flex-left post-item">
-    <div class="unit unit-1-on-mobile">
-        <ul class="list-inline dot-divider post-item-meta">
-            <li class="list-inline-item">
-                <span class="text-muted text-small" href="">{{ post.author.name }}</span>
-            </li>
-            <li class="list-inline-item">
-                <a class="text-muted text-small"
-                   href="{{ post.get_absolute_url }}">{{ post.created_time|timesince }}前</a>
-            </li>
-            <li class="list-inline-item">
-                <span class="text-muted text-small" href="">{{ post.category }}</span>
-            </li>
-        </ul>
-        <h3 class="top-gap-0 post-item-title"><a href="{{ post.get_absolute_url }}">
-            {% block post_title %}{{ post.title }}{% endblock %}</a>
-        </h3>
-        <div class="text-small hide-on-mobile post-item-excerpt">
-            {% block post_excerpt %}{{ post.excerpt }} ...{% endblock %}
-        </div>
-        <div class="top-gap post-item-statistic tool-bar">
-            <a class="text-muted text-small" role="button" href="{{ post.get_absolute_url }}">
-                <i class="fa fa-eye" aria-hidden="true"></i> {{ post.views }}
-            </a>
-            <a class="text-muted text-small" role="button" href="{{ post.get_absolute_url }}#comment-area">
-                <i class="fa fa-comments" aria-hidden="true"></i> {{ post.comment_count }}
-            </a>
-        </div>
+<article class="flex-left list-group-item post-item">
+  <div class="unit unit-1-on-mobile">
+    <ul class="list-inline dot-divider post-item-meta">
+      <li class="list-inline-item">
+        <span class="text-muted text-small">{{ post.author.name }}</span>
+      </li>
+      <li class="list-inline-item">
+        <a class="text-muted text-small"
+           href="{{ post.get_absolute_url }}">{{ post.created_time|timesince }}前</a>
+      </li>
+    </ul>
+    <h3 class="top-gap-0 post-item-title"><a href="{{ post.get_absolute_url }}">
+      {% block post_title %}{{ post.title }}{% endblock %}</a>
+    </h3>
+    <div class="text-small hide-on-mobile post-item-excerpt">
+      {% block post_excerpt %}{{ post.excerpt }} ...{% endblock %}
     </div>
-    {% if post.cover %}
-        <div class="unit-0 hide-on-mobile flex-middle">
-            <figure>
-                <a href=""><img class="post-item-cover" src="{{ post.cover_thumbnail.url }}" alt=""></a>
-            </figure>
-        </div>
-    {% endif %}
+    <div class="post-item-statistic">
+      <a class="text-muted text-small" role="button" href="{{ post.get_absolute_url }}">
+        <i class="fa fa-eye" aria-hidden="true"></i> {{ post.views }}
+      </a>
+      <a class="text-muted text-small" role="button"
+         href="{{ post.get_absolute_url }}#comment-area">
+        <i class="fa fa-comments" aria-hidden="true"></i> {{ post.comment_count }}
+      </a>
+      {% if post.category %}
+        <a class="text-muted text-small" href=""><i class="fa fa-folder"
+                                                    aria-hidden="true"></i> {{ post.category }}</a>
+      {% endif %}
+    </div>
+  </div>
+  {% if post.cover %}
+    <div class="unit-0 hide-on-mobile flex-middle">
+      <figure>
+        <a href=""><img class="post-item-cover" src="{{ post.cover_thumbnail.url }}" alt=""></a>
+      </figure>
+    </div>
+  {% endif %}
 </article>

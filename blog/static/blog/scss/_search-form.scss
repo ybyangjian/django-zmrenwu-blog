@@ -1,28 +1,27 @@
 .search-form {
-  margin-right: $margin-search-form;
-
+  position: relative;
   input[type=search] {
-    background-color: transparent;
-    border: 0;
-    @include border-bottom($color: $color-border);
-    border-radius: 0; // reset for safari
+    background-color: $color-background-faded;
     outline: 0;
-    line-height: $line-height-input;
+    line-height: 1;
     font-size: $font-size-small;
-    padding-bottom: $width-padding-input;
+    padding: 7px 25px 7px 10px;
     width: $width-search-input;
-    margin-right: $width-gap-half; // prevent from closing to button
+    border-radius: 3px;
+    border: 1px solid #f1f1f1;
 
     &:focus {
-      @include border-bottom($color: darken($color-text-muted, 85%));
+      border: 1px solid $color-primary;
     }
   }
 
   button[type=submit] {
-    @include link-effect();
     border: 0;
     background-color: transparent;
-    padding: 0;
+    padding: 7px 0;
+    position: absolute;
+    right: 10px;
+    line-height: 1;
 
     &:focus {
       border: 0;

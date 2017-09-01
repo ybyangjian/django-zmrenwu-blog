@@ -1,20 +1,20 @@
 .nav-bar {
   height: $height-nav-bar;
-  @include border-bottom();
-  @include container-padding-mobile();
-
   position: fixed;
-  top: 0;
   left: 0;
   right: 0;
 
-  // default 15px padding bottom for container
+  @include border-bottom();
+  @include container-padding-mobile();
+
+  // remove default 15px padding bottom of container
   > .container-wider {
     padding-bottom: 0;
   }
 
   .nav-bar-logo {
     width: $width-logo;
+    margin-right: 15px;
   }
 
   .nav-bar-nav {
@@ -22,39 +22,44 @@
 
     .nav-item {
       display: inline-block;
-      margin-left: $margin-nav-item;
+      padding: 0 15px;
+      //margin-left: $margin-nav-item;
+    }
+
+    .active a {
+      color: $color-primary;
     }
   }
 
   .nav-link {
-    @include link-effect();
+    @include link-effect($hover-color: $color-primary, $darken: 0);
   }
 
   //-------- notification count -----------//
-  .notification {
-    .notification-count {
-      display: inline-block;
-      font-size: 12px;
-      color: #fff;
-      background-color: darken(green, 5%);
-      min-width: 18px;
-      height: 18px;
-      border-radius: 9px;
-      text-align: center;
-      padding: 0 4px;
-      position: relative;
-      top: -9px;
-    }
+
+  .notification-count {
+    display: inline-block;
+    font-size: 14px;
+    color: #fff;
+    background-color: $color-primary;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    text-align: center;
+    padding: 0 5px;
+    position: relative;
+    top: -10px;
   }
-}
 
-#menu-toggle {
-  margin-left: 15px;
-}
+  .fa-bell-o,
+  .fa-sign-in,
+  .fa-ellipsis-v,
+  #js-search-btn {
+    font-size: 20px;
+    margin-left: 20px;
+  }
 
-.fa-bell-o,
-.fa-search,
-.fa-chevron-right,
-#menu-toggle {
-  font-size: 18px;
+  #js-search-btn {
+    margin-bottom: 3px;
+  }
 }
