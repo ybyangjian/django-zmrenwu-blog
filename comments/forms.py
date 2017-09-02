@@ -20,7 +20,6 @@ class BlogCommentForm(CommentForm):
         initial.update({'parent': self.parent})
         super().__init__(target_object, data=data, initial=initial, **kwargs)
         self.fields['email'].required = False
-        print(self.fields['parent'].value)
 
     def get_comment_model(self):
         return get_model()

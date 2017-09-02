@@ -14,8 +14,8 @@
     <div class="commet-form-panel top-gap">
       {% if user.is_authenticated %}
         <div class="commet-form-panel top-gap">
-          {% load comments %}
-          {% render_comment_form for blogcomment.content_object %}
+          {#  Don't use render comment form since it would render the form twice! #}
+          {% include 'comments/form.html' %}
         </div>
       {% else %}
         {% include 'account/_login_panel.html' %}
