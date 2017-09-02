@@ -1,7 +1,15 @@
-@mixin reset-ul() {
+@mixin reset-list() {
   padding: 0;
   margin: 0;
   list-style: none;
+}
+
+@mixin clearfix() {
+  &::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
 }
 
 @mixin border-bottom($width: $width-border, $color: #f1f1f1) {

@@ -2,68 +2,71 @@
 {% load comments %}
 
 {% block sidebar_trigger %}
-    <a class="show-on-mobile nav-link mr" id="js-sidebar-btn" href="#" role="button">
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-    </a>
+  <a class="show-on-mobile nav-link m-5" id="js-sidebar-btn" href="#" role="button">
+    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+  </a>
 {% endblock sidebar_trigger %}
 {% block main %}
-    <div class="unit-3-4 unit-1-on-mobile top-gap">
-        <div class="bg-white card post-card">
-            {% include 'blog/_post_detail_item.html' %}
-            <div class="top-gap">
-                <div class="jiathis_style">
-                    <span class="jiathis_txt">分享到：</span>
-                    <a class="jiathis_button_qzone">QQ空间</a>
-                    <a class="jiathis_button_tsina">新浪微博</a>
-                    <a class="jiathis_button_tqq">腾讯微博</a>
-                    <a class="jiathis_button_weixin">微信</a>
-                    <a href="http://www.jiathis.com/share?uid=2128865"
-                       class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
-                    <a class="jiathis_counter_style"></a>
-                </div>
-                <script type="text/javascript">
-                    var jiathis_config = {data_track_clickback: 'true'};
-                </script>
-                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2128865"
-                        charset="utf-8"></script>
-                <!-- JiaThis Button END -->
-            </div>
-            <br>
-            <div class="top-gap">
-                {% if previous_post %}
-                    <a href="{{ previous_post.get_absolute_url }}">
-                        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
-                        {{ previous_post }}
-                    </a>
-                {% endif %}
-                {% if next_post %}
-                    <a href="{{ next_post.get_absolute_url }}" style="float: right">
-                        {{ next_post }}
-                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    </a>
-                {% endif %}
-            </div>
-            {% block related_posts %}{% endblock related_posts %}
-            <section class="comment-area top-gap-big" id="comment-area">
-                <h5>{{ post.comments.count }} 条评论 / {{ post.participants_count }} 人参与</h5>
-                {% if user.is_authenticated %}
-                    {% render_comment_form for post %}
-                {% else %}
-                    {% include 'account/_login_panel.html' %}
-                {% endif %}
-                {% include 'comments/list.html' %}
-            </section>
+  <main class="unit-3-4 unit-1-on-mobile top-gap">
+    <div class="bg-white card post-card px-7 py-5">
+      {% include 'blog/_post_detail_item.html' %}
+      <div class="top-gap">
+        <div class="jiathis_style">
+          <span class="jiathis_txt">分享到：</span>
+          <a class="jiathis_button_qzone">QQ空间</a>
+          <a class="jiathis_button_tsina">新浪微博</a>
+          <a class="jiathis_button_tqq">腾讯微博</a>
+          <a class="jiathis_button_weixin">微信</a>
+          <a href="http://www.jiathis.com/share?uid=2128865"
+             class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+             target="_blank">更多</a>
+          <a class="jiathis_counter_style"></a>
         </div>
+        <script type="text/javascript">
+            var jiathis_config = {data_track_clickback: 'true'};
+        </script>
+        <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2128865"
+                charset="utf-8"></script>
+        <!-- JiaThis Button END -->
+      </div>
+      <br>
+      <div class="top-gap">
+        {% if previous_post %}
+          <a href="{{ previous_post.get_absolute_url }}">
+            <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+            {{ previous_post }}
+          </a>
+        {% endif %}
+        {% if next_post %}
+          <a href="{{ next_post.get_absolute_url }}" style="float: right">
+            {{ next_post }}
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+          </a>
+        {% endif %}
+      </div>
+      {% block related_posts %}{% endblock related_posts %}
+      <hr>
+      <section class="comment-area top-gap-big" id="comment-area">
+        <h5>{{ post.comments.count }} 条评论 / {{ post.participants_count }} 人参与</h5>
+        {% if user.is_authenticated %}
+          {% render_comment_form for post %}
+        {% else %}
+          {% include 'account/_login_panel.html' %}
+        {% endif %}
+        {% include 'comments/list.html' %}
+      </section>
     </div>
+  </main>
 {% endblock main %}
 {% block side %}
-    <div class="unit-1-4 unit-1-on-mobile top-gap">
-        <div class="scroll-view bg-white card toc-sidebar">
-            <div class="card-header">
-                目录
-            </div>
-            {{ post.toc|safe }}
-        </div>
-        <div class="musk" id='js-sidebar-musk'></div>
+  <div class="unit-1-4 unit-1-on-mobile top-gap">
+    <div class="scroll-view bg-white card toc-sidebar">
+      <div class="card-header">
+        目录
+      </div>
+      <div class="card-body">
+        {{ post.toc|safe }}
+      </div>
     </div>
+  </div>
 {% endblock side %}

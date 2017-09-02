@@ -5,50 +5,13 @@
 
   .post-items-header {
     a {
-      @include link-effect($hover-color: $color-primary, $darken: 0);
-    }
-    padding: 7px 20px;
-
-    .rss i {
-      margin-right: 5px;
-    }
-  }
-
-  .post-items-nav {
-    li {
-      margin-right: 15px;
-
-      &.active a {
-        color: $color-primary;
-      }
+      @include link-effect($hover-color: $blue, $darken: 0);
     }
   }
 }
 
 .post-item {
-  padding: 15px 20px !important;
-  .post-item-meta {
-    a, span {
-      font-size: 12px;
-    }
-    .pinned {
-      color: red;
-      &:hover {
-        color: lighten(red, 25%);
-      }
-    }
-
-    .recommended {
-      color: #b71ed7;
-      &:hover {
-        color: lighten(#b71ed7, 25%);
-      }
-    }
-  }
-
   .post-item-title {
-    font-size: $font-size-h5;
-
     a {
       color: $color-text;
       &:hover {
@@ -57,23 +20,7 @@
     }
   }
 
-  .post-item-excerpt {
-    margin-top: 7px;
-    p {
-      margin-top: 0;
-    }
-  }
-
   .post-item-cover {
     width: 60px;
-    margin-left: 30px;
-  }
-
-  .post-item-statistic {
-    margin-top: 5px;
-    a {
-      font-size: 13px;
-      margin-right: 10px;
-    }
   }
 }

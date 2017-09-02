@@ -1,38 +1,39 @@
-<article class="flex-left list-group-item post-item">
+<article class="flex-left list-group-item post-item px-7">
   <div class="unit unit-1-on-mobile">
     <ul class="list-inline dot-divider post-item-meta">
       <li class="list-inline-item">
-        <span class="text-muted text-small">{{ post.author.name }}</span>
+        <span class="text-muted text-small text-faded">{{ post.author.name }}</span>
       </li>
       <li class="list-inline-item">
-        <a class="text-muted text-small"
+        <a class="text-small text-faded"
            href="{{ post.get_absolute_url }}">{{ post.created_time|timesince }}前</a>
       </li>
     </ul>
     <h3 class="top-gap-0 post-item-title"><a href="{{ post.get_absolute_url }}">
       {% block post_title %}{{ post.title }}{% endblock %}</a>
     </h3>
-    <div class="text-small hide-on-mobile post-item-excerpt">
+    <div class="text-small text-muted hide-on-mobile post-item-excerpt mt-2">
       {% block post_excerpt %}{{ post.excerpt }} ...{% endblock %}
     </div>
-    <div class="post-item-statistic">
-      <a class="text-muted text-small" role="button" href="{{ post.get_absolute_url }}">
+    <div class="post-item-statistic mt-2">
+      <a class="text-muted text-small mr-3" role="button" href="{{ post.get_absolute_url }}">
         <i class="fa fa-eye" aria-hidden="true"></i> {{ post.views }}
       </a>
-      <a class="text-muted text-small" role="button"
+      <a class="text-muted text-small mr-3" role="button"
          href="{{ post.get_absolute_url }}#comment-area">
         <i class="fa fa-comments" aria-hidden="true"></i> {{ post.comment_count }}
       </a>
       {% if post.category %}
-        <a class="text-muted text-small" href=""><i class="fa fa-folder"
-                                                    aria-hidden="true"></i> {{ post.category }}</a>
+        <a class="text-muted text-small" href="{{ post.category.get_absolute_url }}"><i
+            class="fa fa-folder"
+            aria-hidden="true"></i> {{ post.category }}</a>
       {% endif %}
     </div>
   </div>
   {% if post.cover %}
     <div class="unit-0 hide-on-mobile flex-middle">
       <figure>
-        <a href=""><img class="post-item-cover" src="{{ post.cover_thumbnail.url }}" alt=""></a>
+        <a href=""><img class="post-item-cover ml-10" src="{{ post.cover_thumbnail.url }}" alt=""></a>
       </figure>
     </div>
   {% endif %}

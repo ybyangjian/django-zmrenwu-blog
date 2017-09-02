@@ -1,19 +1,21 @@
 .card {
+  border: $width-border solid $gray-100;
+}
+
+.card-image {
+  width: 100%;
+}
+
+.card-header {
+  border-bottom: $width-border solid $gray-100;
+  padding: 10px 15px;
+}
+
+.card-footer {
+  border-top: $width-border solid $gray-100;
+  padding: 10px 15px;
+}
+
+.card-body {
   padding: 15px;
-  border: 1px solid #f1f1f1;
-
-  .card-header {
-    border-bottom: 1px solid #f1f1f1;
-    margin: -15px -15px 0 -15px;
-    padding: 10px;
-  }
-
-  .card-image {
-    margin: -15px -15px -15px -15px;
-
-    img {
-      width: 100%;
-      max-width: 100%;
-    }
-  }
 }

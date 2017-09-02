@@ -3,9 +3,9 @@
   position: fixed;
   left: 0;
   right: 0;
+  z-index: 1;
 
-  @include border-bottom();
-  @include container-padding-mobile();
+  border-bottom: $width-border solid $gray-100;
 
   // remove default 15px padding bottom of container
   > .container-wider {
@@ -14,20 +14,13 @@
 
   .nav-bar-logo {
     width: $width-logo;
-    margin-right: 15px;
   }
 
   .nav-bar-nav {
-    @include reset-ul;
+    @include reset-list;
 
     .nav-item {
       display: inline-block;
-      padding: 0 15px;
-      //margin-left: $margin-nav-item;
-    }
-
-    .active a {
-      color: $color-primary;
     }
   }
 
@@ -39,27 +32,15 @@
 
   .notification-count {
     display: inline-block;
-    font-size: 14px;
-    color: #fff;
-    background-color: $color-primary;
+    color: $white;
+    background-color: $cyan;
     min-width: 20px;
     height: 20px;
     border-radius: 10px;
     text-align: center;
+    line-height: 20px;
     padding: 0 5px;
     position: relative;
     top: -10px;
-  }
-
-  .fa-bell-o,
-  .fa-sign-in,
-  .fa-ellipsis-v,
-  #js-search-btn {
-    font-size: 20px;
-    margin-left: 20px;
-  }
-
-  #js-search-btn {
-    margin-bottom: 3px;
   }
 }

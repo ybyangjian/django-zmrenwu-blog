@@ -1,49 +1,25 @@
 {% extends 'base.html' %}
 {% block main %}
-    <main class="unit-3-4 unit-1-on-mobile top-gap card bg-white">
-        <div class="flex-left" id="c{{ child_comment.pk }}">
-            <div class="unit-0">
-                <img class="comment-avatar" src="{{ blogcomment.user.social_avatar }}"/>
-            </div>
-            <div class="unit">
-                {% include 'comments/_comment_item.html' with comment=blogcomment %}
-            </div>
-        </div>
-        <hr class="top-gap-big">
-        <h5>回复<span class=""> {{ blogcomment.user.name }} </span>的评论</h5>
+  <main class="unit-3-4 unit-1-on-mobile top-gap card bg-white py-5 px-7">
+    <div class="flex-left" id="c{{ child_comment.pk }}">
+      <div class="unit-0">
+        <img class="comment-avatar mr-3" src="{{ blogcomment.user.social_avatar }}"/>
+      </div>
+      <div class="unit">
+        {% include 'comments/_comment_item.html' with comment=blogcomment %}
+      </div>
+    </div>
+    <hr class="my-4">
+    <h5>回复<span class=""> {{ blogcomment.user.name }} </span>的评论</h5>
+    <div class="commet-form-panel top-gap">
+      {% if user.is_authenticated %}
         <div class="commet-form-panel top-gap">
-            {% if user.is_authenticated %}
-                <div class="commet-form-panel top-gap">
-                    {% load comments %}
-                    <form class="form comment-form" action="{% comment_form_target %}"
-                          method="post">{% csrf_token %}
-                        {% if next %}
-                            <input type="hidden" name="next" value="{{ next }}"/>
-                        {% endif %}
-                        {% for hidden in form.hidden_fields %}
-                            {{ hidden }}
-                        {% endfor %}
-                        <input type="hidden" name="next" value="{% url 'comments:comment_success' %}">
-                        {{ form.comment.errors }}
-                        {{ form.comment }}
-                        {{ form.honeypot }}
-                        <div class="flex-right">
-                            {% comment %}
-                            <button class="preview-btn btn btn-success text-small" type="button"><i
-                                    class="fa fa-eye"
-                                    aria-hidden="true"></i> 预览
-                            </button>
-                            {% endcomment %}
-                            <button class="send-btn btn btn-success text-small" type="submit"><i
-                                    class="fa fa-paper-plane"
-                                    aria-hidden="true"></i> 发布
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            {% else %}
-                {% include 'account/_login_panal.html' %}
-            {% endif %}
+          {% load comments %}
+          {% render_comment_form for blogcomment.content_object %}
         </div>
-    </main>
+      {% else %}
+        {% include 'account/_login_panel.html' %}
+      {% endif %}
+    </div>
+  </main>
 {% endblock main %}

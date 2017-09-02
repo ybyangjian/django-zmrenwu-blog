@@ -4,16 +4,16 @@
   bottom: 30px;
   right: 30px;
   border: $width-border solid $color-border;
-  padding: 0 5px 3px 5px;
+  padding: 5px;
   border-radius: 3px;
-  background-color: $color-background-faded;
-
-  @include link-effect();
+  background-color: $gray-800;
+  opacity: 0.5;
+  color: $white !important;
+  line-height: 1;
 }
 
 @media (max-width: $width-breakpoint - 1px) {
   .back-top {
-    bottom: 15px;
-    right: 15px;
+    right: 20px;
   }
 }

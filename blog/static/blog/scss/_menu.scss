@@ -2,8 +2,8 @@
   border-radius: 2px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
   color: $color-text-muted;
-  padding: $menu-grid * 2 0;
-  position: absolute;
+  padding: $menu-grid * 1 0;
+  position: fixed;
   top: $menu-grid * 6;
   transform: scale(0);
   transition: transform 0.2s;

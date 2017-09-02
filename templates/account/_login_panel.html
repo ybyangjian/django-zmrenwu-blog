@@ -1,18 +1,18 @@
 {% load socialaccount %}
-<div class="flex-center top-gap login-panel">
-    <div>
-        <div class="text-muted text-center login-header"><span>登录后回复</span></div>
-        <div class="flex-center text-center social-icons">
-                        <span class="weibo">
+<div class="flex-center top-gap login-panel p-7">
+  <div>
+    <div class="text-muted text-center login-header"><span>登录后回复</span></div>
+    <div class="flex-center text-center social-icons mt-3">
+                        <span class="weibo mr-3">
                             <a href="{% provider_login_url 'weibo' %}">
                                 <i class="fa fa-weibo" aria-hidden="true"></i>
                             </a>
                         </span>
-            <span class="github">
+      <span class="github">
                             <a href="{% provider_login_url 'github' %}">
                                 <i class="fa fa-github" aria-hidden="true"></i>
                             </a>
                         </span>
-        </div>
     </div>
+  </div>
 </div>

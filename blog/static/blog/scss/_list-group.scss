@@ -1,8 +1,11 @@
 .list-group {
-  border: $width-border solid #f1f1f1;
+  border: $width-border solid $gray-100;
 
   .list-group-item {
-    padding: $width-gap;
-    @include border-bottom();
+    padding: $list-group-item-padding-y $list-group-item-padding-x;
+
+    // Place the border on the list items and negative margin up for better styling
+    margin-bottom: -$width-border;
+    border: $width-border solid $gray-100;
   }
 }

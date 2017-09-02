@@ -1,5 +1,5 @@
 {% extends 'comments/base.html' %}
 {% block comment %}{% include 'comments/_comment_item.html' %}{% endblock comment %}
 {% block decendant_comment %}
-    {% include 'comments/_decendant_comment_item.html' with comment=child_comment %}
+  {% include 'comments/_decendant_comment_item.html' with comment=child_comment %}
 {% endblock decendant_comment %}

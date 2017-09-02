@@ -1,24 +1,33 @@
 <div class="top-gap-big comment-list">
-    {% for comment in post.root_comments %}
-        <div class="flex-left" id="c{{ comment.pk }}">
-            <div class="unit-0">
-                <img class="comment-avatar" src="{{ comment.user.social_avatar }}"/>
+  {% for comment in post.root_comments %}
+    <div class="flex-left py-4" id="c{{ comment.pk }}">
+      <div class="unit-0">
+        <img class="comment-avatar mr-3" src="{{ comment.user.social_avatar }}"/>
+      </div>
+      <div class="unit">
+        {% block comment %}{% endblock comment %}
+        {% if comment.get_descendants_reversely.count %}
+          <hr class="">
+        {% endif %}
+        <div class="comment-descendant-list">
+          {% for child_comment in comment.get_descendants_reversely %}
+            <div class="flex-left py-4" id="c{{ child_comment.pk }}">
+              <div class="unit-0">
+                <img class="comment-avatar mr-3" src="{{ child_comment.user.social_avatar }}"/>
+              </div>
+              <div class="unit">
+                {% block decendant_comment %}{% endblock decendant_comment %}
+              </div>
             </div>
-            <div class="unit">
-            {% block comment %}{% endblock comment %}
-                <div class="comment-descendant-list">
-                    {% for child_comment in comment.get_descendants_reversely %}
-                        <div class="flex-left" id="c{{ child_comment.pk }}">
-                            <div class="unit-0">
-                                <img class="comment-avatar" src="{{ child_comment.user.social_avatar }}"/>
-                            </div>
-                            <div class="unit">
-                                {% block decendant_comment %}{% endblock decendant_comment %}
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
+            {% if not forloop.last %}
+              <hr class="m-0">
+            {% endif %}
+          {% endfor %}
         </div>
-    {% endfor %}
+      </div>
+    </div>
+    {% if not forloop.last %}
+      <hr class="m-0">
+    {% endif %}
+  {% endfor %}
 </div>

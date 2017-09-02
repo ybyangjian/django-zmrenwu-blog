@@ -1,31 +1,31 @@
 {% extends 'base.html' %}
 {% load comments %}
-{% block sidebar_btn %}
-  <a class="show-on-mobile nav-link mr" id="js-sidebar-btn" href="#" role="button">
+{% block sidebar_trigger %}
+  <a class="show-on-mobile nav-link m-5" id="js-sidebar-btn" href="#" role="button">
     <i class="fa fa-chevron-right" aria-hidden="true"></i>
   </a>
-{% endblock sidebar_btn %}
+{% endblock sidebar_trigger %}
 {% block units_gap %}{% endblock %}
 {% block main %}
-  <aside class="unit-1-4 unit-1-on-mobile top-gap" id="toc-sidebar">
-    <div class="scroll-view bg-white card toc-sidebar toc-sidebar-tutorial">
+  <aside class="unit-1-4 unit-1-on-mobile top-gap">
+    <div class="scroll-view bg-white card toc-sidebar" style="height: 100%">
       <div class="card-header">
         目录
       </div>
-      <div class="toc">
+      <div class="card-body">
         <ul>
           <li>
             <h6 class="top-gap-0"><a href="">{{ post.category }}</a></h6>
             <ul>
-            {% for tutorial_post in post_list %}
-              <li>
-                <a href="{{ tutorial_post.get_absolute_url }}">{{ tutorial_post.title }}</a>
-                {% if tutorial_post.pk == post.pk %}
-                  {{ post.toc |safe }}
-                {% endif %}
-              </li>
-            {% endfor %}
-          </ul>
+              {% for tutorial_post in post_list %}
+                <li>
+                  <a href="{{ tutorial_post.get_absolute_url }}">{{ tutorial_post.title }}</a>
+                  {% if tutorial_post.pk == post.pk %}
+                    {{ post.toc |safe }}
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
           </li>
         </ul>
       </div>
@@ -34,7 +34,7 @@
 {% endblock main %}
 {% block side %}
   <div class="unit-3-4 unit-1-on-mobile top-gap">
-    <div class="bg-white card post-card">
+    <div class="bg-white card post-card py-5 px-7">
       {% include 'blog/_post_detail_item.html' %}
       <div class="top-gap">
         <div class="jiathis_style">

@@ -1,0 +1,5 @@
+@each $level, $size in $font-sizer {
+  .fs-#{$level} {
+    font-size: $size !important;
+  }
+}

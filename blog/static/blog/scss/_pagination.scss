@@ -1,0 +1,11 @@
+.pagination {
+  a, span {
+    font-size: 16px;
+    padding: 0 7px;
+  }
+
+  .current {
+    background-color: $gray-800;
+    color: $white;
+  }
+}

@@ -1,33 +1,15 @@
 .comment-area {
-  .comment-form {
-    textarea {
-      padding: 10px;
-      height: 120px;
+  .comment-descendant-list {
+    .comment-avatar {
+      width: 36px;
     }
   }
+}
 
-  .comment-list {
-    > div {
-      border-bottom: 1px solid #f1f1f1;
-      padding-top: 15px;
-
-      &:last-child {
-        border-bottom: none;
-      }
-    }
-
-    .comment-descendant-list {
-      padding-left: 7px;
-
-      > div {
-        padding-top: 15px;
-        border-top: 1px solid #f1f1f1;
-      }
-
-      .comment-avatar {
-        width: 36px;
-      }
-    }
+.comment-form {
+  textarea {
+    padding: 10px;
+    height: 120px;
   }
 }
 
@@ -37,17 +19,8 @@
 }
 
 .comment-main {
-  padding-left: 7px;
-  padding-bottom: 15px;
-
   .master {
     color: red;
-  }
-
-  &:hover {
-    .edit {
-      display: inline;
-    }
   }
 }
 
@@ -59,26 +32,12 @@
       color: darken($color-text-muted, 85%);
     }
   }
-
-  .edit {
-    display: none;
-  }
 }
 
 .login-panel {
   border: 1px solid #f1f1f1;
-  padding: 30px 0;
-
-  .login-header {
-  }
 
   .social-icons {
-    margin-top: 7px;
-
-    span:not(:last-child) {
-      margin-right: 7px;
-    }
-
     span {
       display: inline-block;
       height: 30px;

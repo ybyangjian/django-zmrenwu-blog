@@ -1,42 +1,73 @@
 $(function () {
-    // search
+    // search form
     $('#js-search-btn').on('click', function (e) {
-        $('#js-search-musk').fadeIn(300);
-        $('#search-form').removeClass('hide-on-mobile').addClass('show-on-mobile').find('input').focus();
-        e.preventDefault();
-    });
+        var $musk = $('#search-musk');
+        var $searchForm = $('#search-form');
 
-    $('#js-search-musk').on('click', function (e) {
-        $(this).fadeOut(300);
-        $('#search-form').removeClass('show-on-mobile').addClass('hide-on-mobile');
+        if ($musk.length === 0) {
+            // Musk does not exist, create it.
+            $musk = $('<div></div>')
+                .addClass('musk')
+                .attr('id', 'search-musk')
+                .appendTo($searchForm)
+                .click(function () {
+                    $searchForm.slideUp();
+                    $(this).fadeOut();
+                });
+        }
+
+        $searchForm.removeClass('hide-on-mobile')
+            .hide().slideDown()
+            .find('input')
+            .focus();
+        $musk.fadeIn();
+
+        return false;
     });
 
     // sidebar
     $('#js-sidebar-btn').on('click', function (e) {
-        $('.toc-sidebar').animate({'left': 0}, 300);
-        $('#js-sidebar-musk').fadeIn(300);
-        e.preventDefault();
-    });
+        var $musk = $('#sidebar-musk');
+        var $sideBar = $('.toc-sidebar');
 
-    $('#js-sidebar-musk').on('click', function (e) {
-        $('.toc-sidebar').animate({'left': '-70%'}, 300);
-        $(this).fadeOut(300);
+        if ($musk.length === 0) {
+            // Musk does not exist, create it.
+            $musk = $('<div></div>')
+                .addClass('musk')
+                .attr('id', 'sidebar-musk')
+                .css('z-index', 1)
+                .appendTo('body')
+                .click(function () {
+                    $(this).fadeOut(500);
+                    $sideBar.animate({'left': '-70%'}, 500);
+                });
+        }
+        $sideBar.animate({'left': 0}, 500);
+        $musk.fadeIn(500);
+        return false;
     });
 
     // back top
-    $('#js-back-top').on('click', function (e) {
-        if ($(window).scrollTop() > 0 && !$('html,body').is(':animated')) {
-            $('html,body').animate({scrollTop: 0}, 500);
-        }
-        e.preventDefault();
-    });
+    var $backTop = $('.back-top');
+
+    if ($backTop.length === 0) {
+        // Button back top does not exist, create it.
+        $backTop = $('<a href="#" class="back-top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>')
+            .appendTo('body')
+            .click(function (e) {
+                if ($(window).scrollTop() > 0 && !$('html,body').is(':animated')) {
+                    $('html,body').animate({scrollTop: 0}, 500);
+                }
+                return false
+            });
+    }
 
     $(window).on('scroll', function (e) {
         var $pos = $(window).height() / 2;
         if ($(window).scrollTop() > $pos) {
-            $('#js-back-top').fadeIn();
+            $backTop.fadeIn();
         } else {
-            $('#js-back-top').fadeOut();
+            $backTop.fadeOut();
         }
     });
 

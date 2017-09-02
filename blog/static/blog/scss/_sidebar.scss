@@ -19,29 +19,32 @@
   }
 }
 
-.toc {
-  > ul {
-    margin-top: 5px;
+.toc-sidebar {
+  ul {
     padding-left: 0;
     list-style: none;
+    margin-top: 0 !important;
 
     li {
-      margin-top: 10px;
+      &:not(:first-child) {
+        margin-top: 7px;
+      }
 
       a {
         @include link-effect();
+        font-size: 14px;
       }
 
       ul {
         list-style: none;
         padding-left: 20px;
+
+        li {
+          margin-top: 7px;
+        }
       }
     }
   }
-}
-
-.toc-sidebar-tutorial {
-  height: 100%;
 }
 
 @media (max-width: $width-breakpoint - 1px) {
@@ -52,8 +55,8 @@
     left: -70%;
     top: 0;
     margin-top: 0 !important;
-    background-color: RGB(255, 255, 255);
+    background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    z-index: 99;
+    z-index: 4;
   }
 }

@@ -1,11 +1,11 @@
 @import "mobi-theme-base/src/variables";
 @import "variables";
 @import "mixins";
-@import "bg";
-@import "navbar";
+@import "utilities";
 @import "list-group";
-@import "card";
 @import "list-inline";
+@import "card";
+@import "navbar";
 @import "post-item";
 @import "sidebar";
 @import "toolbar";
@@ -15,6 +15,6 @@
 @import "search-form";
 @import "menu";
 @import "container-wider";
-@import "utils";
 @import "musk";
 @import "tutorial";
+@import "pagination";
