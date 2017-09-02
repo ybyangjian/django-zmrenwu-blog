@@ -18,6 +18,10 @@
   <link rel="stylesheet" href="{% static 'blog/css/mobi.min.css' %}">
   <link rel="stylesheet" href="{% static 'blog/css/friendly.css' %}">
   <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}?v0.12">
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="{% static 'blog/js/menu.js' %}"></script>
+  <script src="{% static 'blog/js/blog.js' %}"></script>
+  {% block link %}{% endblock link %}
 
   {% baidu_scripts %}
   {% block style %}{% endblock style %}
@@ -137,11 +141,32 @@
     <div>浙ICP备 15005796号-2</div>
   </div>
 </footer>
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="{% static 'blog/js/menu.js' %}"></script>
-<script src="{% static 'blog/js/blog.js' %}"></script>
+{% block script %}
+{% endblock script %}
 <script>
     $('[data-menu]').menu();
+
+    var editor = new Simditor({
+        textarea: $('#id_comment'),
+        placeholder: "提出你的见解...",
+        toolbarFloat: false,
+        cleanPaste: true,
+        toolbar: [
+            'bold',
+            'italic',
+            'underline',
+            'strikethrough',
+            'color',
+            'ol',
+            'ul',
+            'blockquote',
+            'code',
+            'table',
+            'link',
+            'image',
+            'hr'
+        ]
+    });
 </script>
 </body>
 </html>

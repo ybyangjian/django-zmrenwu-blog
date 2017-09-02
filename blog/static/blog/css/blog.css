@@ -834,6 +834,7 @@
   opacity: 0.5;
   color: #fff !important;
   line-height: 1;
+  z-index: 99;
 }
 
 @media (max-width: 767px) {

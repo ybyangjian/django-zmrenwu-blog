@@ -10,6 +10,7 @@
   opacity: 0.5;
   color: $white !important;
   line-height: 1;
+  z-index: 99;
 }
 
 @media (max-width: $width-breakpoint - 1px) {
