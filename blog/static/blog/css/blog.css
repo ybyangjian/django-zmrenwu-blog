@@ -647,6 +647,12 @@
   color: #b2bac2 !important;
 }
 
+.clearfix::after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
 .list-group {
   border: 1px solid #f8f9fa;
 }
@@ -1073,20 +1079,6 @@
   background-color: #343a40;
   opacity: 0.9;
   z-index: -1;
-}
-
-.tutorial-card {
-  margin-bottom: 15px;
-}
-.tutorial-card h6 {
-  padding-top: 5px;
-}
-.tutorial-card .tutorial-meta {
-  margin-top: 7px;
-}
-.tutorial-card .tutorial-meta .state {
-  float: right;
-  color: red;
 }
 
 .pagination a, .pagination span {

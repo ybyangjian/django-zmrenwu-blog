@@ -71,16 +71,9 @@ $(function () {
         }
     });
 
-    // donate
-    $('#js-weixin-btn').on('click', function (e) {
-        $('#alipay').hide();
-        $('#weixin').show();
-        e.preventDefault();
-    });
-
-    $('#js-alipay-btn').on('click', function (e) {
-        $('#weixin').hide();
-        $('#alipay').show();
-        e.preventDefault();
-    });
+    // reward
+    $('#js-reward').click(function () {
+        var $this = $(this);
+        $this.next().slideToggle()
+    })
 });

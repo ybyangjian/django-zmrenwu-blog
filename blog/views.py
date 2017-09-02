@@ -1,7 +1,7 @@
 from django.db.models import Count
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.text import slugify
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, TemplateView
 
 import markdown
 from braces.views import SelectRelatedMixin, SetHeadlineMixin
@@ -160,3 +160,7 @@ class PostArchivesView(SetHeadlineMixin, ListView):
     headline = '归档'
     model = Post
     template_name = 'blog/archives.html'
+
+
+class DonateView(TemplateView):
+    template_name = 'blog/donate.html'

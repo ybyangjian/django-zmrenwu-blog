@@ -3,4 +3,5 @@
 {% load highlight %}
 
 {% block post_title %}{% highlight post.title with query %}{% endblock %}
+{% block hide_on_mobile %}{% endblock hide_on_mobile %}
 {% block post_excerpt %}{% highlight post.body with query %}{% endblock %}

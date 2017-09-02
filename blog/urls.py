@@ -19,4 +19,5 @@ urlpatterns = [
     url(r'^tutorials/$', views.TutorialListView.as_view(), name='tutorials'),
     url(r'^categories/$', views.CategoryListView.as_view(), name='categories'),
     url(r'^archives/$', views.PostArchivesView.as_view(), name='archives'),
+    url(r'^donate/$', views.DonateView.as_view(), name='donate'),
 ]

@@ -9,10 +9,11 @@
            href="{{ post.get_absolute_url }}">{{ post.created_time|timesince }}前</a>
       </li>
     </ul>
-    <h3 class="top-gap-0 post-item-title"><a href="{{ post.get_absolute_url }}">
+    <h5 class="top-gap-0 post-item-title"><a href="{{ post.get_absolute_url }}">
       {% block post_title %}{{ post.title }}{% endblock %}</a>
-    </h3>
-    <div class="text-small text-muted hide-on-mobile post-item-excerpt mt-2">
+    </h5>
+    <div
+        class="text-small text-muted {% block hide_on_mobile %}hide-on-mobile{% endblock hide_on_mobile %} post-item-excerpt mt-2">
       {% block post_excerpt %}{{ post.excerpt }} ...{% endblock %}
     </div>
     <div class="post-item-statistic mt-2">

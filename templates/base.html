@@ -40,8 +40,11 @@
         <li class="nav-item mr-7">
           <a class="nav-link" href="{% url 'blog:categories' %}">分类</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mr-7">
           <a class="nav-link" href="{% url 'blog:archives' %}">归档</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'blog:donate' %}">赞助</a>
         </li>
       </ul>
       <div class="unit flex-right flex-middle">
@@ -74,6 +77,9 @@
             <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
           </a>
           <ul class="menu bg-white" data-menu data-menu-toggle="#menu-toggle">
+            <li class="nav-item mr-7">
+              <a class="nav-link" href="{% url 'blog:index' %}">首页</a>
+            </li>
             <li>
               <a href="{% url 'blog:tutorials' %}">教程</a>
             </li>
@@ -82,6 +88,9 @@
             </li>
             <li>
               <a href="{% url 'blog:archives' %}">归档</a>
+            </li>
+            <li>
+              <a href="{% url 'blog:donate' %}">赞助</a>
             </li>
           </ul>
         </div>
@@ -104,6 +113,7 @@
               <li>645793268</li>
             </ul>
           </section>
+
           <section class="bg-white top-gap card">
             <div class="card-header">
               友情链接
@@ -119,6 +129,14 @@
     </div>
   </div>
 </section>
+<footer class="bg-white py-5 mt-5 text-small text-muted">
+  <div class="flex-center">
+    <div>&copy; 2017 追梦人物的博客</div>
+  </div>
+  <div class="flex-center">
+    <div>浙ICP备 15005796号-2</div>
+  </div>
+</footer>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="{% static 'blog/js/menu.js' %}"></script>
 <script src="{% static 'blog/js/blog.js' %}"></script>
