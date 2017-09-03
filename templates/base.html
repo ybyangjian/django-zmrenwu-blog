@@ -117,7 +117,7 @@
             </button>
             <h4 class="modal-title" id="myModalLabel">设置评论回复接收邮箱</h4>
             <div class="text-primary mt-2">邮箱仅用于接收回复提醒，不会被公开。</div>
-            {% if user.email %}
+            {% if user.email and user.email_bound %}
               <div class="text-small text-primary my-2">你已绑定邮箱：<span
                   class="text-danger">{{ user.email }}</span>，可以在下方更换绑定邮箱
               </div>
