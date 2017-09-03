@@ -1,23 +1,23 @@
 <div class="flex-left">
-    <div class="unit-0">
-        <img class="notification-avatar" src="{{ actor.social_avatar }}" alt="">
+  <div class="unit-0">
+    <img class="notification-avatar" src="{{ actor.social_avatar }}" alt="">
+  </div>
+  <div class="unit notification-main">
+    {% block header %}{% endblock %}
+    <div class="text-small notification-meta">
+      <div class="text-muted">
+        {% block type %}<i class="fa fa-comment" aria-hidden="true"></i>{% endblock %}
+        <time>{{ notification.timestamp|timesince }}前</time>
+        {% if notification.unread %}
+          <a class="text-small text-muted mark-as-read"
+             href="{% url 'notifications:mark_as_read' notification.slug %}"><i class="fa fa-check"
+                                                                                aria-hidden="true"></i>
+            标为已读</a>
+        {% endif %}
+      </div>
     </div>
-    <div class="unit notification-main">
-        {% block header %}{% endblock %}
-        <div class="text-small notification-meta">
-            <div class="text-muted">
-                {% block type %}<i class="fa fa-comment" aria-hidden="true"></i>{% endblock %}
-                <time>{{ notification.timestamp|timesince }}前</time>
-                {% if notification.unread %}
-                    <a class="text-small text-muted mark-as-read"
-                       href="{% url 'notifications:mark_as_read' notification.slug %}"><i class="fa fa-check"
-                                                                                          aria-hidden="true"></i>
-                        标为已读</a>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+  </div>
 </div>
 <div class="text-small top-gap">
-    {{ target.comment|linebreaksbr }}
+  {{ target.comment|safe|linebreaksbr }}
 </div>
