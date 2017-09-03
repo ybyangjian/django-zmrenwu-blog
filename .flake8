@@ -12,4 +12,7 @@ exclude =
     migrations,
     settings,
     functional_tests,
+    static,
+    local.py
+    production.py
 

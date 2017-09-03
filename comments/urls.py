@@ -12,4 +12,12 @@ urlpatterns = [
     url(r'^success/$',
         views.CommentSuccess.as_view(),
         name='comment_success'),
+
+    url(r'^ajax_verification_code/$',
+        views.SendVerificationCodeView.as_view(),
+        name='send_verification_code'),
+
+    url(r'^ajax_email_binding/$',
+        views.EmailBindingView.as_view(),
+        name='email_binding'),
 ]

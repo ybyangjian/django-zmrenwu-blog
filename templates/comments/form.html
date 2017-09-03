@@ -12,8 +12,22 @@
   {{ form.comment.errors }}
   {{ form.comment }}
   {{ form.honeypot }}
-  <div class="flex-right">
-    <button class="send-btn btn btn-success text-small" type="submit"><i
+  <div class="flex-right flex-middle mt-3">
+    {% if not user.email_bound %}
+      <span class="text-small mr-3">有人回复时接收邮件提醒，点此 <a href="javascript:" data-toggle="modal"
+                                                      data-target="#myModal">绑定接收邮箱</a></span>
+    {% else %}
+      {% if messages %}
+        {% for message in messages %}
+          <span{% if message.tags %}
+            class="{{ message.tags }} text-danger mr-3"{% endif %}>{{ message }}</span>
+        {% endfor %}
+      {% endif %}
+      <a class="text-small mr-3" href="javascript:" data-toggle="modal" data-target="#myModal">
+        更换回复提醒接收邮箱
+      </a>
+    {% endif %}
+    <button class="btn text-small mt-0" type="submit"><i
         class="fa fa-paper-plane"
         aria-hidden="true"></i> 发布
     </button>

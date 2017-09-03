@@ -16,10 +16,12 @@
   <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"
         rel="stylesheet">
   <link rel="stylesheet" href="{% static 'blog/css/mobi.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/modal.min.css' %}">
   <link rel="stylesheet" href="{% static 'blog/css/friendly.css' %}">
   <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}?v0.12">
   <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
   <script src="{% static 'blog/js/menu.js' %}"></script>
+  <script src="{% static 'blog/js/modal.min.js' %}"></script>
   <script src="{% static 'blog/js/blog.js' %}"></script>
   {% block link %}{% endblock link %}
 
@@ -104,6 +106,56 @@
 </header>
 <section class="flex-center">
   <div class="container-wider">
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+              &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">设置评论回复接收邮箱</h4>
+            <div class="text-primary mt-2">邮箱仅用于接收回复提醒，不会被公开。</div>
+            {% if user.email %}
+              <div class="text-small text-primary my-2">你已绑定邮箱：<span
+                  class="text-danger">{{ user.email }}</span>，可以在下方更换绑定邮箱
+              </div>
+            {% endif %}
+          </div>
+          <div class="modal-body">
+            <form class="form email-binding-form" action="{% url 'comments:email_binding' %}">
+              <div class="message">
+                <span class="text-danger"></span>
+              </div>
+              {% csrf_token %}
+              <div class="flex-left units-gap">
+                <label class="unit-0 text-right" for="multiple-inputs-name">邮箱: </label>
+                <div class="unit">
+                  <input type="email" name="email" id="id_email" placeholder="请输入绑定邮箱"/>
+                </div>
+                <div class="unit-0">
+                  <button class="btn" id="js-send" type="button"
+                          data-target="{% url 'comments:send_verification_code' %}">发送验证码
+                  </button>
+                </div>
+              </div>
+              <div class="flex-left units-gap">
+                <label class="unit-0 text-right" for="multiple-inputs-name">验证码: </label>
+                <div class="unit">
+                  <input type="text" name="verification_code" id="id_verification_code"
+                         placeholder="请输入接收到的验证码"/>
+                </div>
+              </div>
+              <div class="flex-right">
+                <button type="button" class="btn btn-danger mr-3" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary" id="js-submit">设置</button>
+              </div>
+            </form>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal -->
+    </div>
     <div class="flex-left flex-wrap {% block units_gap %}units-gap-big{% endblock units_gap %}"
          style="margin-top: 60px">
       {% block main %}{% endblock main %}
@@ -143,6 +195,70 @@
 </footer>
 <script>
     $('[data-menu]').menu();
+
+    var InterValObj; //timer变量，控制时间
+    var curCount = 120;//当前剩余秒数
+
+    $('#js-send').on('click', function (event) {
+        var $this = $(this);
+        var $targetURL = $this.attr('data-target');
+        $.post(
+            $targetURL,
+            {email: $('#id_email').val()},
+            function (data) {
+                if (data.ok) {
+                    $this.attr("disabled", "true");
+                    $this.text("重新发送验证码" + "(" + curCount + ")");
+                    InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                    $('.message')
+                        .find('span')
+                        .text(data.msg)
+                } else {
+                    $('.message').find('span').text(data.msg)
+                }
+            }
+        );
+        return false;
+    });
+
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount === 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            $('#js-send').removeAttr("disabled");//启用按钮
+            $('#js-send').text("重新发送验证码");
+        }
+        else {
+            curCount--;
+            $('#js-send').text("重新发送验证码" + "(" + curCount + ")");
+        }
+    }
+
+    $('#js-submit').on('click', function (event) {
+        var $this = $(this);
+        var $form = $('.email-binding-form');
+        var $targetURL = $form.attr('action');
+        console.log($targetURL);
+
+        $.post(
+            $targetURL,
+            {
+                email: $('#id_email').val(),
+                verification_code: $('#id_verification_code').val()
+            },
+            function (data) {
+                if (data.ok) {
+                    location.reload();
+                } else {
+                    $('.message')
+                        .find('span')
+                        .text(data.msg)
+                }
+            }
+        );
+        return false;
+    });
+
 
     var editor = new Simditor({
         textarea: $('#id_comment'),
