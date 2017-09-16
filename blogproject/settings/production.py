@@ -7,7 +7,7 @@ DEBUG = False
 
 # django anymail grid
 ANYMAIL = {
-    "SENDGRID_API_KEY": "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",
+    "SENDGRID_API_KEY": "SGYxQ.7viz7-AVbDRwBQevBCv7-AVbDJJTXluwR.bJklLphYxOwBh.7viz-bM-bMTweWDpvqY",
     # "MAILGUN_SENDER_DOMAIN": 'mg.example.com',
 }
 EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
