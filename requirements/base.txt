@@ -1,4 +1,4 @@
-Django==1.10.6
+Django==2.2.24
 Markdown==2.6.8
 Pygments==2.2.0
 pytz==2016.10
